@@ -1,0 +1,54 @@
+---
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  items?: StatItem[];
+  variant?: 'default' | 'accent';
+  columns?: 2 | 3 | 4 | 5;
+  class?: string;
+}
+
+const defaultItems: StatItem[] = [
+  { value: '50+', label: 'успішних проєктів' },
+  { value: '5+', label: 'років досвіду' },
+  { value: '30+', label: 'постійних клієнтів' },
+  { value: '24/7', label: 'підтримка ботів' },
+];
+
+const {
+  items = defaultItems,
+  variant = 'default',
+  columns = 4,
+  class: className = '',
+} = Astro.props;
+
+const variantClasses = {
+  default: 'bg-kofi-blue/30 border border-black/5',
+  accent: 'bg-paper-white border border-black/5 shadow-xs',
+};
+
+const columnsClasses = {
+  2: 'grid-cols-2',
+  3: 'grid-cols-2 sm:grid-cols-3',
+  4: 'grid-cols-2 md:grid-cols-4',
+  5: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
+};
+---
+
+<section class={`rounded-2xl p-8 md:p-12 w-full ${variantClasses[variant]} ${className}`} data-animate="fade-up">
+  <div class={`grid ${columnsClasses[columns]} gap-6 text-center`} data-animate="fade-up" data-stagger>
+    {items.map((item) => (
+      <div class="space-y-1">
+        <div class="text-3xl md:text-4xl font-black text-ink-black">
+          {item.value}
+        </div>
+        <div class="text-xs font-bold text-black/60 uppercase tracking-wider">
+          {item.label}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

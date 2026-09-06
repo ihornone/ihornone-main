@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../shared/components/sections/Hero.astro';
+import Faq from '../shared/components/sections/Faq.astro';
+import ContactCards from '../shared/components/sections/ContactCards.astro';
+import ContactForm from '../shared/components/sections/ContactForm.astro';
+
+const contactsFaq = [
+  {
+    question: 'Як швидко ви відповідаєте після залишення заявки?',
+    answer: 'Зазвичай я відповідаю протягом 1–3 годин у робочий час (з 9:00 до 19:00). Якщо ви залишили заявку вночі або у вихідний — зв’яжусь з вами найпершим зранку.',
+  },
+  {
+    question: 'Що потрібно підготувати перед обговоренням проєкту?',
+    answer: 'Бажано мати загальне розуміння задачі: які проблеми бізнесу має вирішувати бот чи сайт, приклади схожих рішень (якщо є) та орієнтовні терміни.',
+  },
+  {
+    question: 'Чи обов’язково зустрічатись особисто або зідзвонюватись?',
+    answer: 'Ні, всі питання чудово вирішуються в месенджерах (Telegram) чи короткому аудіо/відеодзвінку. Це економить час і дозволяє швидше зафіксувати деталі.',
+  },
+  {
+    question: 'Яка гарантія, що проєкт буде виконано вчасно?',
+    answer: 'Я працюю за чітким поетапним планом та фіксую терміни і кошторис у технічному завданні перед початком робіт.',
+  },
+];
+---
+
+<Layout
+  title="Контакти — Зв'язок та обговорення проєктів | ihornone"
+  description="Зв'яжіться зі мною для обговорення вашого проєкту. Безкоштовна консультація, прозорі умови, швидка відповідь."
+  url="/contacts"
+>
+
+  <Hero
+    badge={{ text: 'Швидкий зв\'язок', icon: 'fa-solid fa-paper-plane' }}
+    title="Обговоримо ваш наступний цифровий продукт"
+    subtitle="Маєте ідею бота, сайту чи мобільного додатку? Напишіть мені в Telegram або заповніть форму нижче — я проконсультую вас та запропоную оптимальне технічне рішення."
+  />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-16 md:space-y-24">
+
+    <!-- Картки прямого зв'язку з соцмережами -->
+    <div data-animate="fade-up">
+      <ContactCards />
+    </div>
+
+    <!-- Інтерактивна форма заявки та переваги -->
+    <div data-animate="fade-up">
+      <ContactForm />
+    </div>
+
+    <!-- Часті запитання щодо комунікації -->
+    <div data-animate="fade-up">
+      <Faq items={contactsFaq} />
+    </div>
+
+  </div>
+</Layout>

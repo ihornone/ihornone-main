@@ -1,0 +1,36 @@
+---
+interface Props {
+  variant?: 'default' | 'highlight' | 'flat';
+  padding?: 'sm' | 'md' | 'lg';
+  hover?: boolean;
+  as?: 'div' | 'article' | 'section' | 'aside';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  padding = 'md',
+  hover = false,
+  as: Tag = 'div',
+  class: className = '',
+} = Astro.props;
+
+const variantClasses = {
+  default: 'bg-paper-white border border-black/5 shadow-xs',
+  highlight: 'bg-paper-white border-2 border-cobalt-pop shadow-xs',
+  flat: 'bg-morning-fog/70 border border-black/5',
+};
+
+const paddingClasses = {
+  sm: 'p-4 sm:p-5',
+  md: 'p-5 sm:p-7 md:p-8',
+  lg: 'p-6 sm:p-8 md:p-10',
+};
+
+const baseClasses = 'rounded-2xl transition-all';
+const hoverClasses = hover ? 'hover:shadow-md focus-within:ring-2 focus-within:ring-cobalt-pop focus-within:ring-offset-2' : '';
+---
+
+<Tag class:list={[baseClasses, variantClasses[variant], paddingClasses[padding], hoverClasses, className]}>
+  <slot />
+</Tag>

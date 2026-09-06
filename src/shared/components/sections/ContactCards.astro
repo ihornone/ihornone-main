@@ -1,0 +1,65 @@
+---
+interface ContactLink {
+  icon: string;
+  title: string;
+  value: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  contacts?: ContactLink[];
+  class?: string;
+}
+
+const defaultContacts: ContactLink[] = [
+  {
+    icon: '/icons/telegram.svg',
+    title: 'Telegram',
+    value: '@ihornone',
+    href: 'https://t.me/ihornone',
+    external: true,
+  },
+  {
+    icon: '/icons/gmail-2026.svg',
+    title: 'Email',
+    value: 'ihornone.dev@gmail.com',
+    href: 'mailto:ihornone.dev@gmail.com',
+  },
+  {
+    icon: '/icons/github-dark.svg',
+    title: 'GitHub',
+    value: 'ihornone',
+    href: 'https://github.com/ihornone',
+    external: true,
+  },
+];
+
+const {
+  contacts = defaultContacts,
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`grid grid-cols-1 sm:grid-cols-3 gap-6 w-full ${className}`} data-animate="fade-up" data-stagger>
+  {contacts.map((contact) => (
+    <a
+      href={contact.href}
+      class="bg-paper-white border border-black/5 rounded-2xl p-6 shadow-xs flex items-center gap-4 hover:-translate-y-1 hover:shadow-md transition-all no-underline group"
+      {...(contact.external ? { target: '_blank', rel: 'noopener' } : {})}
+    >
+      <div class="w-12 h-12 bg-kofi-blue/40 rounded-xl flex items-center justify-center shrink-0">
+        <img src={contact.icon} alt="" class="w-6 h-6" loading="lazy" />
+      </div>
+      <div class="flex-grow min-w-0">
+        <h3 class="text-sm font-bold text-ink-black m-0 group-hover:text-cobalt-pop transition-colors">
+          {contact.title}
+        </h3>
+        <p class="text-xs text-cobalt-pop font-semibold truncate m-0">
+          {contact.value}
+        </p>
+      </div>
+      <i class="fa-solid fa-arrow-right text-xs text-cobalt-pop group-hover:translate-x-1 transition-transform"></i>
+    </a>
+  ))}
+</div>

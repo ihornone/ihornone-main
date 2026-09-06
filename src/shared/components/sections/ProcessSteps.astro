@@ -1,0 +1,45 @@
+---
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+
+interface ProcessStep {
+  step: number;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  steps?: ProcessStep[];
+  columns?: 3 | 5;
+  class?: string;
+}
+
+const {
+  title = 'Етапи розробки',
+  steps = [],
+  columns = 5,
+  class: className = '',
+} = Astro.props;
+
+const columnsClasses = {
+  3: 'grid-cols-1 sm:grid-cols-3',
+  5: 'grid-cols-1 sm:grid-cols-3 md:grid-cols-5',
+};
+---
+
+<section class={`space-y-6 w-full ${className}`} data-animate="fade-up">
+  <SectionHeader title={title} />
+
+  <div class={`grid ${columnsClasses[columns]} gap-3.5 sm:gap-4`} data-animate="fade-up" data-stagger>
+    {steps.map((step) => (
+      <div class="bg-paper-white border border-black/5 rounded-2xl p-4 sm:p-5 space-y-1.5 shadow-2xs">
+        <span class="text-xs font-black text-cobalt-pop uppercase block">
+          {String(step.step).padStart(2, '0')}
+        </span>
+        <strong class="text-xs sm:text-sm font-bold text-ink-black block">{step.title}</strong>
+        <p class="text-xs text-black/60 m-0 leading-normal">{step.description}</p>
+      </div>
+    ))}
+  </div>
+</section>

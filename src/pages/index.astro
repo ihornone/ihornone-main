@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../shared/components/sections/Hero.astro';
+import SpecializationGrid from '../shared/components/sections/SpecializationGrid.astro';
+import ServiceFaq from '../shared/components/sections/ServiceFaq.astro';
+import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+import ProjectCard from '../features/portfolio/components/ProjectCard.astro';
+import ServiceCard from '../shared/components/sections/ServiceCard.astro';
+import SectionHeader from '../shared/components/ui/SectionHeader.astro';
+import Button from '../shared/components/ui/Button.astro';
+import { getCollection } from 'astro:content';
+
+const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const allEntries = await getCollection('projects');
+const featuredProjects = allEntries.slice(0, 3).map((entry) => ({
+  id: entry.id,
+  title: entry.data.title,
+  category: entry.data.category,
+  icon: entry.data.icon,
+  image: entry.data.image,
+  description: entry.data.description,
+  meta: {
+    technologies: entry.data.technologies,
+  },
+}));
+---
+
+<Layout
+  title="ihornone — Telegram-боти, Веб-сайти, Мобільні додатки | Full-Stack Розробка"
+  description="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності. Повний цикл від ідеї до запуску з високою конверсією."
+  url="/"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ihornone",
+    "description": "Розробка Telegram-ботів, мобільних додатків та веб-сайтів",
+    "url": "https://ihornone.site",
+    "telephone": "+380",
+    "priceRange": "$$",
+    "areaServed": "UA",
+    "knowsAbout": ["Telegram Bots", "Web Development", "Mobile Apps", "React Native", "Node.js", "Python"],
+    "sameAs": [
+      "https://t.me/ihornone",
+      "https://github.com/ihornone",
+      "https://instagram.com/ihornone"
+    ]
+  }}
+>
+  <Hero
+    badge={{ text: 'Full-Stack Розробка', icon: 'fa-solid fa-code' }}
+    title="Створюю сучасні рішення для вашого бізнесу"
+    subtitle="Розробка Telegram-ботів, мобільних додатків та веб-сайтів. Від ідеї до працюючого продукту з високою конверсією."
+    buttons={[
+      { label: 'Обговорити проєкт', href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
+      { label: 'Переглянути портфоліо', href: '/portfolio', variant: 'outline' },
+    ]}
+  >
+    <div class="pt-6 border-t border-black/5 w-full" data-animate="fade-up">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div data-animate="fade-up" data-duration="fast">
+          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">3+</strong>
+          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Років досвіду</span>
+        </div>
+        <div data-animate="fade-up" data-duration="fast" style="transition-delay: 80ms">
+          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">15+</strong>
+          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Успішних проєктів</span>
+        </div>
+        <div data-animate="fade-up" data-duration="fast" style="transition-delay: 160ms">
+          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">99%</strong>
+          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Задоволених клієнтів</span>
+        </div>
+        <div data-animate="fade-up" data-duration="fast" style="transition-delay: 240ms">
+          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">24/7</strong>
+          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Техпідтримка</span>
+        </div>
+      </div>
+    </div>
+  </Hero>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-16 md:space-y-24">
+    <section class="space-y-8 w-full" data-animate="fade-up">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <SectionHeader
+          title="Напрямки розробки"
+          subtitle="Повний цикл розробки цифрових продуктів під ваші цілі"
+        />
+        <Button href="/services" variant="outline" size="sm" icon="fa-solid fa-arrow-right">
+          Усі послуги
+        </Button>
+      </div>
+
+      <div class="flex md:grid items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 md:gap-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pt-4 pb-4 md:pb-0 scrollbar-none" data-animate="fade-up" data-stagger>
+        {allServices.map((service) => (
+          <ServiceCard
+            id={service.id}
+            icon={service.data.icon}
+            title={service.data.title}
+            description={service.data.description}
+            includes={service.data.includes}
+            isPopular={service.data.isPopular}
+          />
+        ))}
+      </div>
+    </section>
+
+    <SpecializationGrid />
+
+    <section class="space-y-8 w-full" data-animate="fade-up">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <SectionHeader
+          title="Останні проєкти"
+          subtitle="Приклади реалізованих рішень із результатами"
+        />
+        <Button href="/portfolio" variant="outline" size="sm" icon="fa-solid fa-arrow-right">
+          Усі проєкти
+        </Button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
+        {featuredProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+    <ServiceFaq globalOnly />
+  </div>
+
+  <CtaBanner />
+</Layout>

@@ -1,0 +1,292 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  telegramUrl?: string;
+  class?: string;
+}
+
+const {
+  title = 'Є ідея для проєкту?',
+  subtitle = 'Напишіть мені і ми створимо рішення, яке буде працювати на ваш бізнес.',
+  telegramUrl = 'https://t.me/ihornone',
+  class: className = '',
+} = Astro.props;
+
+const contactLinks = [
+  { icon: '/icons/telegram.svg', label: 'Telegram', url: 'https://t.me/ihornone', color: '#2AABEE' },
+  { icon: '/icons/github-dark.svg', label: 'GitHub', url: 'https://github.com/ihornone', color: '#333' },
+  { icon: '/icons/instagram.svg', label: 'Instagram', url: 'https://instagram.com/ihornone', color: '#E4405F' },
+  { icon: '/icons/threads.svg', label: 'Threads', url: 'https://threads.net/@ihornone', color: '#000' },
+  { icon: '/icons/gmail-2026.svg', label: 'Email', url: 'mailto:ihornone.dev@gmail.com', color: '#EA4335' },
+];
+---
+
+<section class:list={['max-w-7xl mx-auto px-4 sm:px-6 my-12', className]} data-animate="fade-up">
+  <div class="bg-ink-black rounded-2xl p-8 md:p-14 text-center text-paper-white shadow-xl w-full relative overflow-hidden">
+  <div class="absolute -top-24 -right-24 w-72 h-72 bg-cobalt-pop/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <div class="flex flex-col items-center gap-5 max-w-2xl mx-auto relative z-10">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-paper-white tracking-tight m-0">
+      {title}
+    </h2>
+    <p class="text-sm sm:text-base text-kofi-blue/90 leading-relaxed m-0">
+      {subtitle}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-3 w-full sm:w-auto">
+      <a
+        href={telegramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-paper-white text-ink-black font-bold text-base hover:bg-kofi-blue hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md no-underline border-2 border-paper-white cursor-pointer"
+      >
+        <span>Написати в</span>
+        <img src="/icons/telegram.svg" alt="" class="w-7 h-7" loading="lazy" />
+      </a>
+
+      <button
+        type="button"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-paper-white font-bold text-base border-2 border-white/25 hover:border-white/50 active:scale-[0.98] transition-all cursor-pointer backdrop-blur-xs js-open-drawer"
+      >
+        <span>Зв'язатися</span>
+        <i class="fa-solid fa-arrow-right text-xs opacity-80" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  </div>
+</section>
+
+<dialog
+  id="contact-drawer"
+  class="fixed inset-0 z-[200] bg-transparent p-0 m-0 max-w-none max-h-none w-full h-full opacity-0 pointer-events-none backdrop:bg-black/50"
+>
+  <div class="drawer-content h-full flex flex-col md:flex-row justify-end">
+    <div class="drawer-backdrop absolute inset-0" aria-hidden="true"></div>
+    <div class="drawer-panel relative bg-paper-white h-full w-full max-w-md flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-black/5 shrink-0">
+        <h3 class="text-lg font-bold text-ink-black m-0">Зв'язатися зі мною</h3>
+        <button
+          type="button"
+          class="js-close-drawer w-9 h-9 rounded-full bg-morning-fog flex items-center justify-center text-ink-black/60 hover:text-ink-black transition-colors cursor-pointer border-none"
+          aria-label="Закрити"
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto overscroll-contain px-6 py-5">
+        <form class="space-y-4 mb-6 js-contact-form">
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-ink-black uppercase tracking-wider block" for="drawer-name">
+              Ім'я <span class="text-red-500">*</span>
+            </label>
+            <input
+              class="w-full bg-morning-fog/50 border border-black/10 rounded-xl px-4 py-3 text-sm text-ink-black outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all"
+              type="text"
+              id="drawer-name"
+              name="name"
+              placeholder="Ваше ім'я"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-ink-black uppercase tracking-wider block" for="drawer-contact">
+              Зручний зв'язок <span class="text-red-500">*</span>
+            </label>
+            <input
+              class="w-full bg-morning-fog/50 border border-black/10 rounded-xl px-4 py-3 text-sm text-ink-black outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all"
+              type="text"
+              id="drawer-contact"
+              name="contact"
+              placeholder="Telegram, email або телефон"
+              required
+            />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-ink-black uppercase tracking-wider block" for="drawer-message">
+              Повідомлення <span class="text-red-500">*</span>
+            </label>
+            <textarea
+              class="w-full bg-morning-fog/50 border border-black/10 rounded-xl px-4 py-3 text-sm text-ink-black outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all resize-y"
+              id="drawer-message"
+              name="message"
+              placeholder="Коротко опишіть вашу ідею..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-3.5 rounded-lg bg-ink-black text-paper-white font-bold text-sm hover:bg-neutral-800 transition-colors cursor-pointer border-none"
+          >
+            Надіслати <i class="fa-solid fa-arrow-right text-xs ml-1" aria-hidden="true"></i>
+          </button>
+        </form>
+
+        <div class="border-t border-black/5 pt-5">
+          <p class="text-xs font-bold text-ink-black/50 uppercase tracking-wider mb-3 text-center">Соцмережі</p>
+          <div class="space-y-2">
+            {contactLinks.map((link) => (
+              <a
+                href={link.url}
+                target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 p-3 rounded-xl bg-morning-fog/50 hover:bg-morning-fog transition-colors no-underline"
+              >
+                <img src={link.icon} alt="" class="w-6 h-6 shrink-0" loading="lazy" />
+                <span class="text-sm font-bold text-ink-black">{link.label}</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-ink-black/30 ml-auto" aria-hidden="true"></i>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s;
+  }
+
+  dialog[open]::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  dialog[open] .drawer-panel {
+    transform: translateX(0);
+  }
+
+  .drawer-content {
+    position: relative;
+    height: 100%;
+  }
+
+  .drawer-backdrop {
+    position: absolute;
+    inset: 0;
+  }
+
+  .drawer-panel {
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overscroll-behavior: contain;
+  }
+
+  /* Mobile: bottom sheet style */
+  @media (max-width: 767px) {
+    dialog[open] .drawer-panel {
+      transform: translateY(0);
+    }
+
+    .drawer-panel {
+      transform: translateY(100%);
+      max-height: 85vh;
+      border-radius: 1rem 1rem 0 0;
+      margin-top: auto;
+    }
+
+    .drawer-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+    }
+  }
+
+  /* Desktop: side drawer */
+  @media (min-width: 768px) {
+    .drawer-panel {
+      max-height: none;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const dialog = document.getElementById('contact-drawer') as HTMLDialogElement;
+  const openBtns = document.querySelectorAll('.js-open-drawer');
+  const closeBtns = document.querySelectorAll('.js-close-drawer');
+  const backdrop = dialog?.querySelector('.drawer-backdrop');
+  const form = dialog?.querySelector('.js-contact-form');
+
+  function open() {
+    if (!dialog) return;
+    dialog.showModal();
+    dialog.style.opacity = '1';
+    dialog.style.pointerEvents = 'auto';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    if (!dialog) return;
+    dialog.style.opacity = '0';
+    dialog.style.pointerEvents = 'none';
+    dialog.close();
+    document.body.style.overflow = '';
+  }
+
+  openBtns.forEach(btn => btn.addEventListener('click', open));
+  closeBtns.forEach(btn => btn.addEventListener('click', close));
+  backdrop?.addEventListener('click', close);
+
+  dialog?.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    close();
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(form as HTMLFormElement);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Помилка');
+      }
+
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Надіслано!';
+      setTimeout(() => {
+        close();
+        btn.innerHTML = original;
+        btn.disabled = false;
+        (form as HTMLFormElement).reset();
+      }, 1000);
+    } catch {
+      btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Помилка';
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.disabled = false;
+      }, 2000);
+    }
+  });
+</script>

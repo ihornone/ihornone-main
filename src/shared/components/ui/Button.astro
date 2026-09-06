@@ -1,0 +1,86 @@
+---
+interface Props {
+  variant?: 'primary' | 'outline' | 'dark' | 'ghost' | 'accent';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit';
+  class?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  ariaLabel?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  disabled = false,
+  loading = false,
+  icon,
+  iconPosition = 'right',
+  ariaLabel,
+} = Astro.props;
+
+const isDisabled = disabled || loading;
+
+const variantClasses = {
+  primary: 'bg-ink-black text-paper-white shadow-md hover:bg-neutral-800 hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
+  outline: 'bg-morning-fog text-ink-black border border-black/5 hover:bg-[#e5e0d4] focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
+  dark: 'bg-ink-black text-paper-white hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
+  ghost: 'bg-transparent text-ink-black hover:bg-morning-fog focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
+  accent: 'bg-cobalt-pop text-paper-white shadow-md hover:bg-cobalt-pop/90 hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
+};
+
+const sizeClasses = {
+  sm: '!py-2 !px-4 !text-xs',
+  md: '!py-3 !px-6 !text-sm',
+  lg: '!py-3.5 !px-8 !text-base',
+};
+
+const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg font-sans font-bold transition-all duration-200 cursor-pointer no-underline outline-none';
+---
+
+{href ? (
+  <a
+    href={href}
+    class={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${isDisabled ? 'opacity-50 pointer-events-none' : ''} ${className}`}
+    aria-label={ariaLabel}
+    aria-disabled={isDisabled}
+    tabindex={isDisabled ? -1 : 0}
+  >
+    {loading ? (
+      <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+      </svg>
+    ) : (
+      icon && iconPosition === 'left' && <i class={`${icon} text-xs`} aria-hidden="true"></i>
+    )}
+    <slot />
+    {!loading && icon && iconPosition === 'right' && <i class={`${icon} text-xs`} aria-hidden="true"></i>}
+  </a>
+) : (
+  <button
+    type={type}
+    disabled={isDisabled}
+    class={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
+    aria-label={ariaLabel}
+    aria-busy={loading}
+    aria-disabled={isDisabled}
+  >
+    {loading ? (
+      <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+      </svg>
+    ) : (
+      icon && iconPosition === 'left' && <i class={`${icon} text-xs`} aria-hidden="true"></i>
+    )}
+    <slot />
+    {!loading && icon && iconPosition === 'right' && <i class={`${icon} text-xs`} aria-hidden="true"></i>}
+  </button>
+)}

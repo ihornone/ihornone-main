@@ -1,0 +1,63 @@
+---
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+  badge?: string;
+}
+
+interface Props {
+  title?: string;
+  items?: FaqItem[];
+  class?: string;
+}
+
+const defaultItems: FaqItem[] = [
+  {
+    question: 'Скільки часу займає розробка Telegram-бота чи сайту?',
+    answer: 'Зазвичай розробка базового сайту або бота займає від 1 до 2 тижнів. Складні проєкти з інтеграціями CRM та платежами розробляються за 3-4 тижні.',
+    badge: 'Загальне',
+  },
+  {
+    question: 'Які платіжні системи можна підключити?',
+    answer: 'Можна підключити Monobank, LiqPay, Stripe, WayForPay, Telegram Payments або криптовалютні еквайринги.',
+    badge: 'Оплата',
+  },
+  {
+    question: 'Чи надаєте ви підтримку після запуску?',
+    answer: 'Так, я надаю безкоштовний період технічної підтримки та гарантії на відсутність багів після релізу.',
+    badge: 'Підтримка',
+  },
+  {
+    question: 'Як відбувається процес оплати та співпраці?',
+    answer: 'Робота розбивається на етапи. Ззвичайний порядок: 50% передоплата на початку робіт, та 50% після демонстрації готового проєкту та вашого схвалення.',
+    badge: 'Оплата',
+  },
+];
+
+const {
+  title = 'Часті запитання',
+  items = defaultItems,
+  class: className = '',
+} = Astro.props;
+---
+
+<section class={`space-y-6 w-full ${className}`} data-animate="fade-up">
+  <SectionHeader title={title} align="center" />
+
+  <div class="space-y-3 w-full faq-container" data-animate="fade-up" data-stagger>
+    {items.map((item) => (
+      <details name="faq-accordion" class="bg-paper-white border border-black/5 rounded-2xl p-5 md:p-6 shadow-xs group [&[open]]:border-cobalt-pop/40 transition-all cursor-pointer">
+        <summary class="font-bold text-base md:text-lg text-ink-black flex items-center justify-between gap-4 select-none list-none">
+          <span>{item.question}</span>
+          <div class="w-8 h-8 rounded-full bg-morning-fog group-hover:bg-kofi-blue/40 flex items-center justify-center shrink-0 transition-colors">
+            <i class="fa-solid fa-plus text-base md:text-lg text-cobalt-pop group-open:rotate-45 transition-transform duration-200"></i>
+          </div>
+        </summary>
+        <div class="text-sm md:text-base text-black/70 leading-relaxed m-0 mt-3 pt-3 border-t border-black/5" set:html={item.answer} />
+      </details>
+    ))}
+  </div>
+</section>

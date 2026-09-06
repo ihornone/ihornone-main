@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Faq from '../../shared/components/sections/Faq.astro';
+import CtaBanner from '../../shared/components/sections/CtaBanner.astro';
+import Gallery from '../../shared/components/sections/Gallery.astro';
+import Passport from '../../shared/components/sections/Passport.astro';
+import ProcessSteps from '../../shared/components/sections/ProcessSteps.astro';
+import Breadcrumbs from '../../shared/components/ui/Breadcrumbs.astro';
+import Badge from '../../shared/components/ui/Badge.astro';
+import Card from '../../shared/components/ui/Card.astro';
+import Button from '../../shared/components/ui/Button.astro';
+import IconBox from '../../shared/components/ui/IconBox.astro';
+import SectionHeader from '../../shared/components/ui/SectionHeader.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+  return allProjects.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { title, category, icon, description, type, platform, technologies, duration, year, role, link, github, features, process, results, gallery, galleryFormat, testimonial } = entry.data;
+
+const { Content } = await render(entry);
+
+const allProjects = await getCollection('projects');
+const currentIndex = allProjects.findIndex((p) => p.id === entry.id);
+const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
+
+const passportFields = [
+  { label: 'Категорія', value: category },
+  { label: 'Платформа', value: platform },
+  { label: 'Тип', value: type },
+  { label: 'Технології', value: technologies },
+  { label: 'Роль', value: role },
+  { label: 'Термін', value: duration },
+  { label: 'Рік', value: year },
+];
+---
+
+<Layout
+  title={`${title} — Портфоліо | ihornone`}
+  description={description}
+  url={`/portfolio/${entry.id}`}
+  image={entry.data.image}
+  type="article"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-6 space-y-5 md:space-y-8">
+
+    <Breadcrumbs items={[
+      { label: 'Портфоліо', href: '/portfolio' },
+      { label: title },
+    ]} />
+
+    <section class="bg-paper-white border-2 border-black/5 rounded-2xl p-5 sm:p-8 md:p-12 shadow-xs w-full space-y-6 sm:space-y-8" data-animate="fade-up">
+      <div class="flex flex-col items-center text-center gap-4 sm:gap-5 max-w-3xl mx-auto">
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          <Badge icon={icon}>{category}</Badge>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-ink-black tracking-tight leading-tight m-0">
+          {title}
+        </h1>
+        
+        <p class="text-sm sm:text-base md:text-lg text-black/65 leading-relaxed m-0">
+          {description}
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 pt-1 w-full sm:w-auto">
+          {category === 'Мобільні застосунки' && link && (
+            <Button href={link} variant="dark" icon="fa-solid fa-download" class="w-full sm:w-auto">
+              Скачати
+            </Button>
+          )}
+
+          {category === 'Сайти' && link && (
+            <Button href={link} variant="dark" icon="fa-solid fa-arrow-right" class="w-full sm:w-auto">
+              Переглянути
+            </Button>
+          )}
+
+          {category === 'Telegram-боти' && link && (
+            <Button href={link} variant="dark" icon="fa-brands fa-telegram" class="w-full sm:w-auto">
+              Запустити
+            </Button>
+          )}
+
+          {github && (
+            <Button href={github} variant="outline" icon="fa-brands fa-github" class="w-full sm:w-auto">
+              GitHub
+            </Button>
+          )}
+
+          {!link && !github && (
+            <Button href="/contacts" variant="dark" icon="fa-solid fa-arrow-right" class="w-full sm:w-auto">
+              Замовити схожий проєкт
+            </Button>
+          )}
+
+          <Button href="/contacts" variant="accent" class="w-full sm:w-auto">
+            Обговорити ідею
+          </Button>
+        </div>
+      </div>
+
+      <Passport fields={passportFields} />
+    </section>
+
+    <div class="space-y-6 md:space-y-10 w-full">
+      <Card padding="lg" class="space-y-4 sm:space-y-5 w-full" data-animate="fade-up">
+        <SectionHeader title="Завдання та концепція" icon="fa-solid fa-bullseye" />
+        <div class="prose prose-sm max-w-none text-black/75 leading-relaxed">
+          <Content />
+        </div>
+      </Card>
+
+      <section class="space-y-6 w-full" data-animate="fade-up">
+        <SectionHeader title="Функціональні можливості" icon="fa-solid fa-cube" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-5" data-animate="fade-up" data-stagger>
+          {features.map((f) => (
+            <div class="bg-paper-white border border-black/5 rounded-2xl p-4 sm:p-6 space-y-2.5 flex flex-col justify-between shadow-2xs">
+              <IconBox icon={f.icon} />
+              <div class="space-y-1">
+                <h3 class="text-sm sm:text-base font-bold text-ink-black m-0">{f.title}</h3>
+                <p class="text-xs sm:text-sm text-black/60 m-0 leading-normal">{f.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {gallery && gallery.length > 0 && (
+        <Gallery photos={gallery} format={galleryFormat} />
+      )}
+
+      {results && results.length > 0 && (
+        <section class="space-y-6 w-full" data-animate="fade-up">
+          <SectionHeader title="Результати проєкту" icon="fa-solid fa-chart-line" />
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-animate="fade-up" data-stagger>
+            {results.map((res) => (
+              <div class="bg-paper-white border border-black/5 rounded-2xl p-5 text-center space-y-1.5 flex flex-col justify-center shadow-2xs">
+                <div class="text-2xl sm:text-3xl md:text-4xl font-black text-ink-black tracking-tight">{res.value}</div>
+                <p class="text-xs sm:text-sm text-black/65 m-0 leading-snug">{res.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <ProcessSteps steps={process} />
+
+      {testimonial && (
+        <Card padding="lg" class="space-y-5 sm:space-y-6 w-full bg-morning-fog/40 border-2 border-black/5" data-animate="fade-up">
+          <SectionHeader title="Відгук клієнта" icon="fa-solid fa-quote-left" />
+          <blockquote class="space-y-4 m-0">
+            <p class="text-base sm:text-lg md:text-xl text-ink-black/85 font-medium italic leading-relaxed m-0">
+              «{testimonial.quote}»
+            </p>
+            <div class="flex items-center justify-between flex-wrap gap-4 pt-2 border-t border-black/5">
+              <div>
+                <strong class="block text-sm sm:text-base font-bold text-ink-black">{testimonial.author}</strong>
+                <span class="text-xs sm:text-sm text-black/60">{testimonial.role}</span>
+              </div>
+              {testimonial.rating && (
+                <div class="flex items-center gap-1 text-amber-500 text-sm">
+                  {Array.from({ length: testimonial.rating }).map(() => (
+                    <i class="fa-solid fa-star"></i>
+                  ))}
+                </div>
+              )}
+            </div>
+          </blockquote>
+        </Card>
+      )}
+    </div>
+
+    <section class="w-full bg-paper-white border border-black/5 rounded-2xl p-4 sm:p-6 shadow-xs flex items-center justify-between gap-3" data-animate="fade-up">
+      {prevProject ? (
+        <a href={`/portfolio/${prevProject.id}`} class="flex items-center gap-2.5 text-ink-black hover:text-cobalt-pop transition-colors no-underline">
+          <i class="fa-solid fa-arrow-left text-xs sm:text-sm"></i>
+          <div class="text-left">
+            <span class="text-[10px] sm:text-[11px] font-bold text-black/40 uppercase block">Попередній</span>
+            <strong class="text-xs sm:text-sm font-bold block">{prevProject.data.title}</strong>
+          </div>
+        </a>
+      ) : <div />}
+
+      {nextProject ? (
+        <a href={`/portfolio/${nextProject.id}`} class="flex items-center gap-2.5 text-ink-black hover:text-cobalt-pop transition-colors no-underline ml-auto">
+          <div class="text-right">
+            <span class="text-[10px] sm:text-[11px] font-bold text-black/40 uppercase block">Наступний</span>
+            <strong class="text-xs sm:text-sm font-bold block">{nextProject.data.title}</strong>
+          </div>
+          <i class="fa-solid fa-arrow-right text-xs sm:text-sm"></i>
+        </a>
+      ) : <div />}
+    </section>
+
+    <CtaBanner />
+
+  </div>
+</Layout>

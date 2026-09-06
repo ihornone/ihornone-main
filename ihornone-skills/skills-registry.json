@@ -1,0 +1,587 @@
+{
+  "version": "3.0",
+  "description": "Machine-readable skill registry for AI agent skill discovery. Each skill has tags, triggers, and dependency rules.",
+  "layers": {
+    "universal": {
+      "description": "Language-level principles. Apply to any project type.",
+      "priority": 1
+    },
+    "web": {
+      "description": "Web application implementation (React, Next.js, Vue, Svelte, Astro).",
+      "priority": 2
+    },
+    "mobile": {
+      "description": "Mobile app implementation (React Native, Expo, Flutter).",
+      "priority": 2
+    },
+    "telegram": {
+      "description": "Telegram bot implementation (grammY, Node.js, Prisma).",
+      "priority": 2
+    }
+  },
+  "skills": [
+    {
+      "id": "async-patterns-universal",
+      "path": "async-patterns-universal/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["async", "await", "concurrency", "timeout", "cancellation", "race-condition", "deadlock", "promise", "goroutine", "tokio", "event-loop", "non-blocking"],
+      "triggers": [
+        "async code review",
+        "concurrent operations",
+        "timeout handling",
+        "race condition fix",
+        "deadlock prevention",
+        "resource cleanup",
+        "fire-and-forget",
+        "parallel execution",
+        "Promise.all",
+        "asyncio.gather",
+        "goroutine",
+        "tokio::spawn"
+      ],
+      "depends_on": [],
+      "refined_by": ["telegram-bot-async-patterns"],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "error-handling-standards",
+      "path": "error-handling-standards/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["error", "exception", "retry", "circuit-breaker", "catch", "throw", "result", "error-type", "error-code", "user-message"],
+      "triggers": [
+        "error handling review",
+        "custom exception",
+        "retry logic",
+        "circuit breaker",
+        "error classification",
+        "error hierarchy",
+        "global error handler",
+        "error cause",
+        "transient error",
+        "error logging"
+      ],
+      "depends_on": [],
+      "refined_by": ["telegram-bot-error-handling"],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "logging-standards",
+      "path": "logging-standards/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["logging", "log", "structured", "json", "context", "request-id", "trace-id", "redaction", "sensitive-data", "log-level", "tracing"],
+      "triggers": [
+        "logging setup",
+        "structured logs",
+        "log levels",
+        "context propagation",
+        "sensitive data redaction",
+        "distributed tracing",
+        "log aggregation",
+        "request logging"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "security-checklist",
+      "path": "security-checklist/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["security", "injection", "sql-injection", "command-injection", "ssrf", "path-traversal", "auth", "authentication", "authorization", "secrets", "password", "jwt", "idor", "bola"],
+      "triggers": [
+        "security review",
+        "injection vulnerability",
+        "sql injection fix",
+        "command injection",
+        "ssrf prevention",
+        "path traversal",
+        "authentication setup",
+        "authorization check",
+        "secrets management",
+        "password hashing",
+        "jwt implementation",
+        "idor prevention"
+      ],
+      "depends_on": [],
+      "refined_by": ["web-security"],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "testing-patterns",
+      "path": "testing-patterns/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["testing", "test", "unit", "integration", "e2e", "mock", "coverage", "aaa", "tdd", "assert", "fixture", "jest", "pytest", "testify"],
+      "triggers": [
+        "test writing",
+        "unit test",
+        "integration test",
+        "e2e test",
+        "mock setup",
+        "test coverage",
+        "test structure",
+        "test pyramid",
+        "property-based testing",
+        "contract testing"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "naming-conventions",
+      "path": "naming-conventions/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["naming", "camelcase", "snake-case", "pascalcase", "kebab-case", "constant", "variable", "function", "class", "file-naming", "directory-naming"],
+      "triggers": [
+        "naming review",
+        "rename variable",
+        "rename function",
+        "rename class",
+        "file naming",
+        "directory naming",
+        "naming convention",
+        "camelCase vs snake_case",
+        "constant naming"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "performance-optimization",
+      "path": "performance-optimization/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["performance", "caching", "cache", "lazy-loading", "database", "index", "n+1", "connection-pool", "memory", "profiling", "benchmark", "debounce", "throttle"],
+      "triggers": [
+        "performance review",
+        "slow query",
+        "n+1 problem",
+        "caching strategy",
+        "memory leak",
+        "connection pool",
+        "profiling",
+        "benchmark",
+        "debounce",
+        "throttle",
+        "resource cleanup"
+      ],
+      "depends_on": [],
+      "refined_by": ["web-performance"],
+      "languages": ["typescript", "python", "go", "rust"]
+    },
+    {
+      "id": "git-workflow",
+      "path": "git-workflow/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["git", "branch", "commit", "pr", "pull-request", "merge", "rebase", "squash", "conventional-commit", "semantic-versioning", "release", "code-review"],
+      "triggers": [
+        "git workflow",
+        "branch naming",
+        "commit message",
+        "pull request",
+        "code review",
+        "merge strategy",
+        "rebase",
+        "force push",
+        "versioning",
+        "release"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["any"]
+    },
+    {
+      "id": "code-structure-verification",
+      "path": "code-structure-verification/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["structure", "directory", "folder", "orphan", "duplicate", "depth", "gitignore", "architecture", "monorepo", "contract"],
+      "triggers": [
+        "structure audit",
+        "orphan detection",
+        "duplicate files",
+        "directory depth",
+        "gitignore check",
+        "architecture review",
+        "monorepo structure"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["any"]
+    },
+    {
+      "id": "api-documentation",
+      "path": "api-documentation/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["api", "documentation", "openapi", "swagger", "rest", "endpoint", "http", "curl", "pagination", "rate-limit", "webhook"],
+      "triggers": [
+        "api documentation",
+        "openapi spec",
+        "swagger",
+        "rest api docs",
+        "endpoint documentation",
+        "api reference",
+        "code examples for api"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["any"],
+      "note": "HTTP/API-specific. Not a universal documentation skill."
+    },
+    {
+      "id": "readme-template",
+      "path": "readme-template/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["readme", "documentation", "project-docs", "installation", "quick-start", "usage"],
+      "triggers": [
+        "write readme",
+        "readme template",
+        "project documentation",
+        "installation guide",
+        "quick start"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["any"]
+    },
+    {
+      "id": "roadmap-template",
+      "path": "roadmap-template/SKILL.md",
+      "layer": "universal",
+      "version": "3.0",
+      "tags": ["roadmap", "planning", "milestones", "phases", "features", "timeline", "backlog"],
+      "triggers": [
+        "write roadmap",
+        "project planning",
+        "milestone planning",
+        "feature prioritization",
+        "release planning"
+      ],
+      "depends_on": [],
+      "refined_by": [],
+      "languages": ["any"]
+    },
+    {
+      "id": "web-project-structure",
+      "path": "web-project-structure/SKILL.md",
+      "layer": "web",
+      "version": "3.0",
+      "tags": ["web", "nextjs", "vite", "astro", "remix", "sveltekit", "ssr", "ssg", "routing", "directory", "feature-first", "providers"],
+      "triggers": [
+        "web project setup",
+        "nextjs structure",
+        "vite project",
+        "ssr setup",
+        "ssg setup",
+        "feature directory",
+        "web architecture"
+      ],
+      "depends_on": [],
+      "refines": "code-structure-verification",
+      "languages": ["typescript"]
+    },
+    {
+      "id": "web-components-patterns",
+      "path": "web-components-patterns/SKILL.md",
+      "layer": "web",
+      "version": "3.0",
+      "tags": ["web", "react", "vue", "svelte", "component", "props", "composition", "compound", "aria", "accessibility", "error-boundary", "suspense", "memo", "useclient"],
+      "triggers": [
+        "react component",
+        "vue component",
+        "svelte component",
+        "component patterns",
+        "compound components",
+        "accessibility",
+        "aria",
+        "error boundary",
+        "controlled uncontrolled",
+        "component api"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript"]
+    },
+    {
+      "id": "web-state-management",
+      "path": "web-state-management/SKILL.md",
+      "layer": "web",
+      "version": "3.0",
+      "tags": ["web", "state", "redux", "zustand", "jotai", "context", "selector", "hydration", "ssr", "persist", "store", "reducer"],
+      "triggers": [
+        "state management",
+        "redux setup",
+        "zustand store",
+        "jotai atoms",
+        "ssr hydration",
+        "state persistence",
+        "selector optimization",
+        "global state"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript"]
+    },
+    {
+      "id": "web-api-client",
+      "path": "web-api-client/SKILL.md",
+      "layer": "web",
+      "version": "3.0",
+      "tags": ["web", "api", "axios", "tanstack-query", "fetch", "interceptor", "token-refresh", "optimistic-update", "cache", "dedup", "graphql", "zod"],
+      "triggers": [
+        "api client setup",
+        "axios configuration",
+        "tanstack query",
+        "react query",
+        "token refresh",
+        "optimistic update",
+        "api caching",
+        "request deduplication",
+        "runtime validation"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript"]
+    },
+    {
+      "id": "web-performance",
+      "path": "web-performance/SKILL.md",
+      "layer": "web",
+      "version": "3.0",
+      "tags": ["web", "performance", "web-vitals", "lcp", "inp", "cls", "code-splitting", "lazy-load", "image-optimization", "lighthouse", "bundle", "cache-control"],
+      "triggers": [
+        "web performance",
+        "core web vitals",
+        "lcp optimization",
+        "cls fix",
+        "code splitting",
+        "image optimization",
+        "lighthouse audit",
+        "bundle analysis",
+        "cache headers"
+      ],
+      "depends_on": [],
+      "refines": "performance-optimization",
+      "languages": ["typescript"]
+    },
+    {
+      "id": "web-security",
+      "path": "web-security/SKILL.md",
+      "layer": "web",
+      "version": "3.0",
+      "tags": ["web", "security", "xss", "csrf", "cors", "csp", "security-headers", "helmet", "dompurify", "samesite", "clickjacking"],
+      "triggers": [
+        "xss prevention",
+        "csrf protection",
+        "cors setup",
+        "csp headers",
+        "security headers",
+        "helmet configuration",
+        "content security policy"
+      ],
+      "depends_on": [],
+      "refines": "security-checklist",
+      "languages": ["typescript"]
+    },
+    {
+      "id": "mobile-project-structure",
+      "path": "mobile-project-structure/SKILL.md",
+      "layer": "mobile",
+      "version": "3.0",
+      "tags": ["mobile", "react-native", "expo", "flutter", "navigation", "directory", "feature-first", "flavors", "platform", "env-config"],
+      "triggers": [
+        "mobile project setup",
+        "react native structure",
+        "expo project",
+        "flutter project",
+        "mobile architecture",
+        "feature directory mobile",
+        "flutter flavors"
+      ],
+      "depends_on": [],
+      "refines": "code-structure-verification",
+      "languages": ["typescript", "dart"]
+    },
+    {
+      "id": "mobile-components-ui",
+      "path": "mobile-components-ui/SKILL.md",
+      "layer": "mobile",
+      "version": "3.0",
+      "tags": ["mobile", "react-native", "flutter", "component", "ui", "pressable", "widget", "design-tokens", "theming", "accessibility", "semantics", "memo"],
+      "triggers": [
+        "mobile component",
+        "react native component",
+        "flutter widget",
+        "design tokens",
+        "mobile theming",
+        "mobile accessibility",
+        "compound components mobile"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript", "dart"]
+    },
+    {
+      "id": "mobile-state-management",
+      "path": "mobile-state-management/SKILL.md",
+      "layer": "mobile",
+      "version": "3.0",
+      "tags": ["mobile", "state", "redux", "zustand", "riverpod", "bloc", "context", "selector", "persist", "secure-storage", "keychain"],
+      "triggers": [
+        "mobile state management",
+        "react native state",
+        "flutter state",
+        "riverpod setup",
+        "bloc setup",
+        "mobile persistence",
+        "secure token storage"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript", "dart"]
+    },
+    {
+      "id": "mobile-api-integration",
+      "path": "mobile-api-integration/SKILL.md",
+      "layer": "mobile",
+      "version": "3.0",
+      "tags": ["mobile", "api", "axios", "dio", "http-client", "interceptor", "token-refresh", "retry", "offline", "network", "secure-storage"],
+      "triggers": [
+        "mobile api client",
+        "react native api",
+        "flutter dio",
+        "mobile token refresh",
+        "mobile retry logic",
+        "offline support",
+        "network detection"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript", "dart"]
+    },
+    {
+      "id": "telegram-bot-structure",
+      "path": "telegram-bot-structure/SKILL.md",
+      "layer": "telegram",
+      "version": "3.0",
+      "tags": ["telegram", "bot", "grammy", "structure", "directory", "di", "dependency-injection", "zod", "lifecycle", "feature-first", "composer"],
+      "triggers": [
+        "telegram bot setup",
+        "grammy project",
+        "bot structure",
+        "bot architecture",
+        "bot directory",
+        "bot configuration",
+        "zod validation"
+      ],
+      "depends_on": [],
+      "refines": "code-structure-verification",
+      "languages": ["typescript"]
+    },
+    {
+      "id": "telegram-bot-handlers",
+      "path": "telegram-bot-handlers/SKILL.md",
+      "layer": "telegram",
+      "version": "3.0",
+      "tags": ["telegram", "bot", "grammy", "handler", "callback", "session", "keyboard", "inline", "command", "authorization", "idempotency"],
+      "triggers": [
+        "telegram handler",
+        "grammy handler",
+        "callback query",
+        "inline keyboard",
+        "bot command",
+        "session management",
+        "handler authorization"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript"]
+    },
+    {
+      "id": "telegram-bot-database",
+      "path": "telegram-bot-database/SKILL.md",
+      "layer": "telegram",
+      "version": "3.0",
+      "tags": ["telegram", "bot", "prisma", "database", "orm", "migration", "pooling", "transaction", "bigint", "pagination", "repository"],
+      "triggers": [
+        "telegram bot database",
+        "prisma setup",
+        "bot orm",
+        "database migration",
+        "connection pooling",
+        "bot repository pattern"
+      ],
+      "depends_on": [],
+      "refines": null,
+      "languages": ["typescript"]
+    },
+    {
+      "id": "telegram-bot-async-patterns",
+      "path": "telegram-bot-async-patterns/SKILL.md",
+      "layer": "telegram",
+      "version": "3.0",
+      "tags": ["telegram", "bot", "async", "semaphore", "batch", "broadcast", "queue", "background", "worker", "cancellation", "rate-limit"],
+      "triggers": [
+        "telegram bot async",
+        "broadcast sending",
+        "message batching",
+        "background task",
+        "rate limiting bot",
+        "worker pool bot"
+      ],
+      "depends_on": [],
+      "refines": "async-patterns-universal",
+      "languages": ["typescript"]
+    },
+    {
+      "id": "telegram-bot-error-handling",
+      "path": "telegram-bot-error-handling/SKILL.md",
+      "layer": "telegram",
+      "version": "3.0",
+      "tags": ["telegram", "bot", "error", "exception", "retry", "admin-alert", "graceful", "grammy-error", "domain-error"],
+      "triggers": [
+        "telegram bot error",
+        "bot exception handling",
+        "admin alert",
+        "bot retry logic",
+        "grammy error handler"
+      ],
+      "depends_on": [],
+      "refines": "error-handling-standards",
+      "languages": ["typescript"]
+    }
+  ],
+  "discovery_rules": {
+    "by_project_type": {
+      "web_app": ["web-project-structure", "web-components-patterns", "web-state-management", "web-api-client", "web-performance", "web-security"],
+      "mobile_app": ["mobile-project-structure", "mobile-components-ui", "mobile-state-management", "mobile-api-integration"],
+      "telegram_bot": ["telegram-bot-structure", "telegram-bot-handlers", "telegram-bot-database", "telegram-bot-async-patterns", "telegram-bot-error-handling"],
+      "cli_tool": ["code-structure-verification", "naming-conventions", "testing-patterns", "git-workflow"],
+      "library": ["naming-conventions", "testing-patterns", "api-documentation", "readme-template", "git-workflow"],
+      "backend_api": ["error-handling-standards", "logging-standards", "security-checklist", "testing-patterns", "api-documentation"],
+      "background_job": ["async-patterns-universal", "error-handling-standards", "logging-standards"]
+    },
+    "by_task": {
+      "new_project": ["code-structure-verification", "naming-conventions", "git-workflow"],
+      "security_review": ["security-checklist", "web-security"],
+      "performance_review": ["performance-optimization", "web-performance"],
+      "test_writing": ["testing-patterns"],
+      "error_handling_review": ["error-handling-standards"],
+      "logging_setup": ["logging-standards"],
+      "api_documentation": ["api-documentation"],
+      "readme_writing": ["readme-template"],
+      "roadmap_planning": ["roadmap-template"]
+    },
+    "search_strategy": "1. Match user task keywords against skill 'triggers' array. 2. If project type is known, start with 'by_project_type' list. 3. Add universal skills needed for the task. 4. Never load skills from wrong platform layer."
+  }
+}

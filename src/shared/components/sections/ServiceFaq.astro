@@ -1,0 +1,100 @@
+---
+import Faq from './Faq.astro';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  title?: string;
+  serviceId?: string;
+  globalOnly?: boolean;
+}
+
+const { title, serviceId, globalOnly } = Astro.props;
+
+const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const services = serviceId ? allServices.filter((service) => service.id === serviceId) : allServices;
+const globalFaqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order);
+
+const serviceTitleMap: Record<string, string> = {
+  'websites': 'Сайти',
+  'mobile-apps': 'Мобільні додатки',
+  'telegram-bots': 'Telegram-боти',
+};
+
+const botTimeFaq = {
+  question: 'Скільки займає розробка?',
+  answer: 'Простий бот — 1-2 тижні. Бізнес-бот — 2-3 тижні. Індивідуальний складний бот — від 3-4 тижнів.',
+  serviceName: 'Telegram-боти',
+};
+
+const faqItems: FaqItem[] = [];
+
+if (!globalOnly) {
+  const serviceFaqMap = new Map<string, { serviceName: string; answer: string }[]>();
+
+  for (const service of services) {
+    const serviceName = serviceTitleMap[service.id] || service.data.shortTitle || service.data.title;
+    const serviceFaqs = [...(service.data.faq || [])];
+
+    if (service.id === 'telegram-bots') {
+      const hasTimingFaq = serviceFaqs.some(
+        (item) => item.question.trim().toLowerCase() === botTimeFaq.question.toLowerCase()
+      );
+      if (!hasTimingFaq) {
+        serviceFaqs.unshift({
+          question: botTimeFaq.question,
+          answer: botTimeFaq.answer,
+        });
+      }
+    }
+
+    for (const item of serviceFaqs) {
+      const question = item.question.trim();
+      const answer = item.answer.trim();
+      if (!question || !answer) continue;
+
+      if (!serviceFaqMap.has(question)) {
+        serviceFaqMap.set(question, []);
+      }
+
+      const existing = serviceFaqMap.get(question)!;
+      if (!existing.some((e) => e.answer === answer && e.serviceName === serviceName)) {
+        existing.push({ serviceName, answer });
+      }
+    }
+  }
+
+  for (const [question, entries] of serviceFaqMap.entries()) {
+    if (entries.length === 1) {
+      faqItems.push({
+        question,
+        answer: entries[0].answer,
+      });
+    } else {
+      const combinedAnswerHtml = entries
+        .map(
+          (e) =>
+            `<div class="mb-2 last:mb-0"><strong class="font-bold text-ink-black">• ${e.serviceName}:</strong> ${e.answer}</div>`
+        )
+        .join('');
+
+      faqItems.push({
+        question,
+        answer: combinedAnswerHtml,
+      });
+    }
+  }
+}
+
+for (const item of globalFaqs) {
+  const question = item.data.question.trim();
+  const answer = item.data.answer.trim();
+  if (!question || !answer) continue;
+
+  faqItems.push({
+    question,
+    answer,
+  });
+}
+---
+
+<Faq {title} items={faqItems} />

@@ -1,0 +1,315 @@
+---
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import IconBox from '../ui/IconBox.astro';
+import { getCollection } from 'astro:content';
+
+interface Benefit {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  benefits?: Benefit[];
+  class?: string;
+}
+
+const defaultBenefits: Benefit[] = [
+  {
+    icon: 'fa-solid fa-clock',
+    title: 'Швидка відповідь',
+    description: 'Відповім протягом 24 годин',
+  },
+  {
+    icon: 'fa-solid fa-comments',
+    title: 'Безкоштовна консультація',
+    description: 'Обговоримо ідею безкоштовно',
+  },
+  {
+    icon: 'fa-solid fa-file-contract',
+    title: 'Прозорі умови',
+    description: 'Чітка угода та терміни',
+  },
+];
+
+const {
+  benefits = defaultBenefits,
+  class: className = '',
+} = Astro.props;
+
+const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class:list={['grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full', className]} aria-labelledby="contact-form-heading">
+  <div class="space-y-6">
+    <div class="space-y-2">
+      <h2 id="contact-form-heading" class="text-2xl md:text-3xl font-black text-ink-black tracking-tight m-0">
+        Напишіть мені
+      </h2>
+      <p class="text-sm md:text-base text-black/60 leading-relaxed m-0">
+        Опишіть ваш проєкт, і я відповім протягом 24 годин з пропозицією щодо термінів та вартості.
+      </p>
+    </div>
+
+    <div class="space-y-4" role="list" aria-label="Переваги співпраці">
+      {benefits.map((benefit) => (
+        <Card variant="flat" padding="sm" class="flex items-center gap-4" role="listitem">
+          <IconBox icon={benefit.icon} size="sm" />
+          <div>
+            <h4 class="text-sm font-bold text-ink-black m-0">{benefit.title}</h4>
+            <p class="text-xs text-black/60 m-0">{benefit.description}</p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </div>
+
+  <Card class="w-full">
+    <form class="space-y-4" id="contact-form" aria-describedby="form-instructions">
+      <p id="form-instructions" class="sr-only">Заповніть форму для зв'язку. Поля з позначкою * обов'язкові.</p>
+      
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-ink-black uppercase tracking-wider block" for="name">
+          Ім'я <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input
+          class="w-full bg-paper-white border border-black/15 rounded-xl px-4 py-3 text-sm text-ink-black outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Ваше ім'я"
+          required
+          aria-required="true"
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-ink-black uppercase tracking-wider block" for="contact">
+          Зручний зв'язок <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input
+          class="w-full bg-paper-white border border-black/15 rounded-xl px-4 py-3 text-sm text-ink-black outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all"
+          type="text"
+          id="contact"
+          name="contact"
+          placeholder="Telegram, email або телефон"
+          required
+          aria-required="true"
+          autocomplete="email tel"
+        />
+      </div>
+
+      <div class="space-y-1.5">
+        <label id="service-label" class="text-xs font-bold text-ink-black uppercase tracking-wider block">
+          Послуга <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input type="hidden" id="service" name="service" required aria-required="true" />
+        <div class="relative" id="service-dropdown">
+          <button
+            type="button"
+            class="w-full bg-paper-white border border-black/15 rounded-xl px-4 py-3 text-sm text-left outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all cursor-pointer flex items-center justify-between gap-2"
+            id="service-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="service-label"
+          >
+            <span class="flex items-center gap-2.5" id="service-trigger-content">
+              <span class="text-black/40">Оберіть послугу</span>
+            </span>
+            <i class="fa-solid fa-chevron-down text-xs text-black/40 transition-transform duration-200" id="service-arrow"></i>
+          </button>
+          <div
+            class="absolute top-full left-0 right-0 mt-1.5 bg-paper-white border border-black/10 rounded-xl shadow-lg overflow-hidden z-50 hidden"
+            id="service-options"
+            role="listbox"
+            aria-labelledby="service-label"
+          >
+            <div class="p-1.5">
+              {allServices.map((service) => (
+                <button
+                  type="button"
+                  class="service-option w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left hover:bg-morning-fog transition-colors cursor-pointer"
+                  data-value={service.id}
+                  data-icon={service.data.icon}
+                  data-title={service.data.title}
+                  role="option"
+                  aria-selected="false"
+                >
+                  <div class="w-8 h-8 rounded-lg bg-kofi-blue/40 flex items-center justify-center shrink-0">
+                    <i class={`${service.data.icon} text-sm`} style="color: var(--color-cobalt-pop, #3b5bdb);"></i>
+                  </div>
+                  <span class="font-medium text-ink-black">{service.data.title}</span>
+                </button>
+              ))}
+              <button
+                type="button"
+                class="service-option w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left hover:bg-morning-fog transition-colors cursor-pointer"
+                data-value="other"
+                data-icon="fa-solid fa-ellipsis"
+                data-title="Інше"
+                role="option"
+                aria-selected="false"
+              >
+                <div class="w-8 h-8 rounded-lg bg-morning-fog flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-ellipsis text-sm text-black/50"></i>
+                </div>
+                <span class="font-medium text-ink-black">Інше</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-ink-black uppercase tracking-wider block" for="message">
+          Опишіть проєкт <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <textarea
+          class="w-full bg-paper-white border border-black/15 rounded-xl px-4 py-3 text-sm text-ink-black outline-none focus:border-cobalt-pop focus:ring-2 focus:ring-cobalt-pop/20 transition-all min-h-[110px] resize-y"
+          id="message"
+          name="message"
+          placeholder="Коротко опишіть вашу ідею або задачу..."
+          rows="4"
+          required
+          aria-required="true"
+        ></textarea>
+      </div>
+
+      <Button type="submit" variant="dark" class="w-full !py-3.5 mt-2" id="submit-btn">
+        <span id="submit-text">Надіслати</span>
+        <i class="fa-solid fa-arrow-right text-xs" id="submit-icon" aria-hidden="true"></i>
+        <svg class="animate-spin h-4 w-4 hidden" id="submit-spinner" viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+        </svg>
+      </Button>
+
+      <div id="form-status" class="text-sm text-center" role="status" aria-live="polite"></div>
+    </form>
+  </Card>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('submit-btn');
+    const submitText = document.getElementById('submit-text');
+    const submitIcon = document.getElementById('submit-icon');
+    const submitSpinner = document.getElementById('submit-spinner');
+    const formStatus = document.getElementById('form-status');
+
+    // Custom dropdown
+    const dropdown = document.getElementById('service-dropdown');
+    const trigger = document.getElementById('service-trigger');
+    const triggerContent = document.getElementById('service-trigger-content');
+    const optionsPanel = document.getElementById('service-options');
+    const arrow = document.getElementById('service-arrow');
+    const hiddenInput = document.getElementById('service') as HTMLInputElement;
+    const options = document.querySelectorAll('.service-option');
+
+    if (dropdown && trigger && optionsPanel && arrow && hiddenInput) {
+      trigger.addEventListener('click', () => {
+        const isOpen = !optionsPanel.classList.contains('hidden');
+        optionsPanel.classList.toggle('hidden');
+        arrow.classList.toggle('rotate-180');
+        trigger.classList.toggle('border-cobalt-pop');
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      options.forEach((option) => {
+        option.addEventListener('click', () => {
+          const value = option.getAttribute('data-value') || '';
+          const icon = option.getAttribute('data-icon') || '';
+          const title = option.getAttribute('data-title') || '';
+
+          hiddenInput.value = value;
+          triggerContent.innerHTML = `
+            <div class="w-8 h-8 rounded-lg bg-kofi-blue/40 flex items-center justify-center shrink-0">
+              <i class="${icon} text-sm" style="color: var(--color-cobalt-pop, #3b5bdb);"></i>
+            </div>
+            <span class="font-medium text-ink-black">${title}</span>
+          `;
+
+          optionsPanel.classList.add('hidden');
+          arrow.classList.remove('rotate-180');
+          trigger.classList.remove('border-cobalt-pop');
+          trigger.setAttribute('aria-expanded', 'false');
+          hiddenInput.removeAttribute('aria-invalid');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target as Node)) {
+          optionsPanel.classList.add('hidden');
+          arrow.classList.remove('rotate-180');
+          trigger.classList.remove('border-cobalt-pop');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    if (!form || !submitBtn || !submitText || !submitIcon || !submitSpinner || !formStatus) return;
+
+    let isLoading = false;
+
+    function setLoading(loading: boolean) {
+      isLoading = loading;
+      submitBtn.disabled = loading;
+      submitText.textContent = loading ? 'Надсилаю...' : 'Надіслати';
+      submitIcon.classList.toggle('hidden', loading);
+      submitSpinner.classList.toggle('hidden', !loading);
+    }
+
+    function showStatus(message: string, isError: boolean) {
+      formStatus.textContent = message;
+      formStatus.className = `text-sm text-center ${isError ? 'text-red-600' : 'text-green-600'}`;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (isLoading) return;
+
+      setLoading(true);
+      showStatus('', false);
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Помилка');
+        }
+        
+        showStatus('Повідомлення надіслано! Я зв\'яжусь з вами протягом 24 годин.', false);
+        form.reset();
+        if (triggerContent) {
+          triggerContent.innerHTML = '<span class="text-black/40">Оберіть послугу</span>';
+        }
+        if (hiddenInput) hiddenInput.value = '';
+      } catch {
+        showStatus('Помилка при надсиланні. Спробуйте ще раз або напишіть мені напряму.', true);
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    const requiredFields = form.querySelectorAll('[required]');
+    requiredFields.forEach((field) => {
+      field.addEventListener('blur', () => {
+        const input = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+        if (input.value.trim() === '') {
+          input.setAttribute('aria-invalid', 'true');
+        } else {
+          input.removeAttribute('aria-invalid');
+        }
+      });
+    });
+  });
+</script>

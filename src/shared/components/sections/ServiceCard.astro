@@ -1,0 +1,75 @@
+---
+import Card from '../ui/Card.astro';
+import IconBox from '../ui/IconBox.astro';
+import Button from '../ui/Button.astro';
+
+interface ServiceInclude {
+  title: string;
+}
+
+interface Props {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  includes?: ServiceInclude[];
+  isPopular?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  icon,
+  title,
+  description,
+  includes = [],
+  isPopular = false,
+  class: className = '',
+} = Astro.props;
+---
+
+<article class:list={['relative h-full flex flex-col shrink-0 w-[85vw] sm:w-[320px] md:w-auto snap-center md:snap-align-none pt-4 overflow-visible', className]}>
+  <Card hover variant={isPopular ? 'highlight' : 'default'} class="h-full flex flex-col justify-between min-h-[460px] relative overflow-visible">
+    {isPopular && (
+      <div class="absolute -top-3.5 right-6 bg-cobalt-pop text-paper-white text-[10px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-sm z-30 border-2 border-paper-white whitespace-nowrap" role="status">
+        Популярний напрямок
+      </div>
+    )}
+
+    <div class="flex-1 flex flex-col">
+      <!-- Icon -->
+      <div class="mb-4">
+        <IconBox icon={icon} size="lg" />
+      </div>
+
+      <!-- Title & Description with Fixed Equal Heights -->
+      <div class="space-y-2 mb-4">
+        <h3 class="text-xl font-black text-ink-black m-0 min-h-[3.25rem] flex items-center">
+          {title}
+        </h3>
+        <p class="text-sm text-black/65 leading-relaxed m-0 min-h-[2.5rem]">
+          {description}
+        </p>
+      </div>
+
+      <!-- Included Features List -->
+      {includes.length > 0 && (
+        <ul class="space-y-2.5 pt-4 border-t border-black/5 list-none p-0 m-0 flex-1 flex flex-col justify-start" role="list" aria-label={`Що входить у послугу: ${title}`}>
+          {includes.slice(0, 4).map((item) => (
+            <li class="flex items-center gap-2.5 text-xs font-bold text-ink-black/80">
+              <i class="fa-solid fa-circle-check text-cobalt-pop text-xs shrink-0" aria-hidden="true"></i>
+              <span>{item.title}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <!-- Bottom Action Button Always Aligned at Bottom -->
+    <div class="pt-5 mt-auto">
+      <Button href={`/services/${id}`} variant="primary" class="w-full text-center justify-center" ariaLabel={`Детальніше про ${title}`}>
+        Детальніше <i class="fa-solid fa-arrow-right text-xs ml-1" aria-hidden="true"></i>
+      </Button>
+    </div>
+  </Card>
+</article>

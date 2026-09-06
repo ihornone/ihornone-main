@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../shared/components/sections/Hero.astro';
+import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+import ServiceCard from '../shared/components/sections/ServiceCard.astro';
+import { getCollection } from 'astro:content';
+
+const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout
+  title="Послуги — Telegram-боти, Мобільні додатки, Веб-сайти | ihornone"
+  description="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності. Повний цикл від ідеї до запуску."
+  url="/services"
+>
+  <Hero
+    badge={{ text: 'Напрямки розробки', icon: 'fa-solid fa-code' }}
+    title="Послуги та рішення для вашого бізнесу"
+    subtitle="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності."
+    buttons={[
+      { label: 'Обговорити проєкт', href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
+      { label: 'Переглянути роботи', href: '/portfolio', variant: 'outline' },
+    ]}
+  />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+    <section class="space-y-8 w-full" data-animate="fade-up">
+      <div class="flex md:grid items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 md:gap-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pt-4 pb-4 md:pb-0 scrollbar-none" data-animate="fade-up" data-stagger>
+        {allServices.map((service) => (
+          <ServiceCard
+            id={service.id}
+            icon={service.data.icon}
+            title={service.data.title}
+            description={service.data.description}
+            includes={service.data.includes}
+            isPopular={service.data.isPopular}
+          />
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <CtaBanner
+    title="Потрібна консультація з вибору технологій?"
+    subtitle="Напишіть мені — обговоримо ваші цілі та підберемо найкраще рішення."
+    buttonText="Обговорити проєкт"
+    buttonLink="/contacts"
+  />
+</Layout>

@@ -1,0 +1,59 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  class?: string;
+}
+
+const { project, class: className = '' } = Astro.props;
+---
+
+<a
+  href={`/portfolio/${project.id}`}
+  class={`project-card group relative block aspect-[16/9] w-full rounded-2xl overflow-hidden border border-black/5 bg-paper-white shadow-xs transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 no-underline ${className}`}
+  data-category={project.category}
+  onclick="if(window.innerWidth < 768 && !this.classList.contains('touch-active')){ event.preventDefault(); document.querySelectorAll('.project-card').forEach(c => c.classList.remove('touch-active')); this.classList.add('touch-active'); }"
+>
+  <img
+    src={project.image}
+    alt={project.title}
+    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+    loading="lazy"
+  />
+
+  <div class="absolute inset-0 bg-ink-black/80 backdrop-blur-md p-5 sm:p-6 opacity-0 group-hover:opacity-100 group-[.touch-active]:opacity-100 transition-all duration-300 flex flex-col justify-between z-10 text-paper-white">
+    <div class="flex items-center justify-between">
+      <span class="bg-cobalt-pop text-paper-white text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-md shadow-xs">
+        {project.category}
+      </span>
+      <div class="w-8 h-8 bg-paper-white/10 backdrop-blur-xs rounded-lg flex items-center justify-center text-kofi-blue text-xs">
+        <i class={project.icon}></i>
+      </div>
+    </div>
+
+    <div class="space-y-1.5 my-auto">
+      <h3 class="text-base sm:text-lg md:text-xl font-extrabold text-paper-white m-0 tracking-tight leading-snug">
+        {project.title}
+      </h3>
+      <p class="text-xs text-kofi-blue/90 leading-relaxed m-0 line-clamp-2">
+        {project.description}
+      </p>
+
+      {project.meta?.technologies && (
+        <div class="flex flex-wrap gap-1 pt-1">
+          {project.meta.technologies.split(',').slice(0, 3).map((tech) => (
+            <span class="bg-paper-white/15 text-paper-white text-[10px] font-bold px-2 py-0.5 rounded">
+              {tech.trim()}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="pill-btn bg-paper-white text-ink-black hover:bg-kofi-blue !py-2 !px-4 !text-xs font-bold w-full justify-center shadow-md">
+      <span>Переглянути кейс</span>
+      <i class="fa-solid fa-arrow-right text-[10px]"></i>
+    </div>
+  </div>
+</a>

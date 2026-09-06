@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../shared/components/sections/Hero.astro';
+import Stats from '../shared/components/sections/Stats.astro';
+import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+import SectionHeader from '../shared/components/ui/SectionHeader.astro';
+
+const principles = [
+  {
+    icon: 'fa-solid fa-bullseye text-cobalt-pop',
+    title: 'Фокус на бізнес-результат',
+    desc: 'Я пишу код не заради коду, а щоб бот приносив заявки, економив час адміністраторів або закривав угоди 24/7 без вашої участі.'
+  },
+  {
+    icon: 'fa-solid fa-handshake-angle text-cobalt-pop',
+    title: 'Робота "під ключ"',
+    desc: 'Беру на себе повний цикл: архітектуру, логіку, UI/UX інтерфейси, тестування, підключення платіжних систем та деплой на сервер.'
+  },
+  {
+    icon: 'fa-solid fa-bolt-lightning text-cobalt-pop',
+    title: 'Швидкість та надійність',
+    desc: 'Використовую перевірені сучасні технології (Python, TypeScript, Node.js, PostgreSQL), що гарантує безвідмовну роботу та швидку реакцію.'
+  },
+  {
+    icon: 'fa-solid fa-headset text-cobalt-pop',
+    title: 'Прозора комунікація та підтримка',
+    desc: 'Завжди на зв’язку на етапі розробки, даю гарантію на код після релізу та допомагаю масштабувати проєкт у майбутньому.'
+  },
+];
+
+const stackCategories = [
+  {
+    category: 'Telegram & Bots',
+    items: ['aiogram', 'Telegram WebApps', 'Bot API', 'Payment Gateways', 'Webhooks']
+  },
+  {
+    category: 'Backend & DB',
+    items: ['Python', 'Node.js', 'PostgreSQL', 'Redis', 'REST API', 'Docker']
+  },
+  {
+    category: 'Frontend & Web',
+    items: ['Astro', 'Tailwind CSS', 'TypeScript', 'HTML5/CSS3', 'Responsive UI']
+  },
+  {
+    category: 'Integrations & Tools',
+    items: ['LiqPay & Mono', 'CRM Systems', 'Google Sheets API', 'Git', 'Linux / VPS']
+  },
+];
+
+const workflowSteps = [
+  {
+    step: '01',
+    title: 'Аналіз і ТЗ',
+    desc: 'Обговорюємо вашу ідею, визначаємо бізнес-цілі та формуємо чітке технічне завдання з кошторисом.'
+  },
+  {
+    step: '02',
+    title: 'Архітектура та Прототип',
+    desc: 'Проєктую базу даних, логіку взаємодії користувача з ботом чи сайтом та сценарії.'
+  },
+  {
+    step: '03',
+    title: 'Розробка та Інтеграція',
+    desc: 'Пишу чистий код, інтегрую платіжні системи, API, CRM та налаштовую всю функціональність.'
+  },
+  {
+    step: '04',
+    title: 'Тестування і Запуск',
+    desc: 'Проводжу повне тестування сценаріїв, деплою на ваш сервер та передаю документацію.'
+  },
+];
+
+const stats = [
+  { value: '15+', label: 'успішних проєктів' },
+  { value: '3+', label: 'років досвіду' },
+  { value: '24/7', label: 'підтримка ботів' },
+  { value: '100%', label: 'орієнтація на бізнес' },
+];
+---
+
+<Layout
+  title="Про мене — ihornone | Full-Stack розробник Telegram-ботів та веб-сайтів"
+  description="Досвідчений full-stack розробник. Створюю Telegram-боти, мобільні додатки та веб-сайти з високою конверсією."
+  url="/about"
+>
+  <Hero
+    badge={{ text: 'Full-Stack Developer & Bot Specialist', icon: 'fa-solid fa-code' }}
+    title="Створюю інструменти автоматизації, які працюють на ваш прибуток"
+    subtitle="Привіт! Я розробляю Telegram-боти будь-якої складності, інтерактивні WebApps, мобільні додатки та сучасні веб-сайти. Працюю на результат, без зайвої бюрократії та з повним зануренням у специфіку вашого бізнесу."
+    buttons={[
+      { label: "Обговорити проєкт", href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
+      { label: 'Переглянути портфоліо', href: '/portfolio', variant: 'outline' },
+    ]}
+  />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-16 md:space-y-24">
+
+    <!-- Принципи роботи / Чому я -->
+    <section class="space-y-8 w-full" data-animate="fade-up">
+      <SectionHeader
+        title="Мій підхід до роботи"
+        subtitle="Ключові принципи, якими я керуюсь у кожному проєкті"
+        align="center"
+      />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="fade-up" data-stagger>
+        {principles.map((item) => (
+          <div class="bg-paper-white border border-black/10 rounded-2xl p-6 space-y-4 hover:border-cobalt-pop hover:shadow-md transition-all flex flex-col items-center text-center h-full">
+            <div class="w-12 h-12 rounded-xl bg-morning-fog flex items-center justify-center shrink-0">
+              <i class={`${item.icon} text-xl`}></i>
+            </div>
+            <h3 class="text-base font-black text-ink-black m-0">{item.title}</h3>
+            <p class="text-xs sm:text-sm text-black/70 leading-relaxed m-0">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Технологічний стек -->
+    <section class="space-y-8 w-full" data-animate="fade-up">
+      <SectionHeader
+        title="Технологічний стек"
+        subtitle="Інструменти та технології, які я використовую для створення швидких і надійних рішень"
+        align="center"
+      />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="fade-up" data-stagger>
+        {stackCategories.map((group) => (
+          <div class="bg-paper-white border border-black/10 rounded-2xl p-6 space-y-4">
+            <h3 class="text-sm font-black text-ink-black uppercase tracking-wider pb-3 border-b border-black/5 m-0">
+              {group.category}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {group.items.map((tech) => (
+                <span class="px-3 py-1.5 bg-morning-fog border border-black/5 text-xs font-bold text-ink-black/80 rounded-xl">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Як будується робота (Етапи) -->
+    <section class="space-y-8 w-full" data-animate="fade-up">
+      <SectionHeader
+        title="Як відбувається розробка"
+        subtitle="Прозорий процес від першого повідомлення до запуску проєкту"
+        align="center"
+      />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="fade-up" data-stagger>
+        {workflowSteps.map((w) => (
+          <div class="bg-paper-white border border-black/10 rounded-2xl p-6 space-y-4 relative overflow-hidden group hover:border-cobalt-pop transition-all">
+            <div class="text-4xl font-black text-cobalt-pop/15 absolute top-4 right-4 group-hover:text-cobalt-pop/30 transition-colors">
+              {w.step}
+            </div>
+            <div class="space-y-2 relative z-10">
+              <span class="text-xs font-black uppercase text-cobalt-pop tracking-widest block">Етап {w.step}</span>
+              <h3 class="text-lg font-black text-ink-black m-0">{w.title}</h3>
+              <p class="text-xs sm:text-sm text-black/70 leading-relaxed m-0">{w.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-12 flex justify-center" data-animate="fade-up">
+    <Stats items={stats} columns={4} />
+  </div>
+
+  <CtaBanner />
+</Layout>
