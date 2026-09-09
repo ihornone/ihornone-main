@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../shared/components/sections/Hero.astro';
+import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+---
+
+<Layout
+  title="Політика конфіденційності — ihornone"
+  description="Політика обробки персональних даних на сайті ihornone. Як збираються та використовуються дані з форми зв'язку."
+  url="/privacy"
+>
+  <Hero
+    badge={{ text: 'Конфіденційність', icon: 'fa-solid fa-shield-halved' }}
+    title="Політика конфіденційності"
+    subtitle="Прозора інформація про те, як я обробляю ваші дані."
+  />
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-12">
+
+    <div class="prose prose-slate max-w-none space-y-10" data-animate="fade-up">
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">1. Загальні положення</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Ця Політика конфіденційності пояснює, які персональні дані збираються через сайт
+          <strong>ihornone.site</strong> (далі — «Сайт»), як вони використовуються та які права
+          ви маєте щодо своїх даних.
+        </p>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Користуючись формою зв'язку на цьому Сайті, ви погоджуєтесь з умовами цієї Політики.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">2. Які дані збираються</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          При заповненні форми зв'язку збираються наступні дані:
+        </p>
+        <ul class="list-disc list-inside text-sm text-black/70 space-y-2 pl-4">
+          <li><strong>Ім'я</strong> — щоб звертатись до вас по імені під час спілкування.</li>
+          <li><strong>Контакт</strong> (Telegram, email або телефон) — щоб зв'язатись з вами щодо вашого запиту.</li>
+          <li><strong>Повідомлення</strong> — опис вашого проєкту або питання.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">3. Як використовуються дані</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Дані з форми зв'язку <strong>надсилаються безпосередньо до Telegram</strong> в особистий
+          чат розробника для подальшого зв'язку з вами.
+        </p>
+        <p class="text-sm text-black/70 leading-relaxed">Ці дані використовуються виключно для:</p>
+        <ul class="list-disc list-inside text-sm text-black/70 space-y-2 pl-4">
+          <li>Зв'язку з вами щодо вашого запиту або проєкту.</li>
+          <li>Обговорення деталей, термінів та вартості робіт.</li>
+          <li>Подальшої комунікації на етапі розробки (за згодою).</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">4. Зберігання даних</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Ваші дані <strong>не зберігаються на сервері</strong> Сайту та не записуються до бази
+          даних. Після відправки форми дані передаються до Telegram і більше не обробляються
+          цим Сайтом.
+        </p>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Повідомлення зберігаються в вашому Telegram-чаті відповідно до політики
+          конфіденційності Telegram (Telegram FZ-LLC).
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">5. Передача даних третім особам</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Ваші дані <strong>не передаються</strong> жодним третім особам, рекламним мережам чи
+          аналітичним сервісам. Єдиний отримувач — розробник (ihornone) через Telegram-бот.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">6. Ваші права</h2>
+        <p class="text-sm text-black/70 leading-relaxed">Ви маєте право:</p>
+        <ul class="list-disc list-inside text-sm text-black/70 space-y-2 pl-4">
+          <li>Запитати, які саме дані про вас обробляються.</li>
+          <li>Попросити видалити ваші дані з Telegram-чату (ви можете видалити повідомлення самостійно).</li>
+          <li>Відкликати згоду на обробку даних, припинивши комунікацію.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">7. Cookies та аналітика</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Сайт може використовувати файли cookie для коректної роботи та покращення
+          користувацького досвіду. Жодні треті аналітичні сервіси (Google Analytics тощо)
+          на даний момент не підключені.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">8. Зміни до політики</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Ця Політика може оновлюватись. Актуальна версія завжди доступна на цій сторінці.
+          Дата останнього оновлення: {new Date().toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-ink-black">9. Контакти</h2>
+        <p class="text-sm text-black/70 leading-relaxed">
+          Якщо у вас є питання щодо цієї Політики або обробки ваших даних, зв'яжіться зі мною:
+        </p>
+        <ul class="list-disc list-inside text-sm text-black/70 space-y-2 pl-4">
+          <li>Telegram: <a href="https://t.me/ihornone" class="text-cobalt-pop hover:underline" target="_blank" rel="noopener">@ihornone</a></li>
+          <li>Email: <a href="mailto:ihornone.dev@gmail.com" class="text-cobalt-pop hover:underline">ihornone.dev@gmail.com</a></li>
+        </ul>
+      </section>
+
+    </div>
+
+  </div>
+
+  <CtaBanner />
+</Layout>
