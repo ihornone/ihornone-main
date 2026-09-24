@@ -1,0 +1,28 @@
+---
+import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+
+interface ResultItem {
+  value: string;
+  description: string;
+}
+
+interface Props {
+  results: ResultItem[];
+}
+
+const { results } = Astro.props;
+---
+
+{results && results.length > 0 && (
+  <section class="space-y-6 w-full" data-animate="fade-up">
+    <SectionHeader title="Результати проєкту" />
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-animate="fade-up" data-stagger>
+      {results.map((res) => (
+        <div class="bento-card p-5 text-center space-y-1.5 flex flex-col justify-center shadow-2xs hover:border-[#D09AFC] transition-all">
+          <div class="text-2xl sm:text-3xl md:text-4xl font-black text-[#2A1E1E] tracking-tight">{res.value}</div>
+          <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium m-0 leading-snug">{res.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}

@@ -1,0 +1,42 @@
+---
+import Card from '../../../shared/components/ui/Card.astro';
+import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+
+interface PricingPlan {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+}
+
+interface Props {
+  pricing: PricingPlan[];
+}
+
+const { pricing } = Astro.props;
+---
+
+{pricing && pricing.length > 0 && (
+  <section class="space-y-6 w-full" data-animate="fade-up">
+    <SectionHeader title="Вартість розробки" />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
+      {pricing.map((plan) => (
+        <Card hover class="flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <strong class="text-lg font-black text-[#2A1E1E] block">{plan.name}</strong>
+            <p class="text-xl sm:text-2xl font-black text-[#2A1E1E] m-0">{plan.price}</p>
+            <p class="text-xs sm:text-sm text-[#623A2D]/80 font-medium m-0">{plan.description}</p>
+          </div>
+          <ul class="space-y-2 pt-4 border-t border-[#623A2D]/10 list-none p-0 m-0">
+            {plan.features.map((f) => (
+              <li class="flex items-center gap-2 text-xs font-bold text-[#2A1E1E]/90">
+                <i class="fa-solid fa-check text-[#D09AFC] text-xs shrink-0"></i>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      ))}
+    </div>
+  </section>
+)}

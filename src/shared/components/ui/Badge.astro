@@ -14,13 +14,14 @@ const {
 } = Astro.props;
 
 const variantClasses = {
-  default: 'bg-kofi-blue/30 text-ink-black',
-  accent: 'bg-cobalt-pop text-paper-white',
-  success: 'bg-green-500/10 text-green-700 border border-green-500/20',
-  muted: 'bg-morning-fog text-ink-black/70 border border-black/5',
+  default: 'bg-[#E8BA98] text-[#2A1E1E] shadow-2xs',
+  accent: 'bg-[#D09AFC] text-[#2A1E1E] shadow-2xs',
+  pink: 'bg-[#FAC3C8] text-[#2A1E1E] shadow-2xs',
+  success: 'bg-emerald-500/10 text-emerald-800 border border-emerald-500/20',
+  muted: 'bg-[#FAF1EC] text-[#623A2D] border border-[#623A2D]/10',
 };
 
-const baseClasses = 'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider';
+const baseClasses = 'inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider';
 ---
 
 <span class:list={[baseClasses, variantClasses[variant], className]} role={ariaLabel ? 'status' : undefined} aria-label={ariaLabel}>

@@ -9,6 +9,7 @@ const siteUrl = 'https://ihornone.site';
 
 export default defineConfig({
   site: siteUrl,
+  output: 'static',
   adapter: cloudflare(),
   integrations: [
     react(), 

@@ -20,12 +20,12 @@ const sizeClasses = {
 };
 
 const variantClasses = {
-  default: 'bg-kofi-blue/40 text-ink-black',
-  accent: 'bg-paper-white text-cobalt-pop shadow-2xs',
-  muted: 'bg-morning-fog text-cobalt-pop',
+  default: 'bg-[#FAF1EC] text-[#2A1E1E] border border-[#623A2D]/10',
+  accent: 'bg-[#D09AFC] text-[#2A1E1E] shadow-2xs',
+  muted: 'bg-[#FAF1EC] text-[#623A2D]',
 };
 
-const baseClasses = 'rounded-xl flex items-center justify-center shrink-0';
+const baseClasses = 'rounded-[10px] flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3';
 ---
 
 <div class={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}>

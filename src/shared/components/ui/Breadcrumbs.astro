@@ -19,13 +19,13 @@ const { items, class: className = '' } = Astro.props;
       {item.href ? (
         <a
           href={item.href}
-          class="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-ink-black/70 hover:text-cobalt-pop transition-colors no-underline bg-paper-white px-3.5 py-2 rounded-2xl border border-black/5 shadow-2xs hover:shadow-xs"
+          class="inline-flex items-center gap-2 text-xs md:text-sm font-black text-[#2A1E1E] hover:text-[#95553C] transition-colors no-underline bg-white px-3.5 py-1.5 rounded-[10px] border border-[#623A2D]/10 shadow-2xs hover:border-[#D09AFC]"
         >
           <i class="fa-solid fa-arrow-left text-[10px]"></i>
           {item.label}
         </a>
       ) : (
-        <span class="text-xs md:text-sm font-extrabold text-ink-black bg-morning-fog/60 px-3.5 py-2 rounded-2xl border border-black/5">
+        <span class="text-xs md:text-sm font-black text-[#2A1E1E] bg-[#FAF1EC] px-3.5 py-1.5 rounded-[10px] border border-[#623A2D]/10">
           {item.label}
         </span>
       )}

@@ -1,0 +1,74 @@
+---
+import { QuickContactModal } from '../ui/QuickContactModal';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  class?: string;
+}
+
+const {
+  title = 'Маєте ідею бота, сайту чи додатку?',
+  subtitle = "Напишіть мені напряму в Telegram — обговоримо концепцію, терміни та приблизний бюджет без жодних зобов'язань.",
+  class: className = '',
+} = Astro.props;
+---
+
+<section class:list={['w-full', className]} data-animate="fade-up">
+  <div class="bento-card p-8 sm:p-12 lg:p-14 text-center relative">
+    
+    <!-- Mascot holding the top-left corner of the card with breathing animation -->
+    <div class="absolute left-0 top-0 -translate-x-[83.85%] -translate-y-[35%] w-[190px] sm:w-[230px] lg:w-[270px] pointer-events-none z-20 hidden md:block">
+      <img
+        src="/images/mascot/cta-cat.webp"
+        alt="Маскот котик у худі з логотипом коду тримає форму"
+        class="w-full h-auto drop-shadow-md animate-cat-peek"
+        loading="lazy"
+      />
+    </div>
+    
+    <div class="max-w-2xl mx-auto space-y-6 relative z-10">
+      
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black text-[#2A1E1E] tracking-tight leading-[1.15] m-0">
+        {title}
+      </h2>
+
+      <p class="text-sm sm:text-base lg:text-lg text-[#623A2D]/80 leading-relaxed font-medium m-0 max-w-xl mx-auto">
+        {subtitle}
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
+        <a
+          href="https://t.me/ihornone"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pill-btn-lilac !text-sm sm:!text-base shadow-md animate-pulse-glow flex items-center justify-center gap-2.5 w-full sm:w-auto"
+        >
+          <i class="fa-brands fa-telegram text-[#2A1E1E] text-lg"></i>
+          <span>Написати в Telegram</span>
+          <i class="fa-solid fa-arrow-right text-xs text-[#2A1E1E]"></i>
+        </a>
+
+        <!-- Quick Contact Modal with Vaul Drawer (opens smoothly right on the page) -->
+        <QuickContactModal client:load />
+      </div>
+
+      <div class="pt-6 border-t border-[#623A2D]/10 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-[#623A2D]/75 font-semibold">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-bolt text-[#D09AFC]"></i>
+          Відповідь до 15 хвилин
+        </span>
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-shield-check text-[#E8BA98]"></i>
+          Конфіденційність ідеї
+        </span>
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-handshake text-[#FAC3C8]"></i>
+          Безкоштовна консультація
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+</section>

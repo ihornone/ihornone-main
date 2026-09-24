@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../shared/components/sections/Hero.astro';
-import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+import BentoCta from '../shared/components/sections/BentoCta.astro';
 ---
 
 <Layout
@@ -9,18 +9,17 @@ import CtaBanner from '../shared/components/sections/CtaBanner.astro';
   description="Політика обробки персональних даних на сайті ihornone. Як збираються та використовуються дані з форми зв'язку."
   url="/privacy"
 >
-  <Hero
-    badge={{ text: 'Конфіденційність', icon: 'fa-solid fa-shield-halved' }}
-    title="Політика конфіденційності"
-    subtitle="Прозора інформація про те, як я обробляю ваші дані."
-  />
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-12 sm:space-y-16">
+    <Hero
+      badge={{ text: 'Конфіденційність', icon: 'fa-solid fa-shield-halved' }}
+      title="Політика конфіденційності"
+      subtitle="Прозора інформація про те, як я обробляю ваші дані."
+    />
 
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-12">
-
-    <div class="prose prose-slate max-w-none space-y-10" data-animate="fade-up">
+    <div class="bento-card p-6 sm:p-10 space-y-10 prose prose-slate max-w-none" data-animate="fade-up">
 
       <section class="space-y-4">
-        <h2 class="text-xl font-black text-ink-black">1. Загальні положення</h2>
+        <h2 class="text-xl font-black text-[#2A1E1E]">1. Загальні положення</h2>
         <p class="text-sm text-black/70 leading-relaxed">
           Ця Політика конфіденційності пояснює, які персональні дані збираються через сайт
           <strong>ihornone.site</strong> (далі — «Сайт»), як вони використовуються та які права
@@ -98,27 +97,28 @@ import CtaBanner from '../shared/components/sections/CtaBanner.astro';
       </section>
 
       <section class="space-y-4">
-        <h2 class="text-xl font-black text-ink-black">8. Зміни до політики</h2>
-        <p class="text-sm text-black/70 leading-relaxed">
+        <h2 class="text-xl font-black text-[#2A1E1E]">8. Зміни до політики</h2>
+        <p class="text-sm text-[#623A2D]/80 font-medium leading-relaxed">
           Ця Політика може оновлюватись. Актуальна версія завжди доступна на цій сторінці.
           Дата останнього оновлення: {new Date().toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}.
         </p>
       </section>
 
       <section class="space-y-4">
-        <h2 class="text-xl font-black text-ink-black">9. Контакти</h2>
-        <p class="text-sm text-black/70 leading-relaxed">
+        <h2 class="text-xl font-black text-[#2A1E1E]">9. Контакти</h2>
+        <p class="text-sm text-[#623A2D]/80 font-medium leading-relaxed">
           Якщо у вас є питання щодо цієї Політики або обробки ваших даних, зв'яжіться зі мною:
         </p>
-        <ul class="list-disc list-inside text-sm text-black/70 space-y-2 pl-4">
-          <li>Telegram: <a href="https://t.me/ihornone" class="text-cobalt-pop hover:underline" target="_blank" rel="noopener">@ihornone</a></li>
-          <li>Email: <a href="mailto:ihornone.dev@gmail.com" class="text-cobalt-pop hover:underline">ihornone.dev@gmail.com</a></li>
+        <ul class="list-disc list-inside text-sm text-[#623A2D]/80 font-medium space-y-2 pl-4">
+          <li>Telegram: <a href="https://t.me/ihornone" class="text-[#95553C] font-bold hover:underline" target="_blank" rel="noopener">@ihornone</a></li>
+          <li>Email: <a href="mailto:ihornone.dev@gmail.com" class="text-[#95553C] font-bold hover:underline">ihornone.dev@gmail.com</a></li>
         </ul>
       </section>
 
     </div>
 
-  </div>
+    <!-- Bento CTA with Mascot -->
+    <BentoCta />
 
-  <CtaBanner />
+  </div>
 </Layout>

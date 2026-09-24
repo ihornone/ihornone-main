@@ -1,0 +1,37 @@
+---
+import Button from '../../../shared/components/ui/Button.astro';
+
+interface Props {
+  title: string;
+  icon?: string;
+  description: string;
+  heroSubtitle?: string;
+}
+
+const { title, icon, description, heroSubtitle } = Astro.props;
+---
+
+<section class="bento-card p-6 sm:p-10 md:p-14 shadow-2xs w-full text-center" data-animate="fade-up">
+  <div class="flex flex-col items-center text-center gap-4 sm:gap-5 max-w-3xl mx-auto">
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-[#FAF1EC] border border-[#623A2D]/10 text-xs sm:text-sm font-black text-[#2A1E1E]">
+        {icon && <i class={icon}></i>}
+        {title}
+      </span>
+    </div>
+    <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-[#2A1E1E] tracking-tight leading-tight m-0">
+      {title}
+    </h1>
+    <p class="text-sm sm:text-base md:text-lg text-[#623A2D]/80 font-medium leading-relaxed m-0">
+      {heroSubtitle || description}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 pt-2 w-full sm:w-auto">
+      <Button href="/contacts" variant="dark" icon="fa-solid fa-arrow-right" class="w-full sm:w-auto">
+        Замовити розробку
+      </Button>
+      <Button href="/contacts" variant="outline" class="w-full sm:w-auto">
+        Безкоштовна консультація
+      </Button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+---
+import Card from '../../../shared/components/ui/Card.astro';
+import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  rating?: number;
+}
+
+interface Props {
+  testimonial?: Testimonial;
+}
+
+const { testimonial } = Astro.props;
+---
+
+{testimonial && (
+  <Card padding="lg" class="space-y-5 sm:space-y-6 w-full bg-[#FAF1EC] border border-[#623A2D]/10" data-animate="fade-up">
+    <SectionHeader title="Відгук клієнта" />
+    <blockquote class="space-y-4 m-0">
+      <p class="text-base sm:text-lg md:text-xl text-[#2A1E1E]/90 font-medium italic leading-relaxed m-0">
+        «{testimonial.quote}»
+      </p>
+      <div class="flex items-center justify-between flex-wrap gap-4 pt-3 border-t border-[#623A2D]/10">
+        <div>
+          <strong class="block text-sm sm:text-base font-black text-[#2A1E1E]">{testimonial.author}</strong>
+          <span class="text-xs sm:text-sm text-[#623A2D]/70 font-medium">{testimonial.role}</span>
+        </div>
+        {testimonial.rating && (
+          <div class="flex items-center gap-1 text-amber-500 text-sm">
+            {Array.from({ length: testimonial.rating }).map(() => (
+              <i class="fa-solid fa-star"></i>
+            ))}
+          </div>
+        )}
+      </div>
+    </blockquote>
+  </Card>
+)}

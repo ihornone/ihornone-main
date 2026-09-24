@@ -19,12 +19,12 @@ const alignClasses = {
 };
 ---
 
-<div class={`${alignClasses[align]} space-y-1 ${className}`}>
-  <h2 class="text-2xl sm:text-3xl font-black text-ink-black tracking-tight m-0">
+<div class={`${alignClasses[align]} space-y-1.5 ${className}`}>
+  <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
     {title}
   </h2>
   {subtitle && (
-    <p class="text-sm sm:text-base text-black/60 m-0 mt-1">
+    <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0 mt-1 max-w-xl">
       {subtitle}
     </p>
   )}

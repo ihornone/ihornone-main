@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../shared/components/sections/Hero.astro';
-import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+import BentoCta from '../shared/components/sections/BentoCta.astro';
 import ServiceCard from '../shared/components/sections/ServiceCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -13,17 +13,17 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
   description="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності. Повний цикл від ідеї до запуску."
   url="/services"
 >
-  <Hero
-    badge={{ text: 'Напрямки розробки', icon: 'fa-solid fa-code' }}
-    title="Послуги та рішення для вашого бізнесу"
-    subtitle="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності."
-    buttons={[
-      { label: 'Обговорити проєкт', href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
-      { label: 'Переглянути роботи', href: '/portfolio', variant: 'outline' },
-    ]}
-  />
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
+    <Hero
+      badge={{ text: 'Напрямки розробки', icon: 'fa-solid fa-code' }}
+      title="Послуги та рішення для вашого бізнесу"
+      subtitle="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності."
+      buttons={[
+        { label: 'Обговорити проєкт', href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
+        { label: 'Переглянути роботи', href: '/portfolio', variant: 'outline' },
+      ]}
+    />
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
     <section class="space-y-8 w-full" data-animate="fade-up">
       <div class="flex md:grid items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 md:gap-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pt-4 pb-4 md:pb-0 scrollbar-none" data-animate="fade-up" data-stagger>
         {allServices.map((service) => (
@@ -38,12 +38,11 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
         ))}
       </div>
     </section>
-  </div>
 
-  <CtaBanner
-    title="Потрібна консультація з вибору технологій?"
-    subtitle="Напишіть мені — обговоримо ваші цілі та підберемо найкраще рішення."
-    buttonText="Обговорити проєкт"
-    buttonLink="/contacts"
-  />
+    <!-- Bento CTA with Mascot -->
+    <BentoCta
+      title="Потрібна консультація з вибору технологій?"
+      subtitle="Напишіть мені напряму в Telegram — обговоримо ваші цілі та підберемо найкраще рішення під ваш бюджет."
+    />
+  </div>
 </Layout>

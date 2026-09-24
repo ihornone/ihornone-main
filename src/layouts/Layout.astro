@@ -1,6 +1,7 @@
 ---
 import Navbar from '../shared/components/layout/Navbar.astro';
 import Footer from '../shared/components/layout/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -24,6 +25,7 @@ const {
 const siteName = 'ihornone';
 const fullUrl = url.startsWith('http') ? url : `https://ihornone.site${url}`;
 const fullImageUrl = image.startsWith('http') ? image : `https://ihornone.site${image}`;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 ---
 
 <!doctype html>
@@ -67,6 +69,13 @@ const fullImageUrl = image.startsWith('http') ? image : `https://ihornone.site${
     <meta name="theme-color" content="#f5f0e8" />
     <meta name="color-scheme" content="light" />
 
+    <!-- Client Router for instant millisecond transitions -->
+    <ClientRouter />
+
+    {isHome && (
+      <link rel="preload" as="image" href="/images/mascot/hero-cat.webp" type="image/webp" fetchpriority="high" />
+    )}
+
     {structuredData && (
       <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     )}
@@ -74,28 +83,32 @@ const fullImageUrl = image.startsWith('http') ? image : `https://ihornone.site${
   <body class="bg-oat-cream text-ink-black font-sans min-h-screen antialiased flex flex-col">
     <a href="#main-content" class="skip-link">Перейти до основного вмісту</a>
     <Navbar />
-    <main id="main-content" class="flex-grow">
+    <main id="main-content" class:list={['flex-grow', { 'pt-20 sm:pt-24 lg:pt-24': !isHome }]}>
       <slot />
     </main>
     <Footer />
   </body>
 
   <script>
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
+    // Lightweight Intersection Observer for scroll animations (pre-triggers 80px before entering screen)
+    function initScrollAnimations() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: '80px 0px 80px 0px' }
+      );
 
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
+      document.querySelectorAll('[data-animate]').forEach((el) => {
+        observer.observe(el);
+      });
+    }
+
+    document.addEventListener('astro:page-load', initScrollAnimations);
   </script>
 </html>

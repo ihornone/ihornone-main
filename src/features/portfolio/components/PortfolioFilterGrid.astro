@@ -1,0 +1,59 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  categories: string[];
+  projects: any[];
+}
+
+const { categories, projects } = Astro.props;
+---
+
+<section class="space-y-8 w-full" data-animate="fade-up">
+  <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+    {categories.map((category, i) => (
+      <button
+        data-category={category}
+        class={`filter-tab px-4 py-2.5 rounded-[10px] font-bold text-xs sm:text-sm transition-all cursor-pointer border ${i === 0 ? 'bg-[#2A1E1E] text-white border-[#2A1E1E] shadow-sm' : 'bg-white text-[#2A1E1E] border-[#623A2D]/10 hover:border-[#D09AFC]'}`}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+
+  <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectCards = document.querySelectorAll('#projects-grid .project-card');
+
+    filterTabs.forEach((tab) => {
+      tab.addEventListener('click', function (this: HTMLElement) {
+        const selectedCategory = this.getAttribute('data-category');
+
+        filterTabs.forEach((t) => {
+          t.classList.remove('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-sm');
+          t.classList.add('bg-white', 'text-[#2A1E1E]', 'border-[#623A2D]/10');
+        });
+
+        this.classList.remove('bg-white', 'text-[#2A1E1E]', 'border-[#623A2D]/10');
+        this.classList.add('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-sm');
+
+        projectCards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          if (selectedCategory === 'Усі проєкти' || cardCategory === selectedCategory) {
+            (card as HTMLElement).style.display = 'block';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

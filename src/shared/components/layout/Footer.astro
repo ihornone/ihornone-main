@@ -2,71 +2,68 @@
 const currentYear = new Date().getFullYear();
 
 const services = [
-  { title: 'Розробка сайтів', href: '/services/websites' },
-  { title: 'Telegram-боти', href: '/services/telegram-bots' },
-  { title: 'Мобільні додатки', href: '/services/mobile-apps' },
+  { title: 'Telegram-боти & WebApps', href: '/services/telegram-bots' },
+  { title: 'Розробка сайтів та платформ', href: '/services/websites' },
+  { title: 'Мобільні додатки (iOS & Android)', href: '/services/mobile-apps' },
 ];
 
 const links = [
+  { title: 'Головна', href: '/' },
   { title: 'Про мене', href: '/about' },
-  { title: 'Портфоліо', href: '/portfolio' },
-  { title: 'Відгуки', href: '/reviews' },
-  { title: 'Конфіденційність', href: '/privacy' },
+  { title: 'Портфоліо робіт', href: '/portfolio' },
+  { title: 'Відгуки клієнтів', href: '/reviews' },
+  { title: 'Контакти', href: '/contacts' },
+  { title: 'Політика конфіденційності', href: '/privacy' },
 ];
 
 const socials = [
-  { icon: '/icons/telegram.svg', href: 'https://t.me/ihornone', label: 'Telegram' },
-  { icon: '/icons/github-dark.svg', href: 'https://github.com/ihornone', label: 'GitHub' },
-  { icon: '/icons/instagram.svg', href: 'https://instagram.com/ihornone', label: 'Instagram' },
-  { icon: '/icons/threads.svg', href: 'https://threads.net/@ihornone', label: 'Threads' },
+  { icon: 'fa-brands fa-telegram', href: 'https://t.me/ihornone', label: 'Telegram' },
+  { icon: 'fa-brands fa-github', href: 'https://github.com/ihornone', label: 'GitHub' },
+  { icon: 'fa-brands fa-instagram', href: 'https://instagram.com/ihornone', label: 'Instagram' },
 ];
 ---
 
-<footer class="bg-ink-black text-paper-white mt-auto relative overflow-hidden border-t-4 border-cobalt-pop" data-animate="fade-up">
-  {/* Decorative subtle background glow */}
-  <div class="absolute -top-32 -left-32 w-96 h-96 bg-cobalt-pop/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-kofi-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20 relative z-10">
+<footer class="bg-[#2A1E1E] text-white mt-auto border-t border-white/10" data-animate="fade-up">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-white/10">
       
-      {/* Brand & Bio (takes 2 columns on lg) */}
+      <!-- Brand & Bio (2 cols) -->
       <div class="lg:col-span-2 space-y-5">
-        <a href="/" class="inline-flex items-center gap-2 text-2xl font-black text-paper-white tracking-tight no-underline group">
-          <span class="w-8 h-8 rounded-xl bg-cobalt-pop flex items-center justify-center text-paper-white text-sm shadow-md group-hover:scale-105 transition-transform">
-            <i class="fa-solid fa-code"></i>
-          </span>
-          <span>ihornone</span>
+        <a href="/" class="inline-flex items-center gap-2.5 text-2xl font-black text-white tracking-tight no-underline group" aria-label="ihornone - на головну">
+          <div class="w-8 h-8 rounded-[10px] bg-[#D09AFC] flex items-center justify-center text-[#2A1E1E] text-xs shadow-xs group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-cat"></i>
+          </div>
+          <span class="tracking-tight font-black text-white">ihornone</span>
         </a>
-        <p class="text-sm text-paper-white/70 leading-relaxed max-w-sm">
-          Професійна розробка сучасних Telegram-ботів, веб-сайтів та мобільних додатків під ключ. Втілюємо ідеї в надійні та швидкі цифрові продукти.
+        <p class="text-sm text-white/70 leading-relaxed max-w-sm font-medium">
+          Індивідуальна розробка Telegram-ботів, веб-сервісів та мобільних додатків. Безпечні архітектури, висока конверсія та підтримка після релізу.
         </p>
-        <div class="flex items-center gap-3 pt-2">
-          {socials.map((social) => (
+        <div class="flex items-center gap-2.5 pt-1">
+          {socials.map((s) => (
             <a
-              href={social.href}
+              href={s.href}
               target="_blank"
-              rel="noopener"
-              aria-label={social.label}
-              class="w-11 h-11 bg-white/5 hover:bg-cobalt-pop rounded-xl flex items-center justify-center transition-all duration-300 shadow-xs hover:shadow-lg hover:-translate-y-0.5 border border-white/10"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              class="w-9 h-9 rounded-[10px] bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#D09AFC] hover:text-[#2A1E1E] hover:border-[#D09AFC] transition-all duration-200"
             >
-              <img src={social.icon} alt="" class="w-6 h-6" loading="lazy" />
+              <i class={`${s.icon} text-base`}></i>
             </a>
           ))}
         </div>
       </div>
 
-      {/* Services */}
+      <!-- Services Column -->
       <div class="space-y-4">
-        <h4 class="text-xs font-black text-paper-white uppercase tracking-wider text-opacity-90">
+        <h4 class="text-xs font-black text-[#D09AFC] uppercase tracking-wider">
           Послуги
         </h4>
-        <ul class="space-y-3 list-none p-0 m-0">
+        <ul class="space-y-2.5 list-none p-0 m-0">
           {services.map((service) => (
             <li>
               <a
                 href={service.href}
-                class="text-sm text-paper-white/65 hover:text-paper-white hover:translate-x-1 inline-block transition-all duration-200 no-underline"
+                class="text-sm text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-200 no-underline font-medium"
               >
                 {service.title}
               </a>
@@ -75,17 +72,17 @@ const socials = [
         </ul>
       </div>
 
-      {/* Links */}
+      <!-- Navigation Column -->
       <div class="space-y-4">
-        <h4 class="text-xs font-black text-paper-white uppercase tracking-wider text-opacity-90">
+        <h4 class="text-xs font-black text-[#E8BA98] uppercase tracking-wider">
           Навігація
         </h4>
-        <ul class="space-y-3 list-none p-0 m-0">
+        <ul class="space-y-2.5 list-none p-0 m-0">
           {links.map((link) => (
             <li>
               <a
                 href={link.href}
-                class="text-sm text-paper-white/65 hover:text-paper-white hover:translate-x-1 inline-block transition-all duration-200 no-underline"
+                class="text-sm text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-200 no-underline font-medium"
               >
                 {link.title}
               </a>
@@ -94,38 +91,41 @@ const socials = [
         </ul>
       </div>
 
-      {/* Contact & CTA */}
+      <!-- Contact Column -->
       <div class="space-y-4">
-        <h4 class="text-xs font-black text-paper-white uppercase tracking-wider text-opacity-90">
-          Зв'язатися
+        <h4 class="text-xs font-black text-[#FAC3C8] uppercase tracking-wider">
+          Зв'язок
         </h4>
         <ul class="space-y-3 list-none p-0 m-0">
           <li>
             <a
               href="https://t.me/ihornone"
               target="_blank"
-              rel="noopener"
-              class="text-sm text-paper-white/65 hover:text-paper-white transition-colors no-underline flex items-center gap-2"
+              rel="noopener noreferrer"
+              class="text-sm text-white/80 hover:text-[#D09AFC] transition-colors no-underline flex items-center gap-2.5 font-medium"
             >
-              <img src="/icons/telegram.svg" alt="" class="w-4 h-4" loading="lazy" />
+              <i class="fa-brands fa-telegram text-[#D09AFC] text-base"></i>
               <span>@ihornone</span>
             </a>
           </li>
           <li>
             <a
               href="mailto:ihornone.dev@gmail.com"
-              class="text-sm text-paper-white/65 hover:text-paper-white transition-colors no-underline flex items-center gap-2"
+              class="text-sm text-white/80 hover:text-[#E8BA98] transition-colors no-underline flex items-center gap-2.5 font-medium"
             >
-              <img src="/icons/gmail-2026.svg" alt="" class="w-4 h-4" loading="lazy" />
+              <i class="fa-solid fa-envelope text-[#E8BA98] text-sm"></i>
               <span>ihornone.dev@gmail.com</span>
             </a>
           </li>
           <li class="pt-2">
             <a
-              href="/contacts"
-              class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-xl bg-cobalt-pop hover:bg-cobalt-pop/90 text-paper-white text-xs font-bold transition-all shadow-md no-underline"
+              href="https://t.me/ihornone"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-[10px] bg-[#D09AFC] hover:bg-[#BF80FA] text-[#2A1E1E] text-xs font-black transition-all shadow-xs no-underline"
             >
-              Обговорити проєкт
+              <span>Почати діалог</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </a>
           </li>
         </ul>
@@ -133,15 +133,15 @@ const socials = [
 
     </div>
 
-    {/* Bottom Bar */}
-    <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <p class="text-xs text-paper-white/40 m-0">
+    <!-- Bottom Bar -->
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-white/45 font-medium">
+      <p class="m-0">
         &copy; {currentYear} ihornone. Усі права захищені.
       </p>
-      <div class="flex items-center gap-2 text-xs text-paper-white/50 m-0">
-        <span>Зроблено з</span>
-        <i class="fa-solid fa-heart text-cobalt-pop animate-pulse"></i>
-        <span>в Україні 🇺🇦</span>
+      <div class="flex items-center gap-2 m-0">
+        <span>Створено з</span>
+        <i class="fa-solid fa-heart text-[#FAC3C8]"></i>
+        <span>та котиком в Україні 🇺🇦</span>
       </div>
     </div>
   </div>

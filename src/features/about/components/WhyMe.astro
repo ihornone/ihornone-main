@@ -1,0 +1,78 @@
+---
+import Card from '../../../shared/components/ui/Card.astro';
+import IconBox from '../../../shared/components/ui/IconBox.astro';
+import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+
+interface WhyMeItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  items?: WhyMeItem[];
+  class?: string;
+}
+
+const defaultItems: WhyMeItem[] = [
+  {
+    icon: 'fa-solid fa-tags',
+    title: 'Ціна/якість',
+    desc: 'Агентства накручують 2-3x на команду та офіс. Я беру вартість розробки без зайвих націнок — ви отримуєте ту ж якість за чесні гроші.'
+  },
+  {
+    icon: 'fa-solid fa-rocket',
+    title: 'Швидкість',
+    desc: 'Без черг та очікування. Агентство може тягнути місяцями — я запускаю MVP за 2-4 тижні, бо приймаю рішення самостійно.'
+  },
+  {
+    icon: 'fa-solid fa-user-check',
+    title: 'Особиста увага',
+    desc: 'Працюєте безпосередньо зі мною, а не з менеджером. Жодних "я передам розробнику" — ви одразу отримуєте відповіді та бачите прогрес.'
+  },
+  {
+    icon: 'fa-solid fa-bolt',
+    title: 'Спеціалізація',
+    desc: 'Глибока експертиза в Telegram-ботах, WebApps та мобільних додатках. Не "роблю все ніяк", а знаю свою нішу на рівні експерта.'
+  },
+  {
+    icon: 'fa-solid fa-layer-group',
+    title: 'Все від ідеї до запуску',
+    desc: 'Від аналізу та архітектури до дизайну, коду, тестування та деплою — повний цикл без залучення третіх осіб.'
+  },
+  {
+    icon: 'fa-solid fa-shield-halved',
+    title: 'Підтримка 30 днів',
+    desc: 'Після запуску — 30 днів безкоштовної підтримки та фіксів. Я не зникаю після отримання грошей, бо мені важлива ваша довіра.'
+  },
+];
+
+const { items = defaultItems, class: className = '' } = Astro.props;
+---
+
+<section class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+  <div class="space-y-2 text-center max-w-xl mx-auto">
+    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
+      <i class="fa-solid fa-star text-xs"></i>
+      Переваги
+    </span>
+    <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+      Чому обирають мене
+    </h2>
+    <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
+      Конкретні переваги, через які клієнти обирають мене замість агентств та інших фрилансерів.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
+    {items.map((item) => (
+      <Card hover class="space-y-4 h-full flex flex-col justify-start">
+        <IconBox icon={item.icon} size="md" />
+        <div class="space-y-1.5 flex-1">
+          <h3 class="text-base font-black text-[#2A1E1E] m-0">{item.title}</h3>
+          <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium leading-relaxed m-0">{item.desc}</p>
+        </div>
+      </Card>
+    ))}
+  </div>
+</section>

@@ -1,32 +1,25 @@
 ---
 import Card from '../ui/Card.astro';
 import IconBox from '../ui/IconBox.astro';
-import SectionHeader from '../ui/SectionHeader.astro';
 import { getCollection } from 'astro:content';
 
 interface Props {
-  title?: string;
-  subtitle?: string;
   class?: string;
 }
 
 const {
-  title = 'Спеціалізація та технологічні рішення',
-  subtitle = 'Технології та напрямки розробки, в яких я маю практичний досвід',
   class: className = '',
 } = Astro.props;
 
 const allItems = (await getCollection('specializations')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section class={`space-y-8 w-full ${className}`} data-animate="fade-up">
-  <SectionHeader title={title} subtitle={subtitle} align="center" />
-  
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5" data-animate="fade-up" data-stagger>
+<div class={`w-full ${className}`}>
+  <div class="grid grid-rows-2 grid-flow-col auto-cols-[82vw] sm:auto-cols-auto sm:grid-rows-none sm:grid-flow-row sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-3.5 overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none -mx-4 px-4 sm:mx-0 sm:px-0 pt-1 pb-3 sm:pb-0 scrollbar-none scroll-pl-4 sm:scroll-pl-0 items-stretch" data-animate="fade-up" data-stagger>
     {allItems.map((item) => (
       <button
         type="button"
-        class="spec-item bg-paper-white border border-black/10 rounded-2xl p-4 flex items-center gap-3.5 text-left transition-all hover:border-cobalt-pop hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
+        class="spec-item bg-white border border-[#623A2D]/10 rounded-[10px] p-3.5 sm:p-4 flex items-center gap-3.5 text-left transition-all hover:border-[#D09AFC] hover:shadow-md hover:-translate-y-0.5 cursor-pointer snap-start w-full"
         data-title={item.data.title}
         data-desc={item.data.fullDescription || item.data.desc}
         data-icon={item.data.icon}
@@ -35,13 +28,13 @@ const allItems = (await getCollection('specializations')).sort((a, b) => a.data.
           <IconBox icon={item.data.icon} size="md" variant="accent" />
         </div>
         <div class="min-w-0 flex-1">
-          <strong class="text-sm sm:text-base font-black text-ink-black block leading-tight">{item.data.title}</strong>
-          <span class="text-xs text-black/60 block leading-tight mt-1">{item.data.desc}</span>
+          <strong class="text-sm sm:text-base font-black text-[#2A1E1E] block leading-tight">{item.data.title}</strong>
+          <span class="text-xs text-[#623A2D]/70 block leading-tight mt-1">{item.data.desc}</span>
         </div>
       </button>
     ))}
   </div>
-</section>
+</div>
 
 <dialog
   id="spec-drawer"
@@ -143,7 +136,7 @@ const allItems = (await getCollection('specializations')).sort((a, b) => a.data.
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const dialog = document.getElementById('spec-drawer') as HTMLDialogElement;
     const titleEl = document.getElementById('spec-drawer-title');
     const iconEl = document.getElementById('spec-drawer-icon');

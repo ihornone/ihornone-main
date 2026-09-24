@@ -1,0 +1,74 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  placeholderTitle: string;
+  placeholderDesc?: string;
+  placeholderBadge?: string;
+  class?: string;
+  aspect?: string;
+  priority?: boolean;
+}
+
+const {
+  src,
+  alt,
+  placeholderTitle,
+  placeholderDesc = 'Збережіть згенероване фото за цим шляхом',
+  placeholderBadge = 'Маскот',
+  class: className = '',
+  aspect = 'aspect-square',
+} = Astro.props;
+
+const fallbackId = `mascot-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class:list={['relative overflow-hidden rounded-[10px] bg-gradient-to-br from-[#FAF3EF] via-white to-[#F8EDE9] border border-[#623A2D]/10 transition-all duration-300 group', aspect, className]} id={fallbackId}>
+  <!-- Ambient background glow from mascot palette -->
+  <div class="absolute -top-12 -right-12 w-48 h-48 bg-[#D09AFC]/15 rounded-full blur-2xl pointer-events-none group-hover:bg-[#D09AFC]/25 transition-all"></div>
+  <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-[#E8BA98]/20 rounded-full blur-2xl pointer-events-none group-hover:bg-[#E8BA98]/30 transition-all"></div>
+
+  <!-- Real Image (hidden until loaded or replaced) -->
+  <img
+    src={src}
+    alt={alt}
+    loading="lazy"
+    class="w-full h-full object-cover object-center relative z-10 transition-transform duration-500 group-hover:scale-105 hidden"
+    onload="this.classList.remove('hidden'); const p = this.parentElement.querySelector('.mascot-placeholder-box'); if(p) p.classList.add('hidden');"
+    onerror="this.classList.add('hidden'); const p = this.parentElement.querySelector('.mascot-placeholder-box'); if(p) p.classList.remove('hidden');"
+  />
+
+  <!-- Gorgeous Animated Placeholder Box (visible when image not found) -->
+  <div class="mascot-placeholder-box w-full h-full p-6 sm:p-8 flex flex-col justify-between items-center text-center relative z-10 select-none">
+    <div class="w-full flex items-center justify-between">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[10px] text-[11px] font-black uppercase tracking-wider bg-[#D09AFC] text-[#2A1E1E] shadow-2xs">
+        <span class="w-1.5 h-1.5 rounded-[10px] bg-[#2A1E1E] animate-pulse"></span>
+        {placeholderBadge}
+      </span>
+      <span class="text-xs font-bold text-[#623A2D]/60 font-mono bg-[#2A1E1E]/5 px-2.5 py-1 rounded-[10px]">
+        {src.split('/').pop()}
+      </span>
+    </div>
+
+    <!-- Center icon & illustration -->
+    <div class="my-auto py-4 flex flex-col items-center gap-3">
+      <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-[10px] bg-white border border-[#623A2D]/10 shadow-sm flex items-center justify-center text-2xl sm:text-3xl text-[#95553C] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+        <i class="fa-solid fa-cat"></i>
+      </div>
+      <div>
+        <h4 class="text-base sm:text-lg font-black text-[#2A1E1E] m-0 tracking-tight">
+          {placeholderTitle}
+        </h4>
+        <p class="text-xs sm:text-sm text-[#623A2D]/80 max-w-xs mt-1 mb-0 leading-relaxed font-medium">
+          {placeholderDesc}
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom path guide -->
+    <div class="w-full pt-3 border-t border-[#623A2D]/10 flex items-center justify-center gap-1.5 text-[11px] font-semibold text-[#623A2D]/60">
+      <i class="fa-solid fa-folder-open text-[#95553C]"></i>
+      <code class="font-mono text-[#2A1E1E] bg-white px-2 py-0.5 rounded-[10px] border border-[#623A2D]/10">public{src}</code>
+    </div>
+  </div>
+</div>

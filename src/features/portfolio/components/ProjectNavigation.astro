@@ -1,0 +1,37 @@
+---
+interface ProjectNav {
+  id: string;
+  data: {
+    title: string;
+  };
+}
+
+interface Props {
+  prevProject?: ProjectNav | null;
+  nextProject?: ProjectNav | null;
+}
+
+const { prevProject, nextProject } = Astro.props;
+---
+
+<section class="w-full bento-card p-4 sm:p-5 shadow-2xs flex items-center justify-between gap-3" data-animate="fade-up">
+  {prevProject ? (
+    <a href={`/portfolio/${prevProject.id}`} class="flex items-center gap-2.5 text-[#2A1E1E] hover:text-[#95553C] transition-colors no-underline">
+      <i class="fa-solid fa-arrow-left text-xs sm:text-sm"></i>
+      <div class="text-left">
+        <span class="text-[10px] sm:text-[11px] font-bold text-[#623A2D]/60 uppercase block">Попередній</span>
+        <strong class="text-xs sm:text-sm font-black block">{prevProject.data.title}</strong>
+      </div>
+    </a>
+  ) : <div />}
+
+  {nextProject ? (
+    <a href={`/portfolio/${nextProject.id}`} class="flex items-center gap-2.5 text-[#2A1E1E] hover:text-[#95553C] transition-colors no-underline ml-auto">
+      <div class="text-right">
+        <span class="text-[10px] sm:text-[11px] font-bold text-[#623A2D]/60 uppercase block">Наступний</span>
+        <strong class="text-xs sm:text-sm font-black block">{nextProject.data.title}</strong>
+      </div>
+      <i class="fa-solid fa-arrow-right text-xs sm:text-sm"></i>
+    </a>
+  ) : <div />}
+</section>

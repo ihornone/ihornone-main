@@ -2,94 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../shared/components/sections/Hero.astro';
 import Stats from '../shared/components/sections/Stats.astro';
-import CtaBanner from '../shared/components/sections/CtaBanner.astro';
-import SectionHeader from '../shared/components/ui/SectionHeader.astro';
-
-const whyMe = [
-  {
-    icon: 'fa-solid fa-tags text-cobalt-pop',
-    title: 'Ціна/якість',
-    desc: 'Агентства накручують 2-3x на команду та офіс. Я беру вартість розробки без зайвих націнок — ви отримуєте ту ж якість за чесні гроші.'
-  },
-  {
-    icon: 'fa-solid fa-rocket text-cobalt-pop',
-    title: 'Швидкість',
-    desc: 'Без черг та очікування. Агентство може тягнути місяцями — я запускаю MVP за 2-4 тижні, бо приймаю рішення самостійно.'
-  },
-  {
-    icon: 'fa-solid fa-user-check text-cobalt-pop',
-    title: 'Особиста увага',
-    desc: 'Працюєте безпосереддньо зі мною, а не з менеджером. Жодних "я передам розробнику" — ви одразу отримуєте відповіді та бачите прогрес.'
-  },
-  {
-    icon: 'fa-solid fa-bolt text-cobalt-pop',
-    title: 'Спеціалізація',
-    desc: 'Глибока експертиза в Telegram-ботах, WebApps та мобільних додатках. Не "роблю все ніяк", а знаю свою нішу на рівні експерта.'
-  },
-  {
-    icon: 'fa-solid fa-layer-group text-cobalt-pop',
-    title: 'Все від ідеї до запуску',
-    desc: 'Від аналізу та архітектури до дизайну, коду, тестування та деплою — повний цикл без залучення третіх осіб.'
-  },
-  {
-    icon: 'fa-solid fa-shield-halved text-cobalt-pop',
-    title: 'Підтримка 30 днів',
-    desc: 'Після запуску — 30 днів безкоштовної підтримки та фіксів. Я не зникаю після отримання грошей, бо мені важлива ваша довіра.'
-  },
-];
-
-const comparison = [
-  { feature: 'Особистий контакт з розробником', me: true, agency: false, freelancer: true },
-  { feature: 'Швидкий запуск (2-4 тижні)', me: true, agency: false, freelancer: 'maybe' },
-  { feature: 'Повний цикл (дизайн + код + деплой)', me: true, agency: true, freelancer: false },
-  { feature: 'Чесна ціна без націнок', me: true, agency: false, freelancer: 'maybe' },
-  { feature: 'Глибока експертиза в Telegram/WebApps', me: true, agency: false, freelancer: 'maybe' },
-  { feature: '30 днів безкоштовної підтримки', me: true, agency: false, freelancer: false },
-  { feature: 'Прозорий процес без посередників', me: true, agency: false, freelancer: true },
-  { feature: 'Гарантія на код', me: true, agency: true, freelancer: 'maybe' },
-];
-
-const stackCategories = [
-  {
-    category: 'Telegram & Bots',
-    items: ['aiogram', 'Telegram WebApps', 'Bot API', 'Payment Gateways', 'Webhooks']
-  },
-  {
-    category: 'Backend & DB',
-    items: ['Python', 'Node.js', 'PostgreSQL', 'Redis', 'REST API', 'Docker']
-  },
-  {
-    category: 'Frontend & Web',
-    items: ['Astro', 'Tailwind CSS', 'TypeScript', 'HTML5/CSS3', 'Responsive UI']
-  },
-  {
-    category: 'Integrations & Tools',
-    items: ['LiqPay & Mono', 'CRM Systems', 'Google Sheets API', 'Git', 'Linux / VPS']
-  },
-];
-
-const workflowSteps = [
-  {
-    step: '01',
-    title: 'Аналіз і ТЗ',
-    desc: 'Обговорюємо вашу ідею, визначаємо бізнес-цілі та формуємо чітке технічне завдання з кошторисом.'
-  },
-  {
-    step: '02',
-    title: 'Архітектура та Прототип',
-    desc: 'Проєктую базу даних, логіку взаємодії користувача з ботом чи сайтом та сценарії.'
-  },
-  {
-    step: '03',
-    title: 'Розробка та Інтеграція',
-    desc: 'Пишу чистий код, інтегрую платіжні системи, API, CRM та налаштовую всю функціональність.'
-  },
-  {
-    step: '04',
-    title: 'Тестування і Запуск',
-    desc: 'Проводжу повне тестування сценаріїв, деплою на ваш сервер та передаю документацію.'
-  },
-];
+import BentoCta from '../shared/components/sections/BentoCta.astro';
+import Button from '../shared/components/ui/Button.astro';
+import { WhyMe, ComparisonTable, TechStack, Workflow } from '../features/about';
 
 const stats = [
   { value: '15+', label: 'успішних проєктів' },
@@ -104,146 +19,33 @@ const stats = [
   description="Досвідчений full-stack розробник. Створюю Telegram-боти, мобільні додатки та веб-сайти з високою конверсією."
   url="/about"
 >
-  <Hero
-    badge={{ text: 'Full-Stack Developer & Bot Specialist', icon: 'fa-solid fa-code' }}
-    title="Створюю інструменти автоматизації, які працюють на ваш прибуток"
-    subtitle="Працюю напряму з вами — без агентств, націнок та черг. Один виконавець від ідеї до запуску. Швидко, прозоро та з 30-днями підтримки після здачі."
-    buttons={[
-      { label: "Обговорити проєкт", href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
-      { label: 'Переглянути портфоліо', href: '/portfolio', variant: 'outline' },
-    ]}
-  />
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-16 md:space-y-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 md:space-y-24">
+    <Hero
+      badge={{ text: 'Full-Stack Developer & Bot Specialist', icon: 'fa-solid fa-code' }}
+      title="Створюю інструменти автоматизації, які працюють на ваш прибуток"
+      subtitle="Працюю напряму з вами — без агентств, націнок та черг. Один виконавець від ідеї до запуску. Швидко, прозоро та з 30-днями підтримки після здачі."
+      buttons={[
+        { label: "Обговорити проєкт", href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
+        { label: 'Переглянути портфоліо', href: '/portfolio', variant: 'outline' },
+      ]}
+    />
 
     <!-- Чому обирають мене -->
-    <section class="space-y-8 w-full" data-animate="fade-up">
-      <SectionHeader
-        title="Чому обирають мене"
-        subtitle="Конкретні переваги, через які клієнти обирають мене замість агентств та інших фрилансерів"
-        align="center"
-      />
+    <WhyMe />
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
-        {whyMe.map((item) => (
-          <div class="bg-paper-white border border-black/10 rounded-2xl p-6 space-y-4 hover:border-cobalt-pop hover:shadow-md transition-all h-full">
-            <div class="w-12 h-12 rounded-xl bg-morning-fog flex items-center justify-center shrink-0">
-              <i class={`${item.icon} text-xl`}></i>
-            </div>
-            <h3 class="text-base font-black text-ink-black m-0">{item.title}</h3>
-            <p class="text-xs sm:text-sm text-black/70 leading-relaxed m-0">{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+    <!-- Я vs Агентства vs Інші фрилансери -->
+    <ComparisonTable />
 
-    <!-- Порівняння: Я vs Агентства/Фрилансери -->
-    <section class="space-y-8 w-full" data-animate="fade-up">
-      <SectionHeader
-        title="Я vs Агентства та фрилансери"
-        subtitle="Чесне порівняння, щоб ви бачили різницю"
-        align="center"
-      />
+    <!-- Стек технологій -->
+    <TechStack />
 
-      <div class="bg-paper-white border border-black/10 rounded-2xl overflow-hidden" data-animate="fade-up">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-black/10">
-                <th class="text-left p-4 font-black text-ink-black">Критерій</th>
-                <th class="text-center p-4 font-black text-cobalt-pop">
-                  <i class="fa-solid fa-user-check mr-1"></i> Я
-                </th>
-                <th class="text-center p-4 font-black text-ink-black/60">
-                  <i class="fa-solid fa-building mr-1"></i> Агентства
-                </th>
-                <th class="text-center p-4 font-black text-ink-black/60">
-                  <i class="fa-solid fa-user mr-1"></i> Фрилансери
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparison.map((row, i) => (
-                <tr class={i < comparison.length - 1 ? 'border-b border-black/5' : ''}>
-                  <td class="p-4 text-black/70">{row.feature}</td>
-                  <td class="text-center p-4">
-                    <i class={`fa-solid ${row.me === true ? 'fa-check-circle text-green-500' : row.me === 'maybe' ? 'fa-minus-circle text-yellow-500' : 'fa-times-circle text-red-400'}`}></i>
-                  </td>
-                  <td class="text-center p-4">
-                    <i class={`fa-solid ${row.agency === true ? 'fa-check-circle text-green-500' : row.agency === 'maybe' ? 'fa-minus-circle text-yellow-500' : 'fa-times-circle text-red-400'}`}></i>
-                  </td>
-                  <td class="text-center p-4">
-                    <i class={`fa-solid ${row.freelancer === true ? 'fa-check-circle text-green-500' : row.freelancer === 'maybe' ? 'fa-minus-circle text-yellow-500' : 'fa-times-circle text-red-400'}`}></i>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div class="px-4 py-3 bg-morning-fog/50 border-t border-black/5">
-          <p class="text-xs text-black/50 text-center m-0">
-            <i class="fa-solid fa-circle-info mr-1"></i>
-            Зелений — завжди, жовтий — іноді, червоний — ні
-          </p>
-        </div>
-      </div>
-    </section>
+    <!-- Етапи розробки -->
+    <Workflow />
 
-    <!-- Технологічний стек -->
-    <section class="space-y-8 w-full" data-animate="fade-up">
-      <SectionHeader
-        title="Технологічний стек"
-        subtitle="Інструменти та технології, які я використовую для створення швидких і надійних рішень"
-        align="center"
-      />
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="fade-up" data-stagger>
-        {stackCategories.map((group) => (
-          <div class="bg-paper-white border border-black/10 rounded-2xl p-6 space-y-4">
-            <h3 class="text-sm font-black text-ink-black uppercase tracking-wider pb-3 border-b border-black/5 m-0">
-              {group.category}
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              {group.items.map((tech) => (
-                <span class="px-3 py-1.5 bg-morning-fog border border-black/5 text-xs font-bold text-ink-black/80 rounded-xl">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Як будується робота (Етапи) -->
-    <section class="space-y-8 w-full" data-animate="fade-up">
-      <SectionHeader
-        title="Як відбувається розробка"
-        subtitle="Прозорий процес від першого повідомлення до запуску проєкту"
-        align="center"
-      />
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate="fade-up" data-stagger>
-        {workflowSteps.map((w) => (
-          <div class="bg-paper-white border border-black/10 rounded-2xl p-6 space-y-4 relative overflow-hidden group hover:border-cobalt-pop transition-all">
-            <div class="text-4xl font-black text-cobalt-pop/15 absolute top-4 right-4 group-hover:text-cobalt-pop/30 transition-colors">
-              {w.step}
-            </div>
-            <div class="space-y-2 relative z-10">
-              <span class="text-xs font-black uppercase text-cobalt-pop tracking-widest block">Етап {w.step}</span>
-              <h3 class="text-lg font-black text-ink-black m-0">{w.title}</h3>
-              <p class="text-xs sm:text-sm text-black/70 leading-relaxed m-0">{w.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-  </div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-12 flex justify-center" data-animate="fade-up">
+    <!-- Статистика -->
     <Stats items={stats} columns={4} />
-  </div>
 
-  <CtaBanner />
+    <!-- Bento CTA with Mascot -->
+    <BentoCta />
+  </div>
 </Layout>

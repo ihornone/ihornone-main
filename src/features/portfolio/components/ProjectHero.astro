@@ -1,0 +1,71 @@
+---
+import Badge from '../../../shared/components/ui/Badge.astro';
+import Button from '../../../shared/components/ui/Button.astro';
+import Passport from '../../../shared/components/sections/Passport.astro';
+
+interface Props {
+  title: string;
+  category: string;
+  icon?: string;
+  description: string;
+  link?: string;
+  github?: string;
+  passportFields: Array<{ label: string; value: any }>;
+}
+
+const { title, category, icon, description, link, github, passportFields } = Astro.props;
+---
+
+<section class="bento-card p-6 sm:p-10 md:p-14 shadow-2xs w-full space-y-6 sm:space-y-8 text-center" data-animate="fade-up">
+  <div class="flex flex-col items-center text-center gap-4 sm:gap-5 max-w-3xl mx-auto">
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <Badge icon={icon}>{category}</Badge>
+    </div>
+
+    <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-[#2A1E1E] tracking-tight leading-tight m-0">
+      {title}
+    </h1>
+    
+    <p class="text-sm sm:text-base md:text-lg text-[#623A2D]/80 font-medium leading-relaxed m-0">
+      {description}
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 pt-2 w-full sm:w-auto">
+      {category === 'Мобільні застосунки' && link && (
+        <Button href={link} variant="dark" icon="fa-solid fa-download" class="w-full sm:w-auto">
+          Скачати
+        </Button>
+      )}
+
+      {category === 'Сайти' && link && (
+        <Button href={link} variant="dark" icon="fa-solid fa-arrow-right" class="w-full sm:w-auto">
+          Переглянути
+        </Button>
+      )}
+
+      {category === 'Telegram-боти' && link && (
+        <Button href={link} variant="dark" icon="fa-brands fa-telegram" class="w-full sm:w-auto">
+          Запустити
+        </Button>
+      )}
+
+      {github && (
+        <Button href={github} variant="outline" icon="fa-brands fa-github" class="w-full sm:w-auto">
+          GitHub
+        </Button>
+      )}
+
+      {!link && !github && (
+        <Button href="/contacts" variant="dark" icon="fa-solid fa-arrow-right" class="w-full sm:w-auto">
+          Замовити схожий проєкт
+        </Button>
+      )}
+
+      <Button href="/contacts" variant="accent" class="w-full sm:w-auto">
+        Обговорити ідею
+      </Button>
+    </div>
+  </div>
+
+  <Passport fields={passportFields} />
+</section>

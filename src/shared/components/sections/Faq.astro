@@ -11,6 +11,7 @@ export interface FaqItem {
 interface Props {
   title?: string;
   items?: FaqItem[];
+  showHeader?: boolean;
   class?: string;
 }
 
@@ -40,24 +41,27 @@ const defaultItems: FaqItem[] = [
 const {
   title = 'Часті запитання',
   items = defaultItems,
+  showHeader = true,
   class: className = '',
 } = Astro.props;
 ---
 
-<section class={`space-y-6 w-full ${className}`} data-animate="fade-up">
-  <SectionHeader title={title} align="center" />
+<div class={`space-y-6 w-full ${className}`}>
+  {showHeader && title && (
+    <SectionHeader title={title} align="center" />
+  )}
 
   <div class="space-y-3 w-full faq-container" data-animate="fade-up" data-stagger>
     {items.map((item) => (
-      <details name="faq-accordion" class="bg-paper-white border border-black/5 rounded-2xl p-5 md:p-6 shadow-xs group [&[open]]:border-cobalt-pop/40 transition-all cursor-pointer">
-        <summary class="font-bold text-base md:text-lg text-ink-black flex items-center justify-between gap-4 select-none list-none">
+      <details name="faq-accordion" class="bg-white border border-[#623A2D]/10 rounded-[10px] p-4 sm:p-5 shadow-2xs group [&[open]]:border-[#FAC3C8] hover:border-[#FAC3C8]/60 transition-all cursor-pointer">
+        <summary class="font-bold text-sm sm:text-base text-[#2A1E1E] flex items-center justify-between gap-4 select-none list-none">
           <span>{item.question}</span>
-          <div class="w-8 h-8 rounded-full bg-morning-fog group-hover:bg-kofi-blue/40 flex items-center justify-center shrink-0 transition-colors">
-            <i class="fa-solid fa-plus text-base md:text-lg text-cobalt-pop group-open:rotate-45 transition-transform duration-200"></i>
+          <div class="w-7 h-7 rounded-[10px] bg-[#FAC3C8]/25 group-hover:bg-[#FAC3C8]/50 flex items-center justify-center shrink-0 transition-colors text-[#2A1E1E]">
+            <i class="fa-solid fa-plus text-xs group-open:rotate-45 transition-transform duration-200"></i>
           </div>
         </summary>
-        <div class="text-sm md:text-base text-black/70 leading-relaxed m-0 mt-3 pt-3 border-t border-black/5" set:html={item.answer} />
+        <div class="text-xs sm:text-sm text-[#623A2D]/80 font-medium leading-relaxed m-0 mt-3 pt-3 border-t border-[#623A2D]/10" set:html={item.answer} />
       </details>
     ))}
   </div>
-</section>
+</div>

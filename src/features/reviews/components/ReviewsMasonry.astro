@@ -1,0 +1,81 @@
+---
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+---
+
+<section class="w-full">
+  {images.length > 0 ? (
+    <div class="masonry-grid" data-animate="fade-up" data-stagger>
+      {images.map((src) => (
+        <div class="masonry-item break-inside-avoid mb-4">
+          <img
+            src={src}
+            alt="Відгук клієнта"
+            class="w-full rounded-[10px] border border-[#623A2D]/10 object-cover cursor-pointer hover:border-[#D09AFC] hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+            loading="lazy"
+            data-lightbox
+          />
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p class="text-center text-[#623A2D]/60 text-sm">Додайте фото до папки src/content/reviews/</p>
+  )}
+
+  <dialog id="lightbox" class="fixed inset-0 z-[200] bg-transparent p-0 m-0 max-w-none max-h-none w-full h-full opacity-0 pointer-events-none backdrop:bg-black/80">
+    <button id="lightbox-close" class="fixed top-4 right-4 z-[201] w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl flex items-center justify-center cursor-pointer border-none transition-colors" aria-label="Закрити">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg mx-auto my-auto" />
+  </dialog>
+</section>
+
+<style>
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .masonry-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-grid {
+      column-count: 3;
+    }
+  }
+
+  #lightbox[open] {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const dialog = document.getElementById('lightbox') as HTMLDialogElement;
+    const img = document.getElementById('lightbox-img') as HTMLImageElement;
+    const closeBtn = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('[data-lightbox]').forEach((el) => {
+      el.addEventListener('click', () => {
+        img.src = (el as HTMLImageElement).src;
+        dialog.showModal();
+      });
+    });
+
+    closeBtn?.addEventListener('click', () => dialog.close());
+    dialog?.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  });
+</script>

@@ -1,16 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../shared/components/sections/Hero.astro';
+import FullscreenHero from '../shared/components/sections/FullscreenHero.astro';
+import BentoServices from '../shared/components/sections/BentoServices.astro';
+import TurboComparison from '../shared/components/sections/TurboComparison.astro';
 import SpecializationGrid from '../shared/components/sections/SpecializationGrid.astro';
 import ServiceFaq from '../shared/components/sections/ServiceFaq.astro';
-import CtaBanner from '../shared/components/sections/CtaBanner.astro';
+import BentoCta from '../shared/components/sections/BentoCta.astro';
 import ProjectCard from '../features/portfolio/components/ProjectCard.astro';
-import ServiceCard from '../shared/components/sections/ServiceCard.astro';
-import SectionHeader from '../shared/components/ui/SectionHeader.astro';
-import Button from '../shared/components/ui/Button.astro';
 import { getCollection } from 'astro:content';
 
-const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const allEntries = await getCollection('projects');
 const featuredProjects = allEntries.slice(0, 3).map((entry) => ({
   id: entry.id,
@@ -46,85 +44,88 @@ const featuredProjects = allEntries.slice(0, 3).map((entry) => ({
     ]
   }}
 >
-  <Hero
-    badge={{ text: 'Full-Stack Розробка', icon: 'fa-solid fa-code' }}
-    title="Створюю сучасні рішення для вашого бізнесу"
-    subtitle="Розробка Telegram-ботів, мобільних додатків та веб-сайтів. Від ідеї до працюючого продукту з високою конверсією."
-    buttons={[
-      { label: 'Обговорити проєкт', href: '/contacts', variant: 'dark', icon: 'fa-solid fa-arrow-right' },
-      { label: 'Переглянути портфоліо', href: '/portfolio', variant: 'outline' },
-    ]}
-  >
-    <div class="pt-6 border-t border-black/5 w-full" data-animate="fade-up">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div data-animate="fade-up" data-duration="fast">
-          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">3+</strong>
-          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Років досвіду</span>
-        </div>
-        <div data-animate="fade-up" data-duration="fast" style="transition-delay: 80ms">
-          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">15+</strong>
-          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Успішних проєктів</span>
-        </div>
-        <div data-animate="fade-up" data-duration="fast" style="transition-delay: 160ms">
-          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">99%</strong>
-          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Задоволених клієнтів</span>
-        </div>
-        <div data-animate="fade-up" data-duration="fast" style="transition-delay: 240ms">
-          <strong class="text-2xl sm:text-3xl font-black text-ink-black block">24/7</strong>
-          <span class="text-xs font-bold text-black/60 uppercase tracking-wider block">Техпідтримка</span>
-        </div>
-      </div>
-    </div>
-  </Hero>
+  <!-- Full-screen Cinematic Hero Section -->
+  <FullscreenHero />
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-16 md:space-y-24">
-    <section class="space-y-8 w-full" data-animate="fade-up">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <SectionHeader
-          title="Напрямки розробки"
-          subtitle="Повний цикл розробки цифрових продуктів під ваші цілі"
-        />
-        <Button href="/services" variant="outline" size="sm" icon="fa-solid fa-arrow-right">
-          Усі послуги
-        </Button>
+  <!-- Main Bento Page Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-20 sm:space-y-28">
+    
+    <!-- 3 Big Superpowers (Services Bento) -->
+    <BentoServices />
+
+    <!-- Turbo vs Agency Value Comparison -->
+    <TurboComparison />
+
+    <!-- Detailed Tech Specializations Grid -->
+    <section class="space-y-6 sm:space-y-8" data-animate="fade-up">
+      <div class="space-y-2">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#D09AFC] text-[#2A1E1E] shadow-2xs">
+          <i class="fa-solid fa-microchip text-xs"></i>
+          Експертиза & Інтеграції
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+          Спеціалізація та готові модулі
+        </h2>
+        <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
+          Архітектурні рішення, які я щодня використовую для створення масштабованих продуктів.
+        </p>
       </div>
 
-      <div class="flex md:grid items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 md:gap-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pt-4 pb-4 md:pb-0 scrollbar-none" data-animate="fade-up" data-stagger>
-        {allServices.map((service) => (
-          <ServiceCard
-            id={service.id}
-            icon={service.data.icon}
-            title={service.data.title}
-            description={service.data.description}
-            includes={service.data.includes}
-            isPopular={service.data.isPopular}
-          />
-        ))}
-      </div>
+      <SpecializationGrid />
     </section>
 
-    <SpecializationGrid />
-
-    <section class="space-y-8 w-full" data-animate="fade-up">
+    <!-- Featured Projects Showcase -->
+    <section class="space-y-8 sm:space-y-10 w-full" data-animate="fade-up">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <SectionHeader
-          title="Останні проєкти"
-          subtitle="Приклади реалізованих рішень із результатами"
-        />
-        <Button href="/portfolio" variant="outline" size="sm" icon="fa-solid fa-arrow-right">
-          Усі проєкти
-        </Button>
+        <div class="space-y-2">
+          <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
+            <i class="fa-solid fa-briefcase text-xs"></i>
+            Реалізовані кейси
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+            Останні реалізовані проєкти
+          </h2>
+          <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
+            Працюючі продукти для бізнесу з реальними цифрами та вимірюваним результатом.
+          </p>
+        </div>
+
+        <a
+          href="/portfolio"
+          class="pill-btn-outline !py-2.5 !px-5 text-xs font-bold self-start md:self-auto shrink-0 flex items-center gap-2"
+        >
+          <span>Усі проєкти</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {featuredProjects.map((project) => (
           <ProjectCard project={project} />
         ))}
       </div>
     </section>
 
-    <ServiceFaq globalOnly />
-  </div>
+    <!-- FAQ Accordion -->
+    <section class="space-y-6 sm:space-y-8" data-animate="fade-up">
+      <div class="space-y-2">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#FAC3C8] text-[#2A1E1E] shadow-2xs">
+          <i class="fa-solid fa-circle-question text-xs"></i>
+          Запитання та відповіді
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+          Часті запитання клієнтів
+        </h2>
+        <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
+          Відповіді на головні питання щодо термінів, оплати, передачі прав та підтримки.
+        </p>
+      </div>
 
-  <CtaBanner />
+      <ServiceFaq globalOnly showHeader={false} />
+    </section>
+
+    <!-- Clean CTA Banner -->
+    <BentoCta />
+
+  </div>
 </Layout>

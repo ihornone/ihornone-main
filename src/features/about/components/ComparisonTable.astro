@@ -1,0 +1,106 @@
+---
+interface ComparisonItem {
+  feature: string;
+  me: boolean;
+  agency: boolean;
+  freelancer: boolean | 'maybe';
+}
+
+interface Props {
+  items?: ComparisonItem[];
+  class?: string;
+}
+
+const defaultComparison: ComparisonItem[] = [
+  { feature: 'Особистий контакт з розробником', me: true, agency: false, freelancer: true },
+  { feature: 'Швидкий запуск (2-4 тижні)', me: true, agency: false, freelancer: 'maybe' },
+  { feature: 'Повний цикл (дизайн + код + деплой)', me: true, agency: true, freelancer: false },
+  { feature: 'Чесна ціна без націнок', me: true, agency: false, freelancer: 'maybe' },
+  { feature: 'Глибока експертиза в Telegram/WebApps', me: true, agency: false, freelancer: 'maybe' },
+  { feature: '30 днів безкоштовної підтримки', me: true, agency: false, freelancer: false },
+  { feature: 'Прозорий процес без посередників', me: true, agency: false, freelancer: true },
+  { feature: 'Гарантія на код', me: true, agency: true, freelancer: 'maybe' },
+];
+
+const { items = defaultComparison, class: className = '' } = Astro.props;
+---
+
+<section class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+  <div class="space-y-2 text-center max-w-xl mx-auto">
+    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#D09AFC] text-[#2A1E1E] shadow-2xs">
+      <i class="fa-solid fa-scale-balanced text-xs"></i>
+      Порівняння
+    </span>
+    <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+      Я vs Агентства vs Інші фрилансери
+    </h2>
+    <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
+      Чесне порівняння форматів співпраці, щоб ви могли зробити усвідомлений вибір.
+    </p>
+  </div>
+
+  <div class="bento-card p-0 overflow-hidden shadow-2xs" data-animate="fade-up">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs sm:text-sm border-collapse min-w-[540px]">
+        <thead>
+          <tr class="border-b border-[#623A2D]/10 bg-[#FAF1EC]/60">
+            <th class="p-4 sm:p-5 font-black text-[#2A1E1E] w-1/2">Критерій</th>
+            <th class="p-4 sm:p-5 font-black text-[#2A1E1E] text-center bg-[#D09AFC]/15">
+              <span class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#2A1E1E]">
+                <i class="fa-solid fa-cat text-[#2A1E1E]"></i> ihornone
+              </span>
+            </th>
+            <th class="p-4 sm:p-5 font-bold text-[#623A2D]/70 text-center">Агентства</th>
+            <th class="p-4 sm:p-5 font-bold text-[#623A2D]/70 text-center">Типові фрилансери</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#623A2D]/10">
+          {items.map((row) => (
+            <tr class="hover:bg-[#FAF1EC]/40 transition-colors">
+              <td class="p-4 sm:p-5 font-bold text-[#2A1E1E]">{row.feature}</td>
+              <td class="p-4 sm:p-5 text-center bg-[#D09AFC]/10">
+                {row.me ? (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D09AFC] text-[#2A1E1E] text-xs shadow-2xs">
+                    <i class="fa-solid fa-check"></i>
+                  </span>
+                ) : (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-600 text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                  </span>
+                )}
+              </td>
+              <td class="p-4 sm:p-5 text-center">
+                {row.agency ? (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs">
+                    <i class="fa-solid fa-check"></i>
+                  </span>
+                ) : (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-600 text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                  </span>
+                )}
+              </td>
+              <td class="p-4 sm:p-5 text-center">
+                {row.freelancer === true && (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs">
+                    <i class="fa-solid fa-check"></i>
+                  </span>
+                )}
+                {row.freelancer === false && (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-600 text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                  </span>
+                )}
+                {row.freelancer === 'maybe' && (
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs font-bold" title="Як пощастить">
+                    ?
+                  </span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

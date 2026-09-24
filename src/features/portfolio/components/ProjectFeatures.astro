@@ -1,0 +1,31 @@
+---
+import IconBox from '../../../shared/components/ui/IconBox.astro';
+import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+
+interface FeatureItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  features: FeatureItem[];
+}
+
+const { features } = Astro.props;
+---
+
+<section class="space-y-6 w-full" data-animate="fade-up">
+  <SectionHeader title="Функціональні можливості" />
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-5" data-animate="fade-up" data-stagger>
+    {features.map((f) => (
+      <div class="bento-card p-4 sm:p-6 space-y-2.5 flex flex-col justify-between shadow-2xs hover:border-[#D09AFC] transition-all">
+        <IconBox icon={f.icon} />
+        <div class="space-y-1">
+          <h3 class="text-sm sm:text-base font-black text-[#2A1E1E] m-0">{f.title}</h3>
+          <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium m-0 leading-normal">{f.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

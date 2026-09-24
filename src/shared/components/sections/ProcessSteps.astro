@@ -33,12 +33,12 @@ const columnsClasses = {
 
   <div class={`grid ${columnsClasses[columns]} gap-3.5 sm:gap-4`} data-animate="fade-up" data-stagger>
     {steps.map((step) => (
-      <div class="bg-paper-white border border-black/5 rounded-2xl p-4 sm:p-5 space-y-1.5 shadow-2xs">
-        <span class="text-xs font-black text-cobalt-pop uppercase block">
+      <div class="bento-card p-4 sm:p-5 space-y-1.5 shadow-2xs hover:border-[#D09AFC] transition-all">
+        <span class="text-xs font-black text-[#95553C] uppercase block tracking-wider">
           {String(step.step).padStart(2, '0')}
         </span>
-        <strong class="text-xs sm:text-sm font-bold text-ink-black block">{step.title}</strong>
-        <p class="text-xs text-black/60 m-0 leading-normal">{step.description}</p>
+        <strong class="text-xs sm:text-sm font-black text-[#2A1E1E] block">{step.title}</strong>
+        <p class="text-xs text-[#623A2D]/75 font-medium m-0 leading-normal">{step.description}</p>
       </div>
     ))}
   </div>

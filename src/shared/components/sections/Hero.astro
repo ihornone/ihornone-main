@@ -48,12 +48,12 @@ const contentAlignClasses = {
       </Badge>
     )}
 
-    <h1 class={`text-3xl sm:text-4xl md:text-5xl font-black text-ink-black tracking-tight leading-tight m-0 ${alignClasses[align]}`}>
+    <h1 class={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#2A1E1E] tracking-tight leading-[1.15] m-0 ${alignClasses[align]}`}>
       {title}
     </h1>
 
     {subtitle && (
-      <p class={`text-base sm:text-lg text-black/65 leading-relaxed m-0 ${alignClasses[align]}`}>
+      <p class={`text-base sm:text-lg md:text-xl text-[#623A2D]/80 font-medium leading-relaxed m-0 max-w-2xl ${alignClasses[align]}`}>
         {subtitle}
       </p>
     )}

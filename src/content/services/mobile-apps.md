@@ -1,11 +1,15 @@
 ---
-title: "Розробка мобільних застосунків"
-shortTitle: "Мобільні"
+title: "Мобільні застосунки"
+shortTitle: "Додатки"
 icon: "fa-solid fa-mobile-screen-button"
 order: 3
 description: "Нативні та кросплатформні мобільні додатки для iOS та Android."
 heroSubtitle: "Створюю мобільні додатки, які люблять користувачі. Один код — дві платформи, або нативний досвід для кожної."
 isPopular: false
+badge: "iOS & Android"
+mascotSrc: "/images/mascot/mobile-cat.webp"
+mascotTitle: "Кіт-Тестувальник"
+mascotDesc: "Кіт у навушниках з планшетом або смартфоном"
 includes:
   - title: "UI/UX дизайн для мобільних"
     icon: "fa-solid fa-object-group"

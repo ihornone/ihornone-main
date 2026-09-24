@@ -1,16 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../shared/components/sections/Faq.astro';
-import CtaBanner from '../../shared/components/sections/CtaBanner.astro';
+import BentoCta from '../../shared/components/sections/BentoCta.astro';
 import ProcessSteps from '../../shared/components/sections/ProcessSteps.astro';
 import Breadcrumbs from '../../shared/components/ui/Breadcrumbs.astro';
-import Card from '../../shared/components/ui/Card.astro';
 import Button from '../../shared/components/ui/Button.astro';
-import IconBox from '../../shared/components/ui/IconBox.astro';
 import SectionHeader from '../../shared/components/ui/SectionHeader.astro';
 import ProjectCard from '../../features/portfolio/components/ProjectCard.astro';
+import {
+  ServiceDetailHero,
+  ServiceIncludes,
+  ServicePricing,
+  TechTags,
+} from '../../features/services';
 import { getCollection } from 'astro:content';
-import { getCollection as getProjectCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -23,7 +26,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { title, shortTitle, icon, description, heroSubtitle, isPopular, includes, examples, process, technologies, pricing, faq } = entry.data;
 
-const allProjects = await getProjectCollection('projects');
+const allProjects = await getCollection('projects');
 const serviceProjects = allProjects
   .filter((p) => {
     if (entry.id === 'telegram-bots') return p.id.startsWith('bot-');
@@ -52,56 +55,22 @@ const serviceProjects = allProjects
   description={description}
   url={`/services/${entry.id}`}
 >
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-16 sm:pb-24 space-y-10 sm:space-y-16">
+    <Breadcrumbs
+      items={[
+        { label: 'Усі послуги', href: '/services' },
+        { label: title },
+      ]}
+    />
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-12 md:space-y-16">
+    <ServiceDetailHero
+      title={title}
+      icon={icon}
+      description={description}
+      heroSubtitle={heroSubtitle}
+    />
 
-    <Breadcrumbs items={[
-      { label: 'Усі послуги', href: '/services' },
-      { label: title },
-    ]} />
-
-    <section class="bg-paper-white border-2 border-black/5 rounded-2xl p-5 sm:p-8 md:p-12 shadow-xs w-full" data-animate="fade-up">
-      <div class="flex flex-col items-center text-center gap-4 sm:gap-5 max-w-3xl mx-auto">
-        <div class="flex flex-wrap items-center justify-center gap-2">
-          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-morning-fog border border-black/5 text-xs sm:text-sm font-bold text-ink-black">
-            <i class={icon}></i>
-            {title}
-          </span>
-        </div>
-        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-ink-black tracking-tight leading-tight m-0">
-          {title}
-        </h1>
-        <p class="text-sm sm:text-base md:text-lg text-black/65 leading-relaxed m-0">
-          {heroSubtitle || description}
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 pt-1 w-full sm:w-auto">
-          <Button href="/contacts" variant="dark" icon="fa-solid fa-arrow-right" class="w-full sm:w-auto">
-            Замовити розробку
-          </Button>
-          <Button href="/contacts" variant="outline" class="w-full sm:w-auto">
-            Безкоштовна консультація
-          </Button>
-        </div>
-      </div>
-    </section>
-
-    <section class="space-y-6 w-full" data-animate="fade-up">
-      <SectionHeader
-        title="Що входить у послугу"
-        subtitle="Ключові можливості та функціонал, які ви отримаєте в результаті."
-      />
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
-        {includes.map((item) => (
-          <Card hover class="flex flex-col justify-between space-y-4">
-            <IconBox icon={item.icon} />
-            <div class="space-y-1.5">
-              <h3 class="text-lg font-bold text-ink-black m-0">{item.title}</h3>
-              <p class="text-xs sm:text-sm text-black/65 m-0 leading-relaxed">{item.description}</p>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </section>
+    <ServiceIncludes includes={includes} />
 
     {serviceProjects.length > 0 && (
       <section class="space-y-6 w-full" data-animate="fade-up">
@@ -115,7 +84,7 @@ const serviceProjects = allProjects
           </Button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
           {serviceProjects.map((project) => (
             <ProjectCard project={project} />
           ))}
@@ -125,54 +94,16 @@ const serviceProjects = allProjects
 
     <ProcessSteps title="Як відбувається процес розробки" steps={process} />
 
-    {pricing && pricing.length > 0 && (
-      <section class="space-y-6 w-full" data-animate="fade-up">
-        <SectionHeader title="Вартість розробки" />
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
-          {pricing.map((plan) => (
-            <Card hover class="flex flex-col justify-between space-y-4">
-              <div class="space-y-2">
-                <strong class="text-lg font-black text-ink-black block">{plan.name}</strong>
-                <p class="text-xl font-black text-cobalt-pop m-0">{plan.price}</p>
-                <p class="text-xs sm:text-sm text-black/65 m-0">{plan.description}</p>
-              </div>
-              <ul class="space-y-2 pt-4 border-t border-black/5 list-none p-0 m-0">
-                {plan.features.map((f) => (
-                  <li class="flex items-center gap-2 text-xs font-bold text-ink-black/80">
-                    <i class="fa-solid fa-check text-cobalt-pop text-xs shrink-0"></i>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
-        </div>
-      </section>
-    )}
+    <ServicePricing pricing={pricing} />
 
-    {technologies && technologies.length > 0 && (
-      <section class="space-y-6 w-full" data-animate="fade-up">
-        <SectionHeader title="Технології" />
-        <div class="flex flex-wrap gap-3" data-animate="zoom-in" data-stagger>
-          {technologies.map((tech) => (
-            <span class="px-4 py-2 bg-morning-fog border border-black/5 rounded-xl text-sm font-bold text-ink-black/80">
-              {tech}
-            </span>
-          ))}
-        </div>
-      </section>
-    )}
-
-
+    <TechTags technologies={technologies} />
 
     <Faq items={faq} />
 
-    <CtaBanner
+    <!-- Bento CTA with Mascot -->
+    <BentoCta
       title="Маєте завдання для розробки?"
-      subtitle="Зв'яжіться зі мною, і ми підберемо найкраще рішення під ваш бюджет."
-      buttonText="Обговорити проєкт"
-      buttonLink="/contacts"
+      subtitle="Зв'яжіться зі мною напряму в Telegram — обговоримо концепцію, терміни та бюджет без жодних зобов'язань."
     />
-
   </div>
 </Layout>

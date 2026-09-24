@@ -1,0 +1,22 @@
+---
+import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+
+interface Props {
+  technologies: string[];
+}
+
+const { technologies } = Astro.props;
+---
+
+{technologies && technologies.length > 0 && (
+  <section class="space-y-6 w-full" data-animate="fade-up">
+    <SectionHeader title="Технології" />
+    <div class="flex flex-wrap gap-2.5" data-animate="zoom-in" data-stagger>
+      {technologies.map((tech) => (
+        <span class="px-3.5 py-1.5 bg-[#FAF1EC] border border-[#623A2D]/10 rounded-[10px] text-xs sm:text-sm font-bold text-[#2A1E1E]">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </section>
+)}

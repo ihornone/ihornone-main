@@ -1,0 +1,67 @@
+---
+import Card from '../../../shared/components/ui/Card.astro';
+
+interface StackCategory {
+  category: string;
+  items: string[];
+}
+
+interface Props {
+  categories?: StackCategory[];
+  class?: string;
+}
+
+const defaultCategories: StackCategory[] = [
+  {
+    category: 'Telegram & Bots',
+    items: ['aiogram', 'Telegram WebApps', 'Bot API', 'Payment Gateways', 'Webhooks']
+  },
+  {
+    category: 'Backend & DB',
+    items: ['Python', 'Node.js', 'PostgreSQL', 'Redis', 'REST API', 'Docker']
+  },
+  {
+    category: 'Frontend & Web',
+    items: ['Astro', 'Tailwind CSS', 'TypeScript', 'HTML5/CSS3', 'Responsive UI']
+  },
+  {
+    category: 'Integrations & Tools',
+    items: ['LiqPay & Mono', 'CRM Systems', 'Google Sheets API', 'Git', 'Linux / VPS']
+  },
+];
+
+const { categories = defaultCategories, class: className = '' } = Astro.props;
+---
+
+<section class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+  <div class="space-y-2 text-center max-w-xl mx-auto">
+    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#FAC3C8] text-[#2A1E1E] shadow-2xs">
+      <i class="fa-solid fa-code text-xs"></i>
+      Стек
+    </span>
+    <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+      Технології, з якими я працюю
+    </h2>
+    <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
+      Сучасний, перевірений часом та масштабований стек для вирішення завдань будь-якої складності.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
+    {categories.map((cat) => (
+      <Card hover class="space-y-4 h-full flex flex-col justify-start">
+        <h3 class="text-sm font-black text-[#2A1E1E] uppercase tracking-wider m-0 pb-2 border-b border-[#623A2D]/10">
+          {cat.category}
+        </h3>
+        <ul class="space-y-2 list-none p-0 m-0">
+          {cat.items.map((tech) => (
+            <li class="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#2A1E1E]/90">
+              <i class="fa-solid fa-circle-check text-xs text-[#D09AFC] shrink-0"></i>
+              <span>{tech}</span>
+            </li>
+          ))}
+        </ul>
+      </Card>
+    ))}
+  </div>
+</section>

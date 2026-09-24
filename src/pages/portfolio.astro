@@ -2,17 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../shared/components/sections/Hero.astro';
 import ServiceFaq from '../shared/components/sections/ServiceFaq.astro';
-import CtaBanner from '../shared/components/sections/CtaBanner.astro';
-import ProjectCard from '../features/portfolio/components/ProjectCard.astro';
+import BentoCta from '../shared/components/sections/BentoCta.astro';
+import { PortfolioFilterGrid } from '../features/portfolio';
 import { getCollection } from 'astro:content';
 
 const allEntries = await getCollection('projects');
-
-const categoryMap: Record<string, string> = {
-  'mobile-': 'Мобільні застосунки',
-  'web-': 'Сайти',
-  'bot-': 'Telegram-боти',
-};
 
 const allProjects = allEntries
   .map((entry) => ({
@@ -41,65 +35,18 @@ const categories = ['Усі проєкти', ...new Set(allProjects.map((p) => p
   description="Приклади реалізованих Telegram-ботів, мобільних додатків та веб-сайтів з результатами та відгуками клієнтів."
   url="/portfolio"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-12 md:space-y-16">
-
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
     <Hero
       badge={{ text: 'Портфоліо робіт', icon: 'fa-solid fa-briefcase' }}
       title="Реалізовані проєкти та кейси"
       subtitle="Приклади розроблених Telegram-ботів, мобільних додатків та веб-сайтів. Кожен проєкт реалізовано під конкретні бізнес-завдання."
     />
 
-    <section class="space-y-8 w-full" data-animate="fade-up">
-      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-        {categories.map((category, i) => (
-          <button
-            data-category={category}
-            class={`filter-tab px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer border ${i === 0 ? 'bg-ink-black text-paper-white border-ink-black shadow-xs' : 'bg-paper-white text-ink-black border-black/5 hover:bg-morning-fog'}`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-up" data-stagger>
-        {allProjects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
-    </section>
+    <PortfolioFilterGrid categories={categories} projects={allProjects} />
 
     <ServiceFaq />
-    <CtaBanner />
-
+    
+    <!-- Bento CTA with Mascot -->
+    <BentoCta />
   </div>
 </Layout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const projectCards = document.querySelectorAll('#projects-grid .project-card');
-
-    filterTabs.forEach((tab) => {
-      tab.addEventListener('click', function (this: HTMLElement) {
-        const selectedCategory = this.getAttribute('data-category');
-
-        filterTabs.forEach((t) => {
-          t.classList.remove('bg-ink-black', 'text-paper-white', 'border-ink-black');
-          t.classList.add('bg-paper-white', 'text-ink-black', 'border-black/5');
-        });
-
-        this.classList.remove('bg-paper-white', 'text-ink-black', 'border-black/5');
-        this.classList.add('bg-ink-black', 'text-paper-white', 'border-ink-black');
-
-        projectCards.forEach((card) => {
-          const cardCategory = card.getAttribute('data-category');
-          if (selectedCategory === 'Усі проєкти' || cardCategory === selectedCategory) {
-            (card as HTMLElement).style.display = 'block';
-          } else {
-            (card as HTMLElement).style.display = 'none';
-          }
-        });
-      });
-    });
-  });
-</script>

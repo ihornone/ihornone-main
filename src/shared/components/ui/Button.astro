@@ -28,11 +28,11 @@ const {
 const isDisabled = disabled || loading;
 
 const variantClasses = {
-  primary: 'bg-ink-black text-paper-white shadow-md hover:bg-neutral-800 hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
-  outline: 'bg-morning-fog text-ink-black border border-black/5 hover:bg-[#e5e0d4] focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
-  dark: 'bg-ink-black text-paper-white hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
-  ghost: 'bg-transparent text-ink-black hover:bg-morning-fog focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
-  accent: 'bg-cobalt-pop text-paper-white shadow-md hover:bg-cobalt-pop/90 hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-cobalt-pop focus-visible:ring-offset-2',
+  primary: 'bg-[#2A1E1E] text-white rounded-[10px] shadow-sm hover:bg-[#3D2C2C] hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-[#D09AFC]',
+  outline: 'bg-[#FAF1EC]/90 text-[#2A1E1E] border border-[#623A2D]/15 rounded-[10px] hover:bg-[#FAF1EC] hover:border-[#623A2D]/30 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#D09AFC]',
+  dark: 'bg-[#2A1E1E] text-white rounded-[10px] shadow-sm hover:bg-[#3D2C2C] hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-[#D09AFC]',
+  ghost: 'bg-transparent text-[#2A1E1E] hover:bg-[#FAF1EC] rounded-[10px] focus-visible:ring-2 focus-visible:ring-[#D09AFC]',
+  accent: 'bg-[#D09AFC] text-[#2A1E1E] rounded-[10px] shadow-sm hover:bg-[#BF80FA] hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-[#D09AFC]',
 };
 
 const sizeClasses = {
@@ -41,7 +41,7 @@ const sizeClasses = {
   lg: '!py-3.5 !px-8 !text-base',
 };
 
-const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg font-sans font-bold transition-all duration-200 cursor-pointer no-underline outline-none';
+const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-[10px] font-sans font-bold transition-all duration-200 cursor-pointer no-underline outline-none';
 ---
 
 {href ? (

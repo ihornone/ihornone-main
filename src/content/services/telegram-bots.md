@@ -1,11 +1,15 @@
 ---
-title: "Розробка Telegram-ботів"
+title: "Telegram-боти & WebApps"
 shortTitle: "Боти"
 icon: "fa-brands fa-telegram"
 order: 2
 description: "Автоматизація, інтеграції та зручні боти для бізнесу та особистого використання."
 heroSubtitle: "Створюю Telegram-ботів, які економлять ваш час. Від простих команд до складних автоматизацій з інтеграціями."
 isPopular: false
+badge: "Топ напрямок"
+mascotSrc: "/images/mascot/bot-cat.webp"
+mascotTitle: "Telegram-кіт"
+mascotDesc: "Кіт зі смартфоном у лапках та Telegram-літачком"
 includes:
   - title: "Бот з командами та меню"
     icon: "fa-solid fa-bars-staggered"

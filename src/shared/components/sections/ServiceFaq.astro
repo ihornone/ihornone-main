@@ -6,9 +6,10 @@ export interface Props {
   title?: string;
   serviceId?: string;
   globalOnly?: boolean;
+  showHeader?: boolean;
 }
 
-const { title, serviceId, globalOnly } = Astro.props;
+const { title, serviceId, globalOnly, showHeader } = Astro.props;
 
 const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const services = serviceId ? allServices.filter((service) => service.id === serviceId) : allServices;
@@ -97,4 +98,4 @@ for (const item of globalFaqs) {
 }
 ---
 
-<Faq {title} items={faqItems} />
+<Faq {title} items={faqItems} {showHeader} />

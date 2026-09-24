@@ -41,25 +41,25 @@ const {
 } = Astro.props;
 ---
 
-<div class={`grid grid-cols-1 sm:grid-cols-3 gap-6 w-full ${className}`} data-animate="fade-up" data-stagger>
+<div class={`grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 w-full ${className}`} data-animate="fade-up" data-stagger>
   {contacts.map((contact) => (
     <a
       href={contact.href}
-      class="bg-paper-white border border-black/5 rounded-2xl p-6 shadow-xs flex items-center gap-4 hover:-translate-y-1 hover:shadow-md transition-all no-underline group"
+      class="bg-white border border-[#623A2D]/10 rounded-[10px] p-5 sm:p-6 shadow-2xs flex items-center gap-4 hover:-translate-y-1 hover:border-[#D09AFC] hover:shadow-xl transition-all no-underline group"
       {...(contact.external ? { target: '_blank', rel: 'noopener' } : {})}
     >
-      <div class="w-12 h-12 bg-kofi-blue/40 rounded-xl flex items-center justify-center shrink-0">
+      <div class="w-12 h-12 bg-[#FAF1EC] border border-[#623A2D]/10 rounded-[10px] flex items-center justify-center shrink-0 group-hover:border-[#D09AFC] transition-colors">
         <img src={contact.icon} alt="" class="w-6 h-6" loading="lazy" />
       </div>
       <div class="flex-grow min-w-0">
-        <h3 class="text-sm font-bold text-ink-black m-0 group-hover:text-cobalt-pop transition-colors">
+        <h3 class="text-sm font-black text-[#2A1E1E] m-0 group-hover:text-[#95553C] transition-colors">
           {contact.title}
         </h3>
-        <p class="text-xs text-cobalt-pop font-semibold truncate m-0">
+        <p class="text-xs text-[#623A2D]/80 font-bold truncate m-0">
           {contact.value}
         </p>
       </div>
-      <i class="fa-solid fa-arrow-right text-xs text-cobalt-pop group-hover:translate-x-1 transition-transform"></i>
+      <i class="fa-solid fa-arrow-right text-xs text-[#2A1E1E]/40 group-hover:text-[#D09AFC] group-hover:translate-x-1 transition-all"></i>
     </a>
   ))}
 </div>

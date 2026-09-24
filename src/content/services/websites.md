@@ -1,11 +1,15 @@
 ---
-title: "Розробка сайтів"
+title: "Веб-сайти & Платформи"
 shortTitle: "Сайти"
 icon: "fa-solid fa-globe"
 order: 1
 description: "Сучасні, швидкі та адаптивні сайти від лендінгів до складних веб-додатків."
 heroSubtitle: "Створюю сайти, які працюють на ваш бізнес. Від ідеї до запуску — швидко, якісно та з увагою до деталей."
 isPopular: true
+badge: "Швидкість 100/100"
+mascotSrc: "/images/mascot/web-cat.webp"
+mascotTitle: "Кіт-Архітектор"
+mascotDesc: "Кіт в окулярах перед монітором з лампочкою ідеї"
 includes:
   - title: "Дизайн-макет та прототипування"
     icon: "fa-solid fa-pen-ruler"
