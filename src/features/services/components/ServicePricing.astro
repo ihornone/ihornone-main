@@ -1,10 +1,14 @@
 ---
 import Card from '../../../shared/components/ui/Card.astro';
 import SectionHeader from '../../../shared/components/ui/SectionHeader.astro';
+import Button from '../../../shared/components/ui/Button.astro';
 
 interface PricingPlan {
   name: string;
   price: string;
+  range?: string;
+  timeline?: string;
+  forWhom?: string;
   description: string;
   features: string[];
 }
@@ -18,25 +22,87 @@ const { pricing } = Astro.props;
 
 {pricing && pricing.length > 0 && (
   <section class="space-y-6 w-full" data-animate="fade-up">
-    <SectionHeader title="Вартість розробки" />
+    <SectionHeader
+      title="Вартість та терміни розробки"
+      subtitle="Прозорі діапазони бюджету без прихованих доплат. Ціна та терміни фіксуються в технічному завданні до старту."
+    />
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
-      {pricing.map((plan) => (
-        <Card hover class="flex flex-col justify-between space-y-4">
-          <div class="space-y-2">
-            <strong class="text-lg font-black text-[#2A1E1E] block">{plan.name}</strong>
-            <p class="text-xl sm:text-2xl font-black text-[#2A1E1E] m-0">{plan.price}</p>
-            <p class="text-xs sm:text-sm text-[#623A2D]/80 font-medium m-0">{plan.description}</p>
-          </div>
-          <ul class="space-y-2 pt-4 border-t border-[#623A2D]/10 list-none p-0 m-0">
-            {plan.features.map((f) => (
-              <li class="flex items-center gap-2 text-xs font-bold text-[#2A1E1E]/90">
-                <i class="fa-solid fa-check text-[#D09AFC] text-xs shrink-0"></i>
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-      ))}
+      {pricing.map((plan, index) => {
+        const isHighlight = index === 1;
+        return (
+          <Card
+            hover
+            variant={isHighlight ? 'highlight' : 'default'}
+            class="flex flex-col justify-between space-y-5 p-6 relative overflow-visible"
+          >
+            {isHighlight && (
+              <div class="absolute -top-3.5 right-6 bg-[#D09AFC] text-[#2A1E1E] text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-[10px] shadow-2xs z-20">
+                Оптимальний вибір
+              </div>
+            )}
+
+            <div class="space-y-4">
+              <!-- Plan Header -->
+              <div class="space-y-1.5">
+                <strong class="text-lg sm:text-xl font-black text-[#2A1E1E] block">
+                  {plan.name}
+                </strong>
+                <p class="text-xs sm:text-sm text-[#623A2D]/80 font-medium m-0 min-h-[2.25rem]">
+                  {plan.description}
+                </p>
+              </div>
+
+              <!-- Price & Range Block (Ceiling included!) -->
+              <div class="p-3.5 rounded-[10px] bg-[#FAF1EC] border border-[#623A2D]/10 space-y-1.5">
+                <div class="flex items-baseline justify-between flex-wrap gap-1">
+                  <span class="text-[11px] font-bold text-[#623A2D]/70 uppercase tracking-wider">Діапазон бюджету:</span>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-[#2A1E1E] tracking-tight m-0">
+                  {plan.range || plan.price}
+                </div>
+                {plan.timeline && (
+                  <div class="pt-1.5 border-t border-[#623A2D]/10 flex items-center gap-1.5 text-xs font-bold text-[#95553C]">
+                    <i class="fa-solid fa-clock text-xs"></i>
+                    <span>Термін: <strong>{plan.timeline}</strong></span>
+                  </div>
+                )}
+              </div>
+
+              <!-- For Whom Target Badge -->
+              {plan.forWhom && (
+                <div class="p-3 rounded-[8px] bg-white border border-[#623A2D]/10 text-xs font-medium text-[#623A2D] leading-snug">
+                  <strong class="text-[#2A1E1E] font-bold block mb-0.5">Кому підходить:</strong>
+                  <span>{plan.forWhom}</span>
+                </div>
+              )}
+
+              <!-- Features List -->
+              <ul class="space-y-2 pt-2 border-t border-[#623A2D]/10 list-none p-0 m-0">
+                {plan.features.map((f) => (
+                  <li class="flex items-center gap-2 text-xs font-bold text-[#2A1E1E]/90">
+                    <i class="fa-solid fa-circle-check text-[#D09AFC] text-xs shrink-0"></i>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- CTA Action Button -->
+            <div class="pt-4 border-t border-[#623A2D]/10">
+              <Button
+                href={`https://t.me/ihornone?text=${encodeURIComponent(`Привіт! Мене цікавить тариф "${plan.name}". Хочу дізнатися деталі.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant={isHighlight ? 'primary' : 'outline'}
+                class="w-full text-center justify-center text-xs font-black"
+              >
+                <span>Обрати {plan.name}</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </Button>
+            </div>
+          </Card>
+        );
+      })}
     </div>
   </section>
 )}

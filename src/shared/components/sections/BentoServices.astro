@@ -30,16 +30,21 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
 
   <!-- Cards: Horizontal scroll with snap on mobile/tablet, 3-col grid on desktop (Identical to /services) -->
   <div class="flex md:grid items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 md:gap-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pt-4 pb-4 md:pb-0 scrollbar-none" data-animate="fade-up" data-stagger>
-    {allServices.map((service) => (
-      <ServiceCard
-        id={service.id}
-        icon={service.data.icon}
-        title={service.data.title}
-        description={service.data.description}
-        includes={service.data.includes}
-        isPopular={service.data.isPopular}
-      />
-    ))}
+    {allServices.map((service) => {
+      const firstPlan = service.data.pricing?.[0];
+      const startingPrice = firstPlan ? `${firstPlan.price}` : '';
+      return (
+        <ServiceCard
+          id={service.id}
+          icon={service.data.icon}
+          title={service.data.title}
+          description={service.data.description}
+          includes={service.data.includes}
+          isPopular={service.data.isPopular}
+          startingPrice={startingPrice}
+        />
+      );
+    })}
   </div>
 
 </section>

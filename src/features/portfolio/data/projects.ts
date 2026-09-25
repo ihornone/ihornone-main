@@ -6,6 +6,8 @@ export interface Project {
   image: string;
   description: string;
   pinned?: boolean;
+  statusBadge?: string;
+  clientName?: string;
   meta?: {
     technologies?: string;
   };

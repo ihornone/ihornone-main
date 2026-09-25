@@ -1,0 +1,138 @@
+---
+import Button from '../../../shared/components/ui/Button.astro';
+import Badge from '../../../shared/components/ui/Badge.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const featuredProjects = [
+  {
+    title: 'SEMBUD — сайт будівельної компанії',
+    category: 'Сайти',
+    icon: 'fa-solid fa-trowel-bricks',
+    statusBadge: 'Реальний комерційний проєкт',
+    clientName: 'SEMBUD (Львів)',
+    metric: '+35% конверсія',
+    metricLabel: 'у розрахунок ремонту через калькулятор',
+    description: 'Корпоративний сайт із портфоліо об’єктів, інтерактивним калькулятором та автономною CMS для керування без програміста.',
+    url: '/portfolio/web-sembud',
+    image: 'https://raw.githubusercontent.com/ihornone-clients/portfolio-media/refs/heads/main/sembud/cover-image.png',
+  },
+  {
+    title: 'Expo Marketplace — мобільний маркетплейс',
+    category: 'Мобільні застосунки',
+    icon: 'fa-solid fa-store',
+    statusBadge: 'Практичний проєкт (Демо e-commerce)',
+    clientName: null,
+    metric: '60 FPS • -50% витрат',
+    metricLabel: 'єдина кодова база iOS/Android на React Native & Expo',
+    description: 'Повноцінний маркетплейс із каталогом, живим пошуком, офлайн-кошиком та авторизацією через Firebase.',
+    url: '/portfolio/mobile-expo-marketplace',
+    image: 'https://raw.githubusercontent.com/ihornone/expo-marketplace/refs/heads/main/assets/screenshots/cover-image.png',
+  },
+  {
+    title: 'DentalPro — лендінг клініки',
+    category: 'Сайти',
+    icon: 'fa-solid fa-tooth',
+    statusBadge: 'Демо-концепт для портфоліо',
+    clientName: null,
+    metric: '100/100 PageSpeed',
+    metricLabel: 'миттєве завантаження (< 1 с) та слайдер «до/після»',
+    description: 'Медичний лендінг із сенсорним інтерактивним слайдером «до/після» та швидкою формою запису пацієнта.',
+    url: '/portfolio/web-dentalpro',
+    image: 'https://raw.githubusercontent.com/ihornone/demo-dental-clinic/refs/heads/main/public/screenshots/cover-image.png',
+  },
+];
+---
+
+<section class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div class="space-y-2">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#FAC3C8] text-[#2A1E1E] shadow-2xs">
+        <i class="fa-solid fa-briefcase text-xs"></i>
+        Живі докази
+      </span>
+      <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+        Приклади реалізованих рішень
+      </h2>
+      <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0 max-w-2xl">
+        Не просто слова про «15+ проєктів», а реальні кейси з вимірюваними бізнес-результатами та відкритим кодом.
+      </p>
+    </div>
+
+    <div class="shrink-0">
+      <Button href="/portfolio" variant="outline" icon="fa-solid fa-arrow-right">
+        Переглянути все портфоліо
+      </Button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
+    {featuredProjects.map((project) => (
+      <a
+        href={project.url}
+        class="bento-card group p-0 overflow-hidden hover:scale-[1.01] hover:border-[#623A2D]/30 transition-all duration-300 flex flex-col h-full no-underline"
+      >
+        <!-- Project Image Preview -->
+        <div class="aspect-video w-full overflow-hidden bg-[#FAF1EC] relative border-b border-[#623A2D]/10">
+          <img
+            src={project.image}
+            alt={project.title}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-[8px] text-[10px] font-black uppercase tracking-wider bg-[#2A1E1E]/90 text-white backdrop-blur-sm">
+              <i class={project.icon}></i>
+              {project.category}
+            </span>
+          </div>
+        </div>
+
+        <!-- Project Details -->
+        <div class="p-5 sm:p-6 flex flex-col flex-1 justify-between space-y-4">
+          <div class="space-y-2.5">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[6px] text-[11px] font-bold bg-[#FAF1EC] text-[#623A2D] border border-[#623A2D]/15">
+                <i class="fa-solid fa-circle-check text-[9px] text-[#95553C]"></i>
+                {project.statusBadge}
+              </span>
+              {project.clientName && (
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[6px] text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <i class="fa-solid fa-building text-[9px]"></i>
+                  {project.clientName}
+                </span>
+              )}
+            </div>
+
+            <h3 class="text-base sm:text-lg font-black text-[#2A1E1E] tracking-tight group-hover:text-[#95553C] transition-colors m-0">
+              {project.title}
+            </h3>
+
+            <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium leading-relaxed m-0 line-clamp-2">
+              {project.description}
+            </p>
+          </div>
+
+          <!-- Highlight Metric -->
+          <div class="pt-3 border-t border-[#623A2D]/10 flex items-center justify-between gap-2">
+            <div>
+              <div class="text-xs sm:text-sm font-black text-[#2A1E1E]">
+                {project.metric}
+              </div>
+              <div class="text-[10px] text-[#623A2D]/60 font-semibold">
+                {project.metricLabel}
+              </div>
+            </div>
+            <span class="w-8 h-8 rounded-[8px] bg-[#FAF1EC] border border-[#623A2D]/15 flex items-center justify-center text-[#2A1E1E] group-hover:bg-[#D09AFC] group-hover:border-[#D09AFC] transition-colors shrink-0">
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </span>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

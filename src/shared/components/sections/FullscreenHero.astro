@@ -41,17 +41,36 @@ const { class: className = "" } = Astro.props;
     <div class="absolute -inset-6 sm:-inset-10 backdrop-blur-md bg-[#2A1E1E]/50 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_80%)] pointer-events-none -z-10"></div>
 
     <div class="space-y-4">
+      <!-- Trust Benefit Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#FAF1EC] text-xs font-bold shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-[#D09AFC] animate-ping"></span>
+        <span>Розробка для бізнесу • Старт від 3 700 ₴ • MVP за 14–28 днів</span>
+      </div>
+
       <h1
         class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] m-0 drop-shadow-md"
       >
-        Створюю <span class="text-[#D09AFC]">веб-сайти</span>, Telegram-боти та мобільні додатки
+        Сайти, боти та сервіси, які <span class="text-[#D09AFC]">приносять заявки</span> й автоматизують бізнес
       </h1>
       
       <p
         class="text-sm sm:text-base lg:text-lg text-[#FAF1EC]/90 leading-relaxed font-medium m-0 max-w-lg drop-shadow-sm"
       >
-        Повний цикл розробки від архітектури до запуску. Працюєте напряму зі мною — без посередників і з запуском MVP за 14–28 днів.
+        Перетворюю трафік на клієнтів, а рутину — на автономні продажі 24/7. Працюєте напряму з розробником: фіксований кошторис, чистий код та запуск першого прототипу вже за 5 днів.
       </p>
+
+      <!-- Quick Benefit Bullets -->
+      <div class="pt-2 flex flex-wrap gap-x-4 gap-y-2 text-xs font-bold text-[#FAF1EC]/85">
+        <span class="inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-check text-[#D09AFC]"></i> Більше продажів та лідів
+        </span>
+        <span class="inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-check text-[#D09AFC]"></i> -70% рутинної роботи
+        </span>
+        <span class="inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-check text-[#D09AFC]"></i> 30 днів повної гарантії
+        </span>
+      </div>
     </div>
   </div>
 

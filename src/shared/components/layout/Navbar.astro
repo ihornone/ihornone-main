@@ -1,37 +1,68 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
 interface Props {
   class?: string;
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = "" } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const allServices = (await getCollection("services")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <!-- Full-Width Top Glass Blur Bar on Scroll (Across the whole screen top & right of navbar) -->
-<div id="top-scroll-blur-bar" class="fixed top-0 left-0 w-full h-16 sm:h-20 z-40 pointer-events-none opacity-0 transition-opacity duration-300 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_50%,transparent)]"></div>
+<div
+  id="top-scroll-blur-bar"
+  class="fixed top-0 left-0 w-full h-16 sm:h-20 z-40 pointer-events-none opacity-0 transition-opacity duration-300 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_50%,transparent)]"
+>
+</div>
 
-<header class:list={['fixed top-0 left-0 w-full lg:w-auto z-50 pointer-events-auto', className]}>
-  <div id="navbar-pocket" class="relative bg-[#FAF1EC] rounded-b-[10px] lg:rounded-b-none lg:rounded-br-[10px] shadow-sm w-full lg:w-auto transition-all duration-300 overflow-hidden lg:overflow-visible">
-    
+<header
+  class:list={[
+    "fixed top-0 left-0 w-full lg:w-auto z-50 pointer-events-auto",
+    className,
+  ]}
+>
+  <div
+    id="navbar-pocket"
+    class="relative bg-[#FAF1EC] rounded-b-[10px] lg:rounded-b-none lg:rounded-br-[10px] shadow-sm w-full lg:w-auto transition-all duration-300 overflow-hidden lg:overflow-visible"
+  >
     <!-- Inverted Scoop Curve (Top-Right: curves smoothly inwards towards top edge) -->
-    <svg class="hidden lg:block absolute top-0 -right-[10px] w-[10px] h-[10px] pointer-events-none" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 H10 A 10 10 0 0 0 0 10 V0 Z" fill="#FAF1EC" />
+    <svg
+      class="hidden lg:block absolute top-0 -right-[10px] w-[10px] h-[10px] pointer-events-none"
+      viewBox="0 0 10 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 0 H10 A 10 10 0 0 0 0 10 V0 Z" fill="#FAF1EC"></path>
     </svg>
 
     <!-- Inverted Scoop Curve (Bottom-Left: curves smoothly inwards towards left edge) -->
-    <svg class="hidden lg:block absolute -bottom-[10px] left-0 w-[10px] h-[10px] pointer-events-none" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 V10 A 10 10 0 0 1 10 0 H0 Z" fill="#FAF1EC" />
+    <svg
+      class="hidden lg:block absolute -bottom-[10px] left-0 w-[10px] h-[10px] pointer-events-none"
+      viewBox="0 0 10 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 0 V10 A 10 10 0 0 1 10 0 H0 Z" fill="#FAF1EC"></path>
     </svg>
 
     <!-- Main Header Bar Row -->
-    <div class="px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between lg:justify-start gap-3 sm:gap-4">
+    <div
+      class="px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between lg:justify-start gap-3 sm:gap-4"
+    >
       <!-- Logo with Mascot Palette Icon -->
-      <a href="/" class="flex items-center gap-2 text-base sm:text-lg font-black text-[#2A1E1E] tracking-tight no-underline group shrink-0" aria-label="ihornone - на головну">
-        <div class="w-7 h-7 rounded-[10px] bg-[#D09AFC] flex items-center justify-center text-[#2A1E1E] text-xs shadow-xs brand-cat-icon">
+      <a
+        href="/"
+        class="flex items-center gap-2 text-base sm:text-lg font-black text-[#2A1E1E] tracking-tight no-underline group shrink-0"
+        aria-label="ihornone - на головну"
+      >
+        <div
+          class="w-7 h-7 rounded-[10px] bg-[#D09AFC] flex items-center justify-center text-[#2A1E1E] text-xs shadow-xs brand-cat-icon"
+        >
           <i class="fa-solid fa-cat"></i>
         </div>
         <span class="tracking-tight font-black text-[#2A1E1E]">ihornone</span>
@@ -41,41 +72,67 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
 
       <!-- Desktop Navigation Links (10px rounded) -->
       <div class="hidden lg:flex items-center gap-1">
-        <a href="/" class:list={['nav-item', { active: currentPath === '/' }]}>
+        <a href="/" class:list={["nav-item", { active: currentPath === "/" }]}>
           Головна
         </a>
-        
+
         <!-- Services Dropdown (10px rounded) -->
         <div class="relative group">
           <a
             href="/services"
-            class:list={['nav-item flex items-center gap-1.5', { active: currentPath.startsWith('/services') }]}
+            class:list={[
+              "nav-item flex items-center gap-1.5",
+              { active: currentPath.startsWith("/services") },
+            ]}
           >
             Послуги
-            <i class="fa-solid fa-chevron-down text-[9px] group-hover:rotate-180 transition-transform duration-200"></i>
+            <i
+              class="fa-solid fa-chevron-down text-[9px] group-hover:rotate-180 transition-transform duration-200"
+            ></i>
           </a>
-          <div class="hidden group-hover:block absolute top-full left-0 pt-2 z-50">
-            <div class="bg-[#FAF1EC] border border-[#623A2D]/15 rounded-[10px] p-2 min-w-[210px] shadow-xl space-y-1">
-              {allServices.map((service) => (
-                <a href={`/services/${service.id}`} class="dropdown-item">
-                  <i class={`${service.data.icon} text-xs text-[#95553C]`}></i>
-                  <span>{service.data.title}</span>
-                </a>
-              ))}
+          <div
+            class="hidden group-hover:block absolute top-full left-0 pt-2 z-50"
+          >
+            <div
+              class="bg-[#FAF1EC] border border-[#623A2D]/15 rounded-[10px] p-2 min-w-[210px] shadow-xl space-y-1"
+            >
+              {
+                allServices.map((service) => (
+                  <a href={`/services/${service.id}`} class="dropdown-item">
+                    <i class={`${service.data.icon} text-xs text-[#95553C]`} />
+                    <span>{service.data.title}</span>
+                  </a>
+                ))
+              }
             </div>
           </div>
         </div>
 
-        <a href="/portfolio" class:list={['nav-item', { active: currentPath.startsWith('/portfolio') }]}>
+        <a
+          href="/portfolio"
+          class:list={[
+            "nav-item",
+            { active: currentPath.startsWith("/portfolio") },
+          ]}
+        >
           Портфоліо
         </a>
-        <a href="/about" class:list={['nav-item', { active: currentPath === '/about' }]}>
+        <a
+          href="/about"
+          class:list={["nav-item", { active: currentPath === "/about" }]}
+        >
           Про мене
         </a>
-        <a href="/reviews" class:list={['nav-item', { active: currentPath === '/reviews' }]}>
+        <a
+          href="/reviews"
+          class:list={["nav-item", { active: currentPath === "/reviews" }]}
+        >
           Відгуки
         </a>
-        <a href="/contacts" class:list={['nav-item', { active: currentPath === '/contacts' }]}>
+        <a
+          href="/contacts"
+          class:list={["nav-item", { active: currentPath === "/contacts" }]}
+        >
           Контакти
         </a>
       </div>
@@ -105,7 +162,10 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
     </div>
 
     <!-- Mobile Menu Content (Integrated seamlessly inside the same pocket plate!) -->
-    <div id="mobile-menu-content" class="hidden lg:hidden px-4 sm:px-5 pb-4 pt-1 space-y-2 border-t border-[#623A2D]/10">
+    <div
+      id="mobile-menu-content"
+      class="hidden lg:hidden px-4 sm:px-5 pb-4 pt-1 space-y-2 border-t border-[#623A2D]/10"
+    >
       <nav class="flex flex-col gap-1 pt-1">
         <a href="/" class="mobile-item">
           <i class="fa-solid fa-house w-4 text-center text-[#D09AFC]"></i>
@@ -121,19 +181,29 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
             aria-expanded="false"
           >
             <span class="flex items-center gap-2.5">
-              <i class="fa-solid fa-layer-group w-4 text-center text-[#95553C]"></i>
+              <i class="fa-solid fa-layer-group w-4 text-center text-[#95553C]"
+              ></i>
               <span>Послуги</span>
             </span>
-            <i class="fa-solid fa-chevron-down text-[10px] text-[#623A2D]/60 transition-transform duration-200" id="mobile-services-chevron"></i>
+            <i
+              class="fa-solid fa-chevron-down text-[10px] text-[#623A2D]/60 transition-transform duration-200"
+              id="mobile-services-chevron"></i>
           </button>
-          
-          <div id="mobile-services-menu" class="hidden pl-4 pr-1 py-1 space-y-0.5 bg-[#623A2D]/5 rounded-[10px] my-1">
-            {allServices.map((service) => (
-              <a href={`/services/${service.id}`} class="mobile-subitem">
-                <i class={`${service.data.icon} text-xs text-[#95553C] w-4 text-center`}></i>
-                <span>{service.data.title}</span>
-              </a>
-            ))}
+
+          <div
+            id="mobile-services-menu"
+            class="hidden pl-4 pr-1 py-1 space-y-0.5 bg-[#623A2D]/5 rounded-[10px] my-1"
+          >
+            {
+              allServices.map((service) => (
+                <a href={`/services/${service.id}`} class="mobile-subitem">
+                  <i
+                    class={`${service.data.icon} text-xs text-[#95553C] w-4 text-center`}
+                  />
+                  <span>{service.data.title}</span>
+                </a>
+              ))
+            }
           </div>
         </div>
         <a href="/portfolio" class="mobile-item">
@@ -180,7 +250,8 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
     transition: all 0.15s ease;
     white-space: nowrap;
   }
-  .nav-item:hover, .nav-item.active {
+  .nav-item:hover,
+  .nav-item.active {
     background-color: rgba(98, 58, 45, 0.08);
     color: var(--color-mascot-espresso);
   }
@@ -232,56 +303,58 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
 
   /* Scrolled header state */
   #navbar-pocket.is-scrolled {
-    box-shadow: 0 10px 30px -8px rgba(42, 30, 30, 0.12), 0 2px 8px -2px rgba(42, 30, 30, 0.06);
+    box-shadow:
+      0 10px 30px -8px rgba(42, 30, 30, 0.12),
+      0 2px 8px -2px rgba(42, 30, 30, 0.06);
   }
 </style>
 
 <script>
   function initNavbarBehavior() {
-    const pocket = document.getElementById('navbar-pocket');
-    const blurBar = document.getElementById('top-scroll-blur-bar');
-    const toggleBtn = document.getElementById('mobile-nav-toggle');
-    const menuContent = document.getElementById('mobile-menu-content');
-    const backdrop = document.getElementById('mobile-nav-backdrop');
-    const icon = document.getElementById('burger-icon');
+    const pocket = document.getElementById("navbar-pocket");
+    const blurBar = document.getElementById("top-scroll-blur-bar");
+    const toggleBtn = document.getElementById("mobile-nav-toggle");
+    const menuContent = document.getElementById("mobile-menu-content");
+    const backdrop = document.getElementById("mobile-nav-backdrop");
+    const icon = document.getElementById("burger-icon");
 
-    const servicesToggle = document.getElementById('mobile-services-toggle');
-    const servicesMenu = document.getElementById('mobile-services-menu');
-    const servicesChevron = document.getElementById('mobile-services-chevron');
+    const servicesToggle = document.getElementById("mobile-services-toggle");
+    const servicesMenu = document.getElementById("mobile-services-menu");
+    const servicesChevron = document.getElementById("mobile-services-chevron");
 
     // Handle Scroll for Full-Width Glass Blur
     function handleScroll() {
       if (window.scrollY > 15) {
-        blurBar?.classList.remove('opacity-0');
-        blurBar?.classList.add('opacity-100');
-        pocket?.classList.add('is-scrolled');
+        blurBar?.classList.remove("opacity-0");
+        blurBar?.classList.add("opacity-100");
+        pocket?.classList.add("is-scrolled");
       } else {
-        blurBar?.classList.remove('opacity-100');
-        blurBar?.classList.add('opacity-0');
-        pocket?.classList.remove('is-scrolled');
+        blurBar?.classList.remove("opacity-100");
+        blurBar?.classList.add("opacity-0");
+        pocket?.classList.remove("is-scrolled");
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
     function openMenu() {
-      menuContent?.classList.remove('hidden');
-      backdrop?.classList.remove('hidden');
-      icon?.classList.remove('fa-bars');
-      icon?.classList.add('fa-xmark');
+      menuContent?.classList.remove("hidden");
+      backdrop?.classList.remove("hidden");
+      icon?.classList.remove("fa-bars");
+      icon?.classList.add("fa-xmark");
     }
 
     function closeMenu() {
-      menuContent?.classList.add('hidden');
-      backdrop?.classList.add('hidden');
-      icon?.classList.remove('fa-xmark');
-      icon?.classList.add('fa-bars');
+      menuContent?.classList.add("hidden");
+      backdrop?.classList.add("hidden");
+      icon?.classList.remove("fa-xmark");
+      icon?.classList.add("fa-bars");
     }
 
-    toggleBtn?.addEventListener('click', (e) => {
+    toggleBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
-      const isHidden = menuContent?.classList.contains('hidden');
+      const isHidden = menuContent?.classList.contains("hidden");
       if (isHidden) {
         openMenu();
       } else {
@@ -289,27 +362,27 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
       }
     });
 
-    servicesToggle?.addEventListener('click', (e) => {
+    servicesToggle?.addEventListener("click", (e) => {
       e.stopPropagation();
-      const isSubmenuHidden = servicesMenu?.classList.contains('hidden');
+      const isSubmenuHidden = servicesMenu?.classList.contains("hidden");
       if (isSubmenuHidden) {
-        servicesMenu?.classList.remove('hidden');
-        servicesChevron?.classList.add('rotate-180');
-        servicesToggle?.setAttribute('aria-expanded', 'true');
+        servicesMenu?.classList.remove("hidden");
+        servicesChevron?.classList.add("rotate-180");
+        servicesToggle?.setAttribute("aria-expanded", "true");
       } else {
-        servicesMenu?.classList.add('hidden');
-        servicesChevron?.classList.remove('rotate-180');
-        servicesToggle?.setAttribute('aria-expanded', 'false');
+        servicesMenu?.classList.add("hidden");
+        servicesChevron?.classList.remove("rotate-180");
+        servicesToggle?.setAttribute("aria-expanded", "false");
       }
     });
 
-    backdrop?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener("click", closeMenu);
 
-    menuContent?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMenu);
+    menuContent?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
     });
   }
 
   // Initialize on both standard DOM ready and Astro page-load for ClientRouter
-  document.addEventListener('astro:page-load', initNavbarBehavior);
+  document.addEventListener("astro:page-load", initNavbarBehavior);
 </script>

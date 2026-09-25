@@ -1,30 +1,34 @@
 ---
 const benefits = [
   {
-    icon: 'fa-solid fa-bolt',
-    title: 'MVP за 14–28 днів',
-    desc: 'Швидкий запуск без бюрократії. Перший робочий прототип ви бачите вже в перший тиждень.',
+    icon: 'fa-solid fa-code-commit',
+    tag: '3+ роки досвіду',
+    title: '15+ проєктів у продакшені',
+    desc: 'Реальний комерційний досвід у веб-сервісах, Telegram WebApps та додатках. Ви отримуєте протестовані рішення без експериментів на вашому бюджеті.',
     iconBg: 'bg-[#D09AFC]',
     borderHover: 'hover:border-[#D09AFC]',
   },
   {
-    icon: 'fa-solid fa-comments',
-    title: "Прямий зв'язок 1-на-1",
-    desc: 'Жодних сейлзів чи менеджерів. Ви завжди спілкуєтеся напряму з автором вашого коду.',
+    icon: 'fa-solid fa-bolt',
+    tag: '5 днів до демо',
+    title: 'MVP за 14–28 днів',
+    desc: 'Швидкий цикл без бюрократії. Перший робочий прототип ви тестуєте вже в перший тиждень, а реліз відбувається строго за узгодженим графіком.',
     iconBg: 'bg-[#E8BA98]',
     borderHover: 'hover:border-[#E8BA98]',
   },
   {
     icon: 'fa-solid fa-coins',
-    title: 'Чесний кошторис',
-    desc: 'Ціна лише за чисту розробку. Ви не переплачуєте за оренду офісу та штат агентства.',
+    tag: '-40% витрат',
+    title: 'Чесний бюджет від 3 700 ₴',
+    desc: 'Оплата виключно за чисту інженерію. Ви не переплачуєте за оренду офісу та штат асистентів, заощаджуючи до 40% вартості порівняно з агентствами.',
     iconBg: 'bg-[#FAC3C8]',
     borderHover: 'hover:border-[#FAC3C8]',
   },
   {
-    icon: 'fa-solid fa-shield-halved',
-    title: '30 днів підтримки',
-    desc: "Після релізу залишаюся на зв'язку: безкоштовні виправлення та допомога після запуску.",
+    icon: 'fa-solid fa-shield-check',
+    tag: 'Страховка та Git',
+    title: 'Фокус та резервний план',
+    desc: 'Веду одночасно лише 1–2 проєкти. Весь код з 1-го дня живе у вашому приватному Git, а на випадок форс-мажору є перевірені партнери для підстрахування.',
     iconBg: 'bg-[#D09AFC]',
     borderHover: 'hover:border-[#D09AFC]',
     hasMascot: true,
@@ -35,20 +39,35 @@ const benefits = [
 <section id="advantages" class="space-y-8 sm:space-y-10 w-full" data-animate="fade-up">
   
   <!-- Section Title -->
-  <div class="space-y-2">
-    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
-      <i class="fa-solid fa-star text-xs"></i>
-      Чому я
-    </span>
-    <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
-      Чому зі мною простіше, ніж в агентствах
-    </h2>
-    <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
-      Прозорі процеси, прямий контакт та швидкий результат без зайвих посередників.
-    </p>
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div class="space-y-2">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
+        <i class="fa-solid fa-shield-halved text-xs"></i>
+        Гарантії та підхід
+      </span>
+      <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+        Чому зі мною надійніше, ніж в агентствах
+      </h2>
+      <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
+        Конкретні факти, перевірений досвід та прозорі зобов'язання перед вашим бізнесом.
+      </p>
+    </div>
+
+    <!-- Quick Proof Pills -->
+    <div class="flex items-center gap-2 flex-wrap self-start md:self-auto text-xs font-bold text-[#623A2D]">
+      <span class="px-3 py-1 rounded-[8px] bg-white border border-[#623A2D]/10 shadow-2xs">
+        ✓ 15+ кейсів
+      </span>
+      <span class="px-3 py-1 rounded-[8px] bg-white border border-[#623A2D]/10 shadow-2xs">
+        ✓ 30 днів підтримки
+      </span>
+      <span class="px-3 py-1 rounded-[8px] bg-white border border-[#623A2D]/10 shadow-2xs">
+        ✓ Без посередників
+      </span>
+    </div>
   </div>
 
-  <!-- 4 Simple Benefit Cards -->
+  <!-- 4 Detailed Benefit Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
     {benefits.map((b) => (
       <div class:list={[
@@ -57,15 +76,20 @@ const benefits = [
       ]}>
         {b.hasMascot && (
           <img
-            src="/images/mascot/support-cat.png"
+            src="/images/mascot/support-cat.webp"
             alt="Маскот ihornone у худі сидить на картці підтримки"
             class="absolute -top-[70px] sm:-top-[82px] lg:-top-[106px] -right-3 sm:-right-5 lg:-right-8 w-24 sm:w-28 lg:w-36 h-auto pointer-events-none z-20 drop-shadow-md group-hover:-translate-y-1.5 transition-transform duration-300"
             loading="lazy"
           />
         )}
         <div class="space-y-3">
-          <div class:list={['w-10 h-10 rounded-[10px] flex items-center justify-center text-sm font-black text-[#2A1E1E] shadow-2xs', b.iconBg]}>
-            <i class={b.icon}></i>
+          <div class="flex items-center justify-between">
+            <div class:list={['w-10 h-10 rounded-[10px] flex items-center justify-center text-sm font-black text-[#2A1E1E] shadow-2xs', b.iconBg]}>
+              <i class={b.icon}></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-[6px] bg-[#FAF1EC] border border-[#623A2D]/10 text-[#623A2D]">
+              {b.tag}
+            </span>
           </div>
           <h3 class="text-lg font-black text-[#2A1E1E] tracking-tight m-0">
             {b.title}
@@ -76,6 +100,28 @@ const benefits = [
         </p>
       </div>
     ))}
+  </div>
+
+  <!-- Bottom Guarantee Banner (Addresses risk & post-launch support) -->
+  <div class="p-4 sm:p-5 rounded-[10px] bg-white border border-[#623A2D]/10 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-[10px] bg-[#D09AFC]/20 text-[#623A2D] flex items-center justify-center text-base shrink-0">
+        <i class="fa-solid fa-handshake-simple"></i>
+      </div>
+      <div>
+        <h4 class="text-sm font-black text-[#2A1E1E] m-0">Повна прозорість та безпека розробки</h4>
+        <p class="text-xs text-[#623A2D]/75 font-medium m-0">Фіксація обсягу в ТЗ • Поетапна оплата 50/50 • 30 днів безкоштовних виправлень після релізу</p>
+      </div>
+    </div>
+    <a
+      href="https://t.me/ihornone"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="pill-btn-outline !py-2 !px-4 text-xs font-black shrink-0 self-start sm:self-auto flex items-center gap-1.5"
+    >
+      <span>Запитати деталі</span>
+      <i class="fa-solid fa-arrow-right text-[10px]"></i>
+    </a>
   </div>
 
 </section>

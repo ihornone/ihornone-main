@@ -15,6 +15,7 @@ interface Props {
   includes?: ServiceInclude[];
   isPopular?: boolean;
   class?: string;
+  startingPrice?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   includes = [],
   isPopular = false,
   class: className = '',
+  startingPrice = '',
 } = Astro.props;
 ---
 
@@ -51,6 +53,16 @@ const {
           {description}
         </p>
       </div>
+
+      <!-- Starting Price Badge -->
+      {startingPrice && (
+        <div class="mb-4 inline-flex items-center justify-between w-full px-3.5 py-2 rounded-[8px] bg-[#FAF1EC] border border-[#623A2D]/10">
+          <span class="text-xs font-semibold text-[#623A2D]/70">Орієнтовна вартість:</span>
+          <span class="text-xs font-black text-[#2A1E1E] bg-white px-2 py-0.5 rounded-[6px] border border-[#623A2D]/10 shadow-2xs">
+            {startingPrice}
+          </span>
+        </div>
+      )}
 
       <!-- Included Features List -->
       {includes.length > 0 && (

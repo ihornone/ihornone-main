@@ -41,8 +41,18 @@ const serviceExampleSchema = z.object({
 const servicePricingSchema = z.object({
   name: z.string(),
   price: z.string(),
+  range: z.string().optional(),
+  timeline: z.string().optional(),
+  forWhom: z.string().optional(),
   description: z.string(),
   features: z.array(z.string()),
+});
+
+const serviceGuideSchema = z.object({
+  planName: z.string(),
+  badge: z.string(),
+  recommendation: z.string(),
+  reasons: z.array(z.string()),
 });
 
 const serviceFaqSchema = z.object({
@@ -73,6 +83,8 @@ const projects = defineCollection({
     role: z.string(),
     link: z.string().optional(),
     github: z.string().optional(),
+    statusBadge: z.string().optional(),
+    clientName: z.string().optional(),
     pinned: z.boolean().default(false),
     galleryFormat: z.enum(['16:9', '9:16']).optional(),
     features: z.array(featureSchema).default([]),
@@ -102,6 +114,7 @@ const services = defineCollection({
     process: z.array(processStepSchema).default([]),
     technologies: z.array(z.string()).default([]),
     pricing: z.array(servicePricingSchema).default([]),
+    guide: z.array(serviceGuideSchema).default([]),
     faq: z.array(serviceFaqSchema).default([]),
   }),
 });

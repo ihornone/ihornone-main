@@ -4,19 +4,36 @@ import Hero from '../shared/components/sections/Hero.astro';
 import Stats from '../shared/components/sections/Stats.astro';
 import BentoCta from '../shared/components/sections/BentoCta.astro';
 import Button from '../shared/components/ui/Button.astro';
-import { WhyMe, ComparisonTable, TechStack, Workflow } from '../features/about';
+import { WhyMe, ComparisonTable, CodeGuarantee, FeaturedWorks, TechStack, Workflow } from '../features/about';
 
 const stats = [
-  { value: '15+', label: 'успішних проєктів' },
-  { value: '3+', label: 'років досвіду' },
-  { value: '24/7', label: 'підтримка ботів' },
-  { value: '100%', label: 'орієнтація на бізнес' },
+  {
+    value: '15+',
+    label: 'реалізованих рішень',
+    subtext: 'сайти, боти та застосунки',
+    link: { text: 'Дивитись кейси в портфоліо', href: '/portfolio' },
+  },
+  {
+    value: '3+',
+    label: 'роки досвіду',
+    subtext: 'Full-Stack розробки',
+  },
+  {
+    value: '14–28',
+    label: 'днів на запуск MVP',
+    subtext: 'від ТЗ до перших клієнтів',
+  },
+  {
+    value: '30 днів',
+    label: 'гарантійної підтримки',
+    subtext: 'безкоштовні фікси після релізу',
+  },
 ];
 ---
 
 <Layout
   title="Про мене — ihornone | Full-Stack розробник Telegram-ботів та веб-сайтів"
-  description="Досвідчений full-stack розробник. Створюю Telegram-боти, мобільні додатки та веб-сайти з високою конверсією."
+  description="Досвідчений full-stack розробник. Створюю Telegram-боти, мобільні додатки та веб-сайти з гарантією на код та прозорими строками."
   url="/about"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 md:space-y-24">
@@ -33,8 +50,14 @@ const stats = [
     <!-- Чому обирають мене -->
     <WhyMe />
 
+    <!-- Живі докази: ключові кейси -->
+    <FeaturedWorks />
+
     <!-- Я vs Агентства vs Інші фрилансери -->
     <ComparisonTable />
+
+    <!-- Деталізація гарантії на код (30 днів) -->
+    <CodeGuarantee />
 
     <!-- Стек технологій -->
     <TechStack />

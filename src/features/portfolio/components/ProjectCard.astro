@@ -25,10 +25,15 @@ const { project, class: className = '' } = Astro.props;
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       loading="lazy"
     />
-    <div class="absolute top-3.5 left-3.5 z-10 flex items-center gap-2">
-      <span class="bg-[#2A1E1E]/85 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-[10px] shadow-xs">
+    <div class="absolute top-3.5 left-3.5 z-10 flex flex-wrap items-center gap-1.5 max-w-[80%]">
+      <span class="bg-[#2A1E1E]/85 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-[8px] shadow-xs">
         {project.category}
       </span>
+      {project.statusBadge && (
+        <span class="bg-[#FAF1EC]/95 backdrop-blur-md text-[#623A2D] border border-[#623A2D]/15 text-[10px] font-bold px-2 py-0.5 rounded-[8px] shadow-xs">
+          {project.statusBadge}
+        </span>
+      )}
     </div>
     <div class="absolute top-3.5 right-3.5 z-10 w-8 h-8 rounded-[10px] bg-white/95 backdrop-blur-md flex items-center justify-center text-[#2A1E1E] text-xs shadow-xs group-hover:scale-110 transition-transform">
       <i class={project.icon}></i>

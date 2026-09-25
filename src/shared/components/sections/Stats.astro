@@ -2,6 +2,8 @@
 interface StatItem {
   value: string;
   label: string;
+  subtext?: string;
+  link?: { text: string; href: string };
 }
 
 interface Props {
@@ -12,10 +14,10 @@ interface Props {
 }
 
 const defaultItems: StatItem[] = [
-  { value: '15+', label: 'успішних проєктів' },
+  { value: '15+', label: 'реалізованих рішень', link: { text: 'Дивитись кейси', href: '/portfolio' } },
   { value: '3+', label: 'роки досвіду' },
-  { value: '99.9%', label: 'uptime ботів' },
-  { value: '14-28', label: 'днів до запуску MVP' },
+  { value: '14-28', label: 'днів на запуск MVP' },
+  { value: '30 днів', label: 'гарантійної підтримки' },
 ];
 
 const {
@@ -41,13 +43,22 @@ const columnsClasses = {
 <section class={`rounded-[10px] p-6 sm:p-8 md:p-10 w-full ${variantClasses[variant]} ${className}`} data-animate="fade-up">
   <div class={`grid ${columnsClasses[columns]} gap-6 text-center`} data-animate="fade-up" data-stagger>
     {items.map((item) => (
-      <div class="space-y-1">
+      <div class="space-y-1 flex flex-col items-center justify-center">
         <div class="text-3xl md:text-4xl font-black text-[#2A1E1E] tracking-tight">
           {item.value}
         </div>
         <div class="text-xs font-bold text-[#623A2D]/75 uppercase tracking-wider">
           {item.label}
         </div>
+        {item.subtext && (
+          <p class="text-[11px] text-[#623A2D]/60 font-medium m-0">{item.subtext}</p>
+        )}
+        {item.link && (
+          <a href={item.link.href} class="inline-flex items-center gap-1 text-[11px] font-bold text-[#95553C] hover:text-[#2A1E1E] transition-colors mt-0.5 no-underline">
+            <span>{item.link.text}</span>
+            <i class="fa-solid fa-arrow-right text-[9px]"></i>
+          </a>
+        )}
       </div>
     ))}
   </div>

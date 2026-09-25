@@ -11,6 +11,7 @@ import {
   ServiceDetailHero,
   ServiceIncludes,
   ServicePricing,
+  PlanDecisionGuide,
   TechTags,
 } from '../../features/services';
 import { getCollection } from 'astro:content';
@@ -24,7 +25,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { title, shortTitle, icon, description, heroSubtitle, isPopular, includes, examples, process, technologies, pricing, faq } = entry.data;
+const { title, shortTitle, icon, description, heroSubtitle, isPopular, includes, examples, process, technologies, pricing, guide = [], faq } = entry.data;
 
 const allProjects = await getCollection('projects');
 const serviceProjects = allProjects
@@ -95,6 +96,8 @@ const serviceProjects = allProjects
     <ProcessSteps title="Як відбувається процес розробки" steps={process} />
 
     <ServicePricing pricing={pricing} />
+
+    <PlanDecisionGuide guide={guide} />
 
     <TechTags technologies={technologies} />
 

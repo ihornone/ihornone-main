@@ -1,0 +1,79 @@
+---
+import Card from '../../../shared/components/ui/Card.astro';
+import Button from '../../../shared/components/ui/Button.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const guaranteeItems = [
+  {
+    icon: 'fa-solid fa-bug-slash',
+    title: 'Безкоштовне усунення багів (30 днів)',
+    desc: 'Якщо після релізу під час живого навантаження виявиться прихована помилка або неточність за ТЗ — я усуваю її безкоштовно та першочергово.',
+  },
+  {
+    icon: 'fa-solid fa-server',
+    title: 'Налаштування серверів та домену',
+    desc: 'Не лишаю вас із архівом коду сам на сам. Підключаю Cloudflare, Vercel або ваш VPS, налаштовую SSL та перевіряю стабільність.',
+  },
+  {
+    icon: 'fa-solid fa-key',
+    title: '100% права на вихідний код',
+    desc: 'Після фінального розрахунку весь репозиторій передається у вашу власність. Жодних прихованих ліцензій чи прив’язки до одного програміста.',
+  },
+  {
+    icon: 'fa-solid fa-bolt',
+    title: 'Швидкі консультації в Telegram',
+    desc: 'Відповідаю на технічні питання протягом 15 хвилин у робочий час. Допомагаю розібратися з адмінкою чи оновленням контенту.',
+  },
+];
+---
+
+<section class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+  <div class="space-y-2 text-center max-w-2xl mx-auto">
+    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
+      <i class="fa-solid fa-shield-halved text-xs"></i>
+      Прозорість та надійність
+    </span>
+    <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+      Що саме покриває моя 30-денна гарантія на код
+    </h2>
+    <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
+      Я не зникаю після отримання оплати. Ви отримуєте юридично чисту роботу та спокій за стабільність запущеного продукту.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
+    {guaranteeItems.map((item) => (
+      <Card hover class="p-6 space-y-3 h-full flex flex-col justify-start">
+        <div class="w-10 h-10 rounded-[10px] bg-[#FAF1EC] border border-[#623A2D]/15 flex items-center justify-center text-[#95553C] text-base shrink-0">
+          <i class={item.icon}></i>
+        </div>
+        <div class="space-y-1.5 flex-1">
+          <h3 class="text-base font-black text-[#2A1E1E] m-0">{item.title}</h3>
+          <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium leading-relaxed m-0">{item.desc}</p>
+        </div>
+      </Card>
+    ))}
+  </div>
+
+  <!-- Additional assurance box -->
+  <div class="bento-card p-6 sm:p-8 bg-[#FAF1EC]/60 border border-[#623A2D]/15 flex flex-col sm:flex-row items-center justify-between gap-6" data-animate="fade-up">
+    <div class="space-y-1.5 text-center sm:text-left">
+      <h4 class="text-base font-black text-[#2A1E1E] m-0">
+        Маєте специфічні вимоги до договору або SLA?
+      </h4>
+      <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium m-0 max-w-xl">
+        Працюю за офіційним договором, з фіксованими етапами оплати (50/50 або потижнево за спринти). Докладніше дивіться у розділі FAQ.
+      </p>
+    </div>
+    <div class="flex items-center gap-3 shrink-0">
+      <Button href="/contacts" variant="dark" icon="fa-solid fa-arrow-right">
+        Поставити запитання
+      </Button>
+    </div>
+  </div>
+</section>

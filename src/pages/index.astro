@@ -17,6 +17,8 @@ const featuredProjects = allEntries.slice(0, 3).map((entry) => ({
   icon: entry.data.icon,
   image: entry.data.image,
   description: entry.data.description,
+  statusBadge: entry.data.statusBadge,
+  clientName: entry.data.clientName,
   meta: {
     technologies: entry.data.technologies,
   },
@@ -24,14 +26,14 @@ const featuredProjects = allEntries.slice(0, 3).map((entry) => ({
 ---
 
 <Layout
-  title="ihornone — Telegram-боти, Веб-сайти, Мобільні додатки | Full-Stack Розробка"
-  description="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності. Повний цикл від ідеї до запуску з високою конверсією."
+  title="ihornone — Сайти, Telegram-боти та Додатки, які приносять клієнтів"
+  description="Створюю швидкі сайти, Telegram-боти з оплатами та мобільні додатки, які приносять клієнтів. Старт від 3 700 ₴, запуск MVP за 14–28 днів, 30 днів підтримки."
   url="/"
   structuredData={{
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "ihornone",
-    "description": "Розробка Telegram-ботів, мобільних додатків та веб-сайтів",
+    "description": "Розробка конверсійних сайтів, Telegram-ботів та мобільних додатків для бізнесу",
     "url": "https://ihornone.site",
     "telephone": "+380",
     "priceRange": "$$",

@@ -17,6 +17,8 @@ const allProjects = allEntries
     image: entry.data.image,
     description: entry.data.description,
     pinned: entry.data.pinned,
+    statusBadge: entry.data.statusBadge,
+    clientName: entry.data.clientName,
     meta: {
       technologies: entry.data.technologies,
     },
@@ -32,7 +34,7 @@ const categories = ['Усі проєкти', ...new Set(allProjects.map((p) => p
 
 <Layout
   title="Портфоліо — Приклади розроблених проєктів | ihornone"
-  description="Приклади реалізованих Telegram-ботів, мобільних додатків та веб-сайтів з результатами та відгуками клієнтів."
+  description="Приклади розроблених веб-сайтів, мобільних додатків та Telegram-ботів з реальними бізнес-результатами та метриками."
   url="/portfolio"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
