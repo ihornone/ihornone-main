@@ -12,6 +12,13 @@ const images = Object.values(imageModules) as string[];
   title="Відгуки — Що кажуть клієнти | ihornone"
   description="Відгуки клієнтів про співпрацю з розробником Telegram-ботів, мобільних додатків та веб-сайтів."
   url="/reviews"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "ItemPage",
+    "name": "Відгуки про роботу з ihornone",
+    "description": "Скріншоти та реальні відгуки клієнтів про створені Telegram-боти, сайти та застосунки",
+    "url": "https://ihornone.site/reviews"
+  }}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
     <Hero

@@ -16,7 +16,7 @@ interface Props {
 const {
   title = 'ihornone — Telegram-боти, Веб-сайти, Мобільні додатки',
   description = 'Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності. Повний цикл від ідеї до запуску з високою конверсією.',
-  image = '/og-default.svg',
+  image = '/og-image.png',
   url = 'https://ihornone.site',
   type = 'website',
   structuredData,
@@ -35,10 +35,25 @@ const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{title}</title>
+    <!-- Primary SEO & GEO / AI Optimization -->
     <meta name="description" content={description} />
     <meta name="author" content="ihornone" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Geographic & Regional Targeting (GEO) -->
+    <meta name="geo.region" content="UA" />
+    <meta name="geo.placename" content="Ukraine" />
+    <meta name="geo.position" content="49.8397;24.0297" />
+    <meta name="ICBM" content="49.8397, 24.0297" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+
+    <!-- AI & LLM Engine Context Metadata -->
+    <meta name="application-name" content="ihornone Portfolio & Engineering" />
+    <meta name="keywords" content="розробка сайтів, створення telegram ботів, розробка мобільних додатків, web development, telegram bot developer, react native, astro, node.js, full-stack розробник, ihornone, сайти для бізнесу, чат-боти з оплатою" />
+    <meta name="rating" content="General" />
 
     <link rel="canonical" href={fullUrl} />
 
@@ -62,12 +77,53 @@ const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#f5f0e8" />
+    <meta name="theme-color" content="#FAF1EC" />
     <meta name="color-scheme" content="light" />
+
+    <!-- Global Base Schema for AI Engine Knowledge Graphs -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://ihornone.site/#person",
+          "name": "ihornone",
+          "url": "https://ihornone.site",
+          "image": "https://ihornone.site/favicon.svg",
+          "jobTitle": "Full-Stack Software Engineer & AI Integrator",
+          "knowsAbout": [
+            "Telegram Bots Architecture",
+            "Web Development",
+            "Mobile Apps Development",
+            "React Native",
+            "Astro",
+            "Node.js",
+            "TypeScript",
+            "UI/UX Design",
+            "API & Payment Gateways Integration"
+          ],
+          "sameAs": [
+            "https://t.me/ihornone",
+            "https://github.com/ihornone",
+            "https://instagram.com/ihornone",
+            "https://threads.net/@ihornone"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ihornone.site/#website",
+          "url": "https://ihornone.site",
+          "name": "ihornone — Розробка Telegram-ботів, веб-сайтів та мобільних додатків",
+          "description": "Індивідуальна розробка Telegram-ботів, сучасних веб-сервісів та мобільних додатків з гарантією та підтримкою.",
+          "publisher": { "@id": "https://ihornone.site/#person" },
+          "inLanguage": "uk-UA"
+        }
+      ]
+    })} />
 
     <!-- Client Router for instant millisecond transitions -->
     <ClientRouter />

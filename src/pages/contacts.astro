@@ -27,8 +27,37 @@ const contactsFaq = [
 
 <Layout
   title="Контакти — Зв'язок та обговорення проєктів | ihornone"
-  description="Зв'яжіться зі мною для обговорення вашого проєкту. Безкоштовна консультація, прозорі умови, швидка відповідь."
+  description="Зв'яжіться зі мною для обговорення вашого проєкту. Безкоштовна консультація, прозорі умови, швидка відповідь у Telegram та по Email."
   url="/contacts"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Контакти ihornone",
+    "description": "Прямий зв'язок з розробником Telegram-ботів, мобільних додатків та веб-сайтів ihornone",
+    "url": "https://ihornone.site/contacts",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "ihornone Digital Studio",
+      "url": "https://ihornone.site",
+      "email": "ihornone.dev@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "UA",
+        "addressRegion": "Ukraine"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "49.8397",
+        "longitude": "24.0297"
+      },
+      "sameAs": [
+        "https://t.me/ihornone",
+        "https://github.com/ihornone",
+        "https://instagram.com/ihornone",
+        "https://threads.net/@ihornone"
+      ]
+    }
+  }}
 >
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">

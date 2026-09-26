@@ -42,18 +42,78 @@ const featuredProjects = sortedEntries.slice(0, 3).map((entry) => ({
   url="/"
   structuredData={{
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "ihornone",
-    "description": "Розробка конверсійних сайтів, Telegram-ботів та мобільних додатків для бізнесу",
+    "@type": ["ProfessionalService", "LocalBusiness"],
+    "name": "ihornone — Digital Engineering & Bot Studio",
+    "alternateName": "ihornone",
+    "description": "Індивідуальна розробка Telegram-ботів, конверсійних веб-сайтів та мобільних додатків на React Native для українського та міжнародного бізнесу.",
     "url": "https://ihornone.site",
-    "telephone": "+380",
+    "image": "https://ihornone.site/favicon.svg",
     "priceRange": "$$",
-    "areaServed": "UA",
-    "knowsAbout": ["Telegram Bots", "Web Development", "Mobile Apps", "React Native", "Node.js", "Python"],
+    "currenciesAccepted": "UAH, USD, EUR",
+    "paymentAccepted": "Bank Transfer, Card, Crypto",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "UA",
+      "addressRegion": "Lviv / Ukraine"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "49.8397",
+      "longitude": "24.0297"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "Ukraine" },
+      { "@type": "Country", "name": "Poland" },
+      { "@type": "Country", "name": "United States" },
+      { "@type": "Country", "name": "European Union" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Послуги розробки під ключ",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Розробка Telegram-ботів та WebApps",
+            "description": "Боти для прийому оплат, автоматизації замовлень, CRM-інтеграції та штучного інтелекту"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Розробка веб-сайтів та платформ",
+            "description": "Швидкісні сайти на Astro, Next.js, інтеграція платіжних систем, адмін-панелей та баз даних"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Розробка кросплатформних мобільних додатків",
+            "description": "Мобільні застосунки iOS та Android на React Native / Expo з повною серверною частиною"
+          }
+        }
+      ]
+    },
+    "knowsAbout": [
+      "Telegram Bots Architecture",
+      "Telegram WebApp (TMA)",
+      "Web Development",
+      "Mobile Applications",
+      "React Native & Expo",
+      "Astro Web Framework",
+      "Node.js Backend",
+      "TypeScript",
+      "Stripe / Monobank / LiqPay Integrations",
+      "AI & LLM Integration (OpenAI, Claude)"
+    ],
     "sameAs": [
       "https://t.me/ihornone",
       "https://github.com/ihornone",
-      "https://instagram.com/ihornone"
+      "https://instagram.com/ihornone",
+      "https://threads.net/@ihornone"
     ]
   }}
 >

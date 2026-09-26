@@ -83,6 +83,27 @@ const passportFields = [
   url={`/portfolio/${entry.id}`}
   image={entry.data.image}
   type="article"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": title,
+    "headline": title,
+    "description": description,
+    "image": entry.data.image,
+    "url": `https://ihornone.site/portfolio/${entry.id}`,
+    "author": {
+      "@type": "Person",
+      "name": "ihornone",
+      "url": "https://ihornone.site"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "ihornone"
+    },
+    "genre": category,
+    "keywords": technologies,
+    "dateCreated": year
+  }}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-16 sm:pb-24 space-y-6 sm:space-y-8">
     <Breadcrumbs

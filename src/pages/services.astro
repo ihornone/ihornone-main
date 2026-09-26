@@ -12,6 +12,23 @@ const allServices = (await getCollection('services')).sort((a, b) => a.data.orde
   title="Послуги — Telegram-боти, Мобільні додатки, Веб-сайти | ihornone"
   description="Розробка Telegram-ботів, мобільних додатків та веб-сайтів будь-якої складності. Повний цикл від ідеї до запуску."
   url="/services"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Послуги розробки ihornone",
+    "description": "Повний перелік послуг з розробки Telegram-ботів, сайтів та додатків",
+    "url": "https://ihornone.site/services",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": allServices.map((s, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": s.data.title,
+        "url": `https://ihornone.site/services/${s.id}`,
+        "description": s.data.description
+      }))
+    }
+  }}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
     <Hero

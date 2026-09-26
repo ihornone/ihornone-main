@@ -60,6 +60,29 @@ const serviceProjects = allProjects
   title={`${title} — Послуги розробки | ihornone`}
   description={description}
   url={`/services/${entry.id}`}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": title,
+    "description": description,
+    "provider": {
+      "@type": "Person",
+      "name": "ihornone",
+      "url": "https://ihornone.site"
+    },
+    "areaServed": "UA",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": `Тарифи: ${title}`,
+      "itemListElement": pricing?.map((p: any) => ({
+        "@type": "Offer",
+        "name": p.name,
+        "price": p.price.replace(/[^\d]/g, '') || undefined,
+        "priceCurrency": "UAH",
+        "description": p.description
+      })) || []
+    }
+  }}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-16 sm:pb-24 space-y-10 sm:space-y-16">
     <Breadcrumbs

@@ -42,6 +42,23 @@ const categories = ['Усі проєкти', ...new Set(allProjects.map((p) => p
   title="Портфоліо — Приклади розроблених проєктів | ihornone"
   description="Приклади розроблених веб-сайтів, мобільних додатків та Telegram-ботів з реальними бізнес-результатами та метриками."
   url="/portfolio"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Портфоліо проєктів ihornone",
+    "description": "Кейси розробки веб-сайтів, Telegram-ботів та мобільних додатків",
+    "url": "https://ihornone.site/portfolio",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": allProjects.map((p, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": p.title,
+        "url": `https://ihornone.site/portfolio/${p.id}`,
+        "description": p.description
+      }))
+    }
+  }}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 sm:pt-4 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
     <Hero
