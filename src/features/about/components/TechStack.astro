@@ -1,80 +1,95 @@
 ---
-interface TechItem {
-  name: string;
+import Card from '../../../shared/components/ui/Card.astro';
+
+interface StackCategory {
   category: string;
   icon: string;
-  badge: string;
-  desc: string;
+  items: string[];
 }
 
 interface Props {
   class?: string;
 }
 
-const technologies: TechItem[] = [
+const defaultCategories: StackCategory[] = [
   {
-    name: 'React & Next.js',
-    category: 'Web',
-    icon: 'fa-brands fa-react',
-    badge: 'Frontend',
-    desc: 'Сучасні веб-інтерфейси, особисті кабінети та високошвидкісні сервіси.',
+    category: 'Web & Сайти',
+    icon: 'fa-solid fa-globe',
+    items: [
+      'React & Next.js',
+      'Astro & Vite',
+      'TypeScript / JavaScript',
+      'Tailwind CSS & SCSS',
+      'HTML5 / CSS3 / Responsive UI',
+      'SSR, SPA & Оптимізація SEO',
+    ],
   },
   {
-    name: 'TypeScript',
-    category: 'Мова',
-    icon: 'fa-solid fa-code',
-    badge: 'Надійність',
-    desc: 'Сувора типізація для стабільного коду без прихованих багів у продакшені.',
-  },
-  {
-    name: 'Astro & Tailwind CSS',
-    category: 'Web & UI',
-    icon: 'fa-solid fa-rocket',
-    badge: '100/100 Speed',
-    desc: 'Ультрашвидкі лендінги та адаптивний дизайн під будь-які екрани.',
-  },
-  {
-    name: 'React Native & Expo',
-    category: 'Mobile',
+    category: 'Мобільні застосунки',
     icon: 'fa-solid fa-mobile-screen-button',
-    badge: 'iOS & Android',
-    desc: 'Єдина кодова база для двох платформ: швидкий запуск та економія бюджету.',
+    items: [
+      'React Native',
+      'Expo Framework',
+      'Кросплатформність (iOS & Android)',
+      'Нативні модулі та пуш-сповіщення',
+      'Офлайн-кеш та синхронізація',
+      'Публікація в App Store & Google Play',
+    ],
   },
   {
-    name: 'Telegram Mini Apps & Боти',
-    category: 'Telegram',
+    category: 'Telegram & Боти',
     icon: 'fa-brands fa-telegram',
-    badge: 'aiogram 3 / WebApp',
-    desc: 'Автоматизація бізнесу, прийом замовлень та боти з веб-інтерфейсом прямо в чаті.',
+    items: [
+      'aiogram 3 & Python',
+      'Telegram Mini Apps (TMA)',
+      'Telegram Bot API & Webhooks',
+      'Багаторівневі інтерактивні сценарії',
+      'CRM-боти та автоворонки',
+      'High-load черги та асинхронність',
+    ],
   },
   {
-    name: 'Node.js & Python (FastAPI)',
-    category: 'Backend',
-    icon: 'fa-brands fa-node-js',
-    badge: 'REST API',
-    desc: 'Швидка та масштабована серверна логіка, мікросервіси та обробка вебхуків.',
+    category: 'Backend & Бази даних',
+    icon: 'fa-solid fa-server',
+    items: [
+      'Node.js (Express / Fastify)',
+      'Python (FastAPI / Django)',
+      'PostgreSQL, MySQL, SQLite',
+      'Redis (кешування та черги)',
+      'REST API, GraphQL & WebSocket',
+      'Docker & Linux VPS (Ubuntu / Debian)',
+    ],
   },
   {
-    name: 'PostgreSQL & Redis',
-    category: 'Бази даних',
-    icon: 'fa-solid fa-database',
-    badge: 'ACID / Кеш',
-    desc: 'Надійне збереження даних, захист транзакцій та миттєвий відгук систем.',
-  },
-  {
-    name: 'Платіжні системи & API',
-    category: 'Fintech',
+    category: 'Платежі & Fintech',
     icon: 'fa-solid fa-credit-card',
-    badge: 'Mono / LiqPay / WayForPay',
-    desc: 'Прийом оплат картками, Apple Pay, Google Pay, QR-коди та автофіскалізація.',
+    items: [
+      'Monobank API (еквайринг та QR)',
+      'LiqPay & PrivatBank',
+      'WayForPay & NovaPay',
+      'Stripe & PayPal',
+      'Автофіскалізація (Checkbox / Вчасно)',
+      'Рекурентні платежі та підписки',
+    ],
+  },
+  {
+    category: 'Інтеграції & Інструменти',
+    icon: 'fa-solid fa-gears',
+    items: [
+      'Інтеграція з CRM (KeyCRM, SalesDrive)',
+      'Google Sheets & Drive API',
+      'OpenAI & Claude AI інтеграції',
+      'Нова Пошта & Укрпошта API',
+      'Git, GitHub & CI/CD автоматизація',
+      'Sentry & Моніторинг працездатності',
+    ],
   },
 ];
 
 const { class: className = '' } = Astro.props;
 ---
 
-<section id="tech-stack" class:list={['space-y-6 sm:space-y-8 w-full', className]} data-animate="fade-up">
-  
+<section id="tech-stack" class:list={['space-y-8 w-full', className]} data-animate="fade-up">
   <!-- Section Title -->
   <div class="space-y-2 text-center max-w-xl mx-auto">
     <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#FAC3C8] text-[#2A1E1E] shadow-2xs">
@@ -85,43 +100,32 @@ const { class: className = '' } = Astro.props;
       Технології, з якими я працюю
     </h2>
     <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
-      Перевірений сучасний стек для швидких сайтів, надійних ботів та мобільних додатків.
+      Сучасний, перевірений часом та масштабований стек для вирішення завдань будь-якої складності.
     </p>
   </div>
 
-  <!-- Clean, Simple 4-in-a-row Grid -->
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4"
-    data-animate="fade-up"
-    data-stagger
-  >
-    {technologies.map((t) => (
-      <div class="bg-white border border-[#623A2D]/10 rounded-[10px] p-4 sm:p-5 flex flex-col justify-between space-y-3 transition-all duration-200 hover:border-[#D09AFC] hover:shadow-sm">
-        <div class="space-y-2.5">
-          <div class="flex items-center justify-between gap-2">
-            <div class="w-9 h-9 rounded-[10px] bg-[#FAF1EC] border border-[#623A2D]/10 flex items-center justify-center text-base text-[#2A1E1E] shadow-2xs">
-              <i class={t.icon}></i>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-[6px] bg-[#FAF1EC] border border-[#623A2D]/10 text-[#623A2D]">
-              {t.badge}
-            </span>
+  <!-- Expanded Lists with Checkmarks Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" data-animate="fade-up" data-stagger>
+    {defaultCategories.map((cat) => (
+      <Card hover class="space-y-4 h-full flex flex-col justify-start !p-5 sm:!p-6 bg-white border border-[#623A2D]/10 rounded-[10px] hover:border-[#D09AFC] transition-colors">
+        <div class="flex items-center gap-2.5 pb-3 border-b border-[#623A2D]/10">
+          <div class="w-8 h-8 rounded-[8px] bg-[#FAF1EC] flex items-center justify-center text-[#2A1E1E] text-sm shrink-0 border border-[#623A2D]/10">
+            <i class={cat.icon}></i>
           </div>
-
-          <h3 class="text-base font-black text-[#2A1E1E] tracking-tight m-0">
-            {t.name}
+          <h3 class="text-sm sm:text-base font-black text-[#2A1E1E] m-0">
+            {cat.category}
           </h3>
-
-          <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium leading-relaxed m-0">
-            {t.desc}
-          </p>
         </div>
-
-        <div class="pt-2 border-t border-[#623A2D]/10 flex items-center justify-between text-[11px] font-bold text-[#623A2D]/60">
-          <span>{t.category}</span>
-          <i class="fa-solid fa-check text-[#95553C] text-[10px]"></i>
-        </div>
-      </div>
+        
+        <ul class="space-y-2.5 list-none p-0 m-0">
+          {cat.items.map((tech) => (
+            <li class="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-[#2A1E1E]/90 leading-tight">
+              <i class="fa-solid fa-circle-check text-xs text-[#D09AFC] shrink-0 mt-0.5"></i>
+              <span>{tech}</span>
+            </li>
+          ))}
+        </ul>
+      </Card>
     ))}
   </div>
-
 </section>
