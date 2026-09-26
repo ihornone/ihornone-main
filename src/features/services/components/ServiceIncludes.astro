@@ -23,10 +23,10 @@ const { includes } = Astro.props;
   />
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
     {includes.map((item) => (
-      <Card hover class="flex flex-col justify-between space-y-4">
+      <Card hover class="flex flex-col items-start p-6 sm:p-7 space-y-4">
         <IconBox icon={item.icon} />
-        <div class="space-y-1.5">
-          <h3 class="text-lg font-black text-[#2A1E1E] m-0">{item.title}</h3>
+        <div class="space-y-2 flex-1 flex flex-col justify-start">
+          <h3 class="text-base sm:text-lg font-black text-[#2A1E1E] m-0 leading-snug">{item.title}</h3>
           <p class="text-xs sm:text-sm text-[#623A2D]/80 font-medium m-0 leading-relaxed">{item.description}</p>
         </div>
       </Card>
