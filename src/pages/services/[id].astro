@@ -36,9 +36,14 @@ const serviceProjects = allProjects
     return true;
   })
   .sort((a, b) => {
-    if (a.data.pinned && !b.data.pinned) return -1;
-    if (!a.data.pinned && b.data.pinned) return 1;
-    return 0;
+    const pinA = Boolean(a.data.pinned);
+    const pinB = Boolean(b.data.pinned);
+    if (pinA && !pinB) return -1;
+    if (!pinA && pinB) return 1;
+
+    const orderA = a.data.order ?? (typeof a.data.pinned === 'number' ? a.data.pinned : 99);
+    const orderB = b.data.order ?? (typeof b.data.pinned === 'number' ? b.data.pinned : 99);
+    return orderA - orderB;
   })
   .map((p) => ({
     id: p.id,

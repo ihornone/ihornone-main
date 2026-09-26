@@ -25,7 +25,7 @@ const benefits = [
     borderHover: 'hover:border-[#FAC3C8]',
   },
   {
-    icon: 'fa-solid fa-shield-check',
+    icon: 'fa-solid fa-shield-halved',
     tag: 'Страховка та Git',
     title: 'Фокус та резервний план',
     desc: 'Веду одночасно лише 1–2 проєкти. Весь код з 1-го дня живе у вашому приватному Git, а на випадок форс-мажору є перевірені партнери для підстрахування.',
@@ -39,32 +39,17 @@ const benefits = [
 <section id="advantages" class="space-y-8 sm:space-y-10 w-full" data-animate="fade-up">
   
   <!-- Section Title -->
-  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-    <div class="space-y-2">
-      <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
-        <i class="fa-solid fa-shield-halved text-xs"></i>
-        Гарантії та підхід
-      </span>
-      <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
-        Чому зі мною надійніше, ніж в агентствах
-      </h2>
-      <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
-        Конкретні факти, перевірений досвід та прозорі зобов'язання перед вашим бізнесом.
-      </p>
-    </div>
-
-    <!-- Quick Proof Pills -->
-    <div class="flex items-center gap-2 flex-wrap self-start md:self-auto text-xs font-bold text-[#623A2D]">
-      <span class="px-3 py-1 rounded-[8px] bg-white border border-[#623A2D]/10 shadow-2xs">
-        ✓ 15+ кейсів
-      </span>
-      <span class="px-3 py-1 rounded-[8px] bg-white border border-[#623A2D]/10 shadow-2xs">
-        ✓ 30 днів підтримки
-      </span>
-      <span class="px-3 py-1 rounded-[8px] bg-white border border-[#623A2D]/10 shadow-2xs">
-        ✓ Без посередників
-      </span>
-    </div>
+  <div class="space-y-2">
+    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#E8BA98] text-[#2A1E1E] shadow-2xs">
+      <i class="fa-solid fa-shield-halved text-xs"></i>
+      Гарантії та підхід
+    </span>
+    <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
+      Чому зі мною надійніше, ніж в агентствах
+    </h2>
+    <p class="text-sm sm:text-base text-[#623A2D]/80 max-w-xl m-0 font-medium">
+      Конкретні факти, перевірений досвід та прозорі зобов'язання перед вашим бізнесом.
+    </p>
   </div>
 
   <!-- 4 Detailed Benefit Cards -->
@@ -100,28 +85,6 @@ const benefits = [
         </p>
       </div>
     ))}
-  </div>
-
-  <!-- Bottom Guarantee Banner (Addresses risk & post-launch support) -->
-  <div class="p-4 sm:p-5 rounded-[10px] bg-white border border-[#623A2D]/10 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-[10px] bg-[#D09AFC]/20 text-[#623A2D] flex items-center justify-center text-base shrink-0">
-        <i class="fa-solid fa-handshake-simple"></i>
-      </div>
-      <div>
-        <h4 class="text-sm font-black text-[#2A1E1E] m-0">Повна прозорість та безпека розробки</h4>
-        <p class="text-xs text-[#623A2D]/75 font-medium m-0">Фіксація обсягу в ТЗ • Поетапна оплата 50/50 • 30 днів безкоштовних виправлень після релізу</p>
-      </div>
-    </div>
-    <a
-      href="https://t.me/ihornone"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="pill-btn-outline !py-2 !px-4 text-xs font-black shrink-0 self-start sm:self-auto flex items-center gap-1.5"
-    >
-      <span>Запитати деталі</span>
-      <i class="fa-solid fa-arrow-right text-[10px]"></i>
-    </a>
   </div>
 
 </section>

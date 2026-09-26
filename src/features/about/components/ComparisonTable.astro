@@ -1,8 +1,7 @@
 ---
 interface CellData {
   text: string;
-  detail?: string;
-  status: 'good' | 'neutral' | 'bad';
+  status: 'good' | 'neutral';
 }
 
 interface ComparisonRow {
@@ -18,112 +17,46 @@ interface Props {
 
 const comparisonRows: ComparisonRow[] = [
   {
-    feature: 'Гарантія на код',
-    me: {
-      text: '30 днів безкоштовно',
-      detail: 'Пряме виправлення автором коду за лічені години без бюрократії',
-      status: 'good',
-    },
-    agency: {
-      text: 'Формальна гарантія',
-      detail: 'Часто через довгу чергу тікетів саппорту або за окремим платним договором',
-      status: 'neutral',
-    },
-    freelancer: {
-      text: 'Без гарантій',
-      detail: 'Зникають після фінальної виплати або вимагають оплати за кожен баг-фікс',
-      status: 'bad',
-    },
+    feature: 'Рівень інженерії та дизайн',
+    me: { text: 'Агентський рівень', status: 'good' },
+    agency: { text: 'Агентський рівень', status: 'good' },
+    freelancer: { text: 'Залежить від навичок', status: 'neutral' },
   },
   {
-    feature: 'Підтримка після релізу',
-    me: {
-      text: '30 днів включено',
-      detail: 'Прямий Telegram-чат, відповідь за 15 хв, допомога з доменом та сервером',
-      status: 'good',
-    },
-    agency: {
-      text: 'Платний абонемент',
-      detail: 'Будь-яка підтримка та правки оплачуються окремим щомісячним контрактом',
-      status: 'bad',
-    },
-    freelancer: {
-      text: 'Залежить від людини',
-      detail: 'Часто переключаються на новий проєкт і перестають відповідати на дзвінки',
-      status: 'neutral',
-    },
+    feature: 'Вартість проєкту',
+    me: { text: 'Чесна ціна (без націнок)', status: 'good' },
+    agency: { text: 'Висока (офіс + менеджери)', status: 'neutral' },
+    freelancer: { text: 'Низька або плаваюча', status: 'neutral' },
   },
   {
     feature: 'Швидкість запуску MVP',
-    me: {
-      text: '14–28 днів',
-      detail: 'Швидкі рішення напряму без узгоджень з відділами менеджменту',
-      status: 'good',
-    },
-    agency: {
-      text: '1.5–3 місяці',
-      detail: 'Черги проєктів, багатошарові мітинги та узгодження кожного кроку',
-      status: 'bad',
-    },
-    freelancer: {
-      text: 'Непередбачувано',
-      detail: 'Часті затримки через паралельну роботу над багатьма замовленнями',
-      status: 'neutral',
-    },
+    me: { text: '14–28 днів', status: 'good' },
+    agency: { text: '1.5–3 місяці', status: 'neutral' },
+    freelancer: { text: 'Непередбачувано', status: 'neutral' },
   },
   {
-    feature: 'Контакт та комунікація',
-    me: {
-      text: 'Прямо з розробником',
-      detail: 'Без посередників: обговорюєте задачу з тим, хто власноруч пише архітектуру',
-      status: 'good',
-    },
-    agency: {
-      text: 'Через менеджера (PM)',
-      detail: 'Ефект «зіпсованого телефону»: менеджер не завжди розуміє технічні нюанси',
-      status: 'bad',
-    },
-    freelancer: {
-      text: 'Прямий контакт',
-      detail: 'Спілкування напряму, проте є ризик раптового зникнення зі зв’язку',
-      status: 'neutral',
-    },
+    feature: 'Комунікація',
+    me: { text: 'Прямо з автором коду', status: 'good' },
+    agency: { text: 'Через менеджера (PM)', status: 'neutral' },
+    freelancer: { text: 'Прямий контакт', status: 'good' },
   },
   {
-    feature: 'Ціна та прозорість',
-    me: {
-      text: 'Чесна ринкова ціна',
-      detail: 'Фіксований бюджет без прихованих платежів та без накрутки на утримання офісу',
-      status: 'good',
-    },
-    agency: {
-      text: '+200–300% націнки',
-      detail: 'У вартість закладена зарплата офісу, директорів, сейлзів та реклами',
-      status: 'bad',
-    },
-    freelancer: {
-      text: 'Оманливий старт',
-      detail: 'Часто називають занижену ціну, а потім вимагають доплат за кожен пункт',
-      status: 'neutral',
-    },
+    feature: 'Робота під ключ (дизайн + код)',
+    me: { text: 'Повний цикл від ідеї до релізу', status: 'good' },
+    agency: { text: 'Повний цикл від ідеї до релізу', status: 'good' },
+    freelancer: { text: 'Часто лише окрема частина', status: 'neutral' },
   },
   {
-    feature: 'Повний цикл (дизайн + код)',
-    me: {
-      text: 'Все під ключ',
-      detail: 'Один виконавець веде інтерфейс, логіку, бази даних та публікацію',
-      status: 'good',
-    },
-    agency: {
-      text: 'Повна команда',
-      detail: 'Усі спеціалісти є, але висока вартість та ризик розмитої відповідальності',
-      status: 'neutral',
-    },
-    freelancer: {
-      text: 'Фрагментарно',
-      detail: 'Зазвичай тільки верстка або тільки бот — решту шукаєте самостійно',
-      status: 'bad',
-    },
+    feature: 'Гарантійна підтримка',
+    me: { text: '30 днів включено', status: 'good' },
+    agency: { text: 'За окремим контрактом', status: 'neutral' },
+    freelancer: { text: 'За домовленістю', status: 'neutral' },
+  },
+  {
+    feature: 'Контроль та вихідний код',
+    me: { text: 'Ваш приватний Git з 1-го дня', status: 'good' },
+    agency: { text: 'Корпоративний репозиторій', status: 'good' },
+    freelancer: { text: 'За домовленістю', status: 'neutral' },
   },
 ];
 
@@ -134,13 +67,13 @@ const { class: className = '' } = Astro.props;
   <div class="space-y-2 text-center max-w-xl mx-auto">
     <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#D09AFC] text-[#2A1E1E] shadow-2xs">
       <i class="fa-solid fa-scale-balanced text-xs"></i>
-      Порівняння
+      Порівняння форматів
     </span>
     <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
-      Я vs Агентства vs Інші фрилансери
+      Якість агентства — вигода прямого розробника
     </h2>
     <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
-      Чесне порівняння форматів співпраці, щоб ви могли зробити усвідомлений вибір без ілюзій.
+      Агентський рівень дизайну та інженерії без переплат за зайві ланки та офіси.
     </p>
   </div>
 
@@ -156,96 +89,61 @@ const { class: className = '' } = Astro.props;
               </span>
             </th>
             <th class="p-4 sm:p-5 font-bold text-[#623A2D]/80 text-left w-[23%]">Digital-агентства</th>
-            <th class="p-4 sm:p-5 font-bold text-[#623A2D]/80 text-left w-[23%]">Типові фрилансери</th>
+            <th class="p-4 sm:p-5 font-bold text-[#623A2D]/80 text-left w-[23%]">Фрилансери</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-[#623A2D]/10">
           {comparisonRows.map((row) => (
             <tr class="hover:bg-[#FAF1EC]/30 transition-colors">
-              <td class="p-4 sm:p-5 font-black text-[#2A1E1E] align-top">
+              <td class="p-4 sm:p-5 font-black text-[#2A1E1E] align-middle">
                 {row.feature}
               </td>
               
               <!-- ihornone -->
-              <td class="p-4 sm:p-5 bg-[#D09AFC]/10 align-top space-y-1">
-                <div class="inline-flex items-center gap-1.5 text-xs font-black text-[#2A1E1E]">
-                  <span class="w-4 h-4 rounded-full bg-[#D09AFC] text-[#2A1E1E] flex items-center justify-center text-[10px] shrink-0">
+              <td class="p-4 sm:p-5 bg-[#D09AFC]/10 align-middle">
+                <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#2A1E1E]">
+                  <span class="w-5 h-5 rounded-full bg-[#D09AFC] text-[#2A1E1E] flex items-center justify-center text-[11px] shrink-0 shadow-2xs">
                     <i class="fa-solid fa-check"></i>
                   </span>
                   <span>{row.me.text}</span>
                 </div>
-                {row.me.detail && (
-                  <p class="text-[11px] text-[#623A2D]/80 font-medium leading-relaxed m-0 pl-5.5">
-                    {row.me.detail}
-                  </p>
-                )}
               </td>
 
               <!-- agency -->
-              <td class="p-4 sm:p-5 align-top space-y-1">
-                <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#2A1E1E]">
-                  {row.agency.status === 'good' && (
-                    <span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0">
+              <td class="p-4 sm:p-5 align-middle">
+                <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#2A1E1E]">
+                  {row.agency.status === 'good' ? (
+                    <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[11px] shrink-0">
                       <i class="fa-solid fa-check"></i>
                     </span>
-                  )}
-                  {row.agency.status === 'neutral' && (
-                    <span class="w-4 h-4 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-[10px] shrink-0">
-                      <i class="fa-solid fa-triangle-exclamation"></i>
-                    </span>
-                  )}
-                  {row.agency.status === 'bad' && (
-                    <span class="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] shrink-0">
-                      <i class="fa-solid fa-xmark"></i>
+                  ) : (
+                    <span class="w-5 h-5 rounded-full bg-[#FAF1EC] border border-[#623A2D]/15 text-[#623A2D] flex items-center justify-center text-[10px] shrink-0">
+                      <i class="fa-solid fa-minus"></i>
                     </span>
                   )}
                   <span>{row.agency.text}</span>
                 </div>
-                {row.agency.detail && (
-                  <p class="text-[11px] text-[#623A2D]/70 font-medium leading-relaxed m-0 pl-5.5">
-                    {row.agency.detail}
-                  </p>
-                )}
               </td>
 
               <!-- freelancer -->
-              <td class="p-4 sm:p-5 align-top space-y-1">
-                <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#2A1E1E]">
-                  {row.freelancer.status === 'good' && (
-                    <span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0">
+              <td class="p-4 sm:p-5 align-middle">
+                <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#623A2D]/80">
+                  {row.freelancer.status === 'good' ? (
+                    <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[11px] shrink-0">
                       <i class="fa-solid fa-check"></i>
                     </span>
-                  )}
-                  {row.freelancer.status === 'neutral' && (
-                    <span class="w-4 h-4 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-[10px] shrink-0">
-                      <i class="fa-solid fa-circle-question"></i>
-                    </span>
-                  )}
-                  {row.freelancer.status === 'bad' && (
-                    <span class="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] shrink-0">
-                      <i class="fa-solid fa-xmark"></i>
+                  ) : (
+                    <span class="w-5 h-5 rounded-full bg-[#FAF1EC] border border-[#623A2D]/15 text-[#623A2D] flex items-center justify-center text-[10px] shrink-0">
+                      <i class="fa-solid fa-minus"></i>
                     </span>
                   )}
                   <span>{row.freelancer.text}</span>
                 </div>
-                {row.freelancer.detail && (
-                  <p class="text-[11px] text-[#623A2D]/70 font-medium leading-relaxed m-0 pl-5.5">
-                    {row.freelancer.detail}
-                  </p>
-                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
-
-    <!-- Footnote about freelancers -->
-    <div class="p-4 sm:p-5 bg-[#FAF1EC]/50 border-t border-[#623A2D]/10 flex items-start gap-3 text-xs text-[#623A2D]/80">
-      <i class="fa-solid fa-circle-info text-[#95553C] mt-0.5 text-sm shrink-0"></i>
-      <p class="m-0 leading-relaxed font-medium">
-        <strong>Чому в колонці фрилансерів зазначено «Залежить від людини»?</strong> На фріланс-біржах є відповідальні розробники, проте замовник бере на себе весь ризик: відсутність єдиного стандарту коду, зриви дедлайнів через паралельні замовлення та зникнення спеціаліста одразу після отримання фінальної виплати.
-      </p>
     </div>
   </div>
 </section>

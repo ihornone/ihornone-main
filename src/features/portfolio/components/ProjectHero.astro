@@ -2,6 +2,7 @@
 import Badge from '../../../shared/components/ui/Badge.astro';
 import Button from '../../../shared/components/ui/Button.astro';
 import Passport from '../../../shared/components/sections/Passport.astro';
+import { QuickContactModal } from '../../../shared/components/ui/QuickContactModal';
 
 interface Props {
   title: string;
@@ -46,32 +47,34 @@ const { title, category, icon, description, link, github, statusBadge, clientNam
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 pt-2 w-full sm:w-auto">
       {category === 'Мобільні застосунки' && link && (
-        <Button href={link} variant="dark" icon="fa-brands fa-android" class="w-full sm:w-auto">
+        <Button href={link} target="_blank" variant="dark" icon="fa-brands fa-android" class="w-full sm:w-auto">
           Завантажити демо APK (Android)
         </Button>
       )}
 
       {category === 'Сайти' && link && (
-        <Button href={link} variant="dark" icon="fa-solid fa-arrow-up-right-from-square" class="w-full sm:w-auto">
+        <Button href={link} target="_blank" variant="dark" icon="fa-solid fa-arrow-up-right-from-square" class="w-full sm:w-auto">
           {statusBadge?.includes('Комерційний') ? 'Відкрити сайт компанії' : 'Відкрити Live Demo'}
         </Button>
       )}
 
       {category === 'Telegram-боти' && link && (
-        <Button href={link} variant="dark" icon="fa-brands fa-telegram" class="w-full sm:w-auto">
+        <Button href={link} target="_blank" variant="dark" icon="fa-brands fa-telegram" class="w-full sm:w-auto">
           Запустити бота
         </Button>
       )}
 
       {github && (
-        <Button href={github} variant="outline" icon="fa-brands fa-github" class="w-full sm:w-auto">
+        <Button href={github} target="_blank" variant="outline" icon="fa-brands fa-github" class="w-full sm:w-auto">
           Вихідний код на GitHub
         </Button>
       )}
 
-      <Button href="/contacts" variant="accent" class="w-full sm:w-auto">
-        Замовити схожий проєкт
-      </Button>
+      <QuickContactModal
+        client:load
+        triggerText="Замовити схожий проєкт"
+        triggerClass="pill-btn-lilac !py-3 !px-6 !text-sm w-full sm:w-auto flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
+      />
     </div>
   </div>
 

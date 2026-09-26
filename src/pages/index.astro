@@ -10,7 +10,18 @@ import ProjectCard from '../features/portfolio/components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 const allEntries = await getCollection('projects');
-const featuredProjects = allEntries.slice(0, 3).map((entry) => ({
+const sortedEntries = [...allEntries].sort((a, b) => {
+  const pinA = Boolean(a.data.pinned);
+  const pinB = Boolean(b.data.pinned);
+  if (pinA && !pinB) return -1;
+  if (!pinA && pinB) return 1;
+
+  const orderA = a.data.order ?? (typeof a.data.pinned === 'number' ? a.data.pinned : 99);
+  const orderB = b.data.order ?? (typeof b.data.pinned === 'number' ? b.data.pinned : 99);
+  return orderA - orderB;
+});
+
+const featuredProjects = sortedEntries.slice(0, 3).map((entry) => ({
   id: entry.id,
   title: entry.data.title,
   category: entry.data.category,

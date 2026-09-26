@@ -14,6 +14,7 @@ link: "https://www.sembud.com.ua/"
 statusBadge: "Реальний комерційний проєкт"
 clientName: "SEMBUD (Львів)"
 pinned: true
+order: 1
 galleryFormat: "16:9"
 features:
   - title: "Головна сторінка та конверсійний Hero"

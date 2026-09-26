@@ -1,67 +1,464 @@
 ---
-import Card from '../../../shared/components/ui/Card.astro';
-
-interface StackCategory {
-  category: string;
-  items: string[];
+interface TechItem {
+  id: string;
+  name: string;
+  category: 'web' | 'mobile' | 'bots' | 'backend' | 'integrations';
+  categoryLabel: string;
+  icon: string;
+  badge: string;
+  desc: string;
+  presets: string[];
 }
 
 interface Props {
-  categories?: StackCategory[];
   class?: string;
 }
 
-const defaultCategories: StackCategory[] = [
+const technologies: TechItem[] = [
+  // Web & Frontend
   {
-    category: 'Telegram & Bots',
-    items: ['aiogram', 'Telegram WebApps', 'Bot API', 'Payment Gateways', 'Webhooks']
+    id: 'nextjs',
+    name: 'Next.js',
+    category: 'web',
+    categoryLabel: 'Web-фреймворк',
+    icon: 'fa-solid fa-cube',
+    badge: 'SSR & SEO',
+    desc: 'Серверний рендеринг, миттєве завантаження та максимальні показники конверсії для порталів і e-commerce.',
+    presets: ['web-site'],
   },
   {
-    category: 'Backend & DB',
-    items: ['Python', 'Node.js', 'PostgreSQL', 'Redis', 'REST API', 'Docker']
+    id: 'react',
+    name: 'React',
+    category: 'web',
+    categoryLabel: 'Frontend',
+    icon: 'fa-brands fa-react',
+    badge: 'UI-компоненти',
+    desc: 'Інтерактивні інтерфейси, особисті кабінети користувачів та швидка модульна розробка.',
+    presets: ['web-site', 'telegram-bot'],
   },
   {
-    category: 'Frontend & Web',
-    items: ['Astro', 'Tailwind CSS', 'TypeScript', 'HTML5/CSS3', 'Responsive UI']
+    id: 'astro',
+    name: 'Astro',
+    category: 'web',
+    categoryLabel: 'Веб-рушій',
+    icon: 'fa-solid fa-rocket',
+    badge: '100/100 PageSpeed',
+    desc: 'Створення ультрашвидких лендінгів та корпоративних сайтів з нульовим зайвим JS на клієнті.',
+    presets: ['landing'],
   },
   {
-    category: 'Integrations & Tools',
-    items: ['LiqPay & Mono', 'CRM Systems', 'Google Sheets API', 'Git', 'Linux / VPS']
+    id: 'vue',
+    name: 'Vue.js',
+    category: 'web',
+    categoryLabel: 'Frontend',
+    icon: 'fa-brands fa-vuejs',
+    badge: 'SPA & Дашборди',
+    desc: 'Легкі реактивні інтерфейси, клієнтські панелі та гнучкі віджети для веб-сервісів.',
+    presets: ['web-site'],
+  },
+  {
+    id: 'typescript',
+    name: 'TypeScript',
+    category: 'web',
+    categoryLabel: 'Мова розробки',
+    icon: 'fa-solid fa-code',
+    badge: 'Стабільний код',
+    desc: 'Сувора типізація запобігає типовим помилкам ще на етапі написання архітектури коду.',
+    presets: ['web-site', 'mobile-app', 'telegram-bot', 'landing'],
+  },
+  {
+    id: 'tailwind',
+    name: 'Tailwind CSS',
+    category: 'web',
+    categoryLabel: 'UI-система',
+    icon: 'fa-brands fa-css3-alt',
+    badge: 'Mobile-First',
+    desc: 'Адаптивна верстка з бездоганним виглядом на смартфонах, планшетах та десктопах.',
+    presets: ['web-site', 'landing', 'telegram-bot'],
+  },
+
+  // Mobile
+  {
+    id: 'react-native',
+    name: 'React Native',
+    category: 'mobile',
+    categoryLabel: 'Мобільний рушій',
+    icon: 'fa-brands fa-react',
+    badge: 'iOS & Android',
+    desc: 'Нативні застосунки для двох платформ одночасно з єдиною кодовою базою (економія до 50% бюджету).',
+    presets: ['mobile-app'],
+  },
+  {
+    id: 'expo',
+    name: 'Expo',
+    category: 'mobile',
+    categoryLabel: 'Мобільний тулкіт',
+    icon: 'fa-solid fa-mobile-screen-button',
+    badge: 'Швидкий реліз',
+    desc: 'Миттєве тестування на реальних смартфонах замовника та швидка публікація в маркети без затримок.',
+    presets: ['mobile-app'],
+  },
+
+  // Telegram & Bots
+  {
+    id: 'aiogram',
+    name: 'aiogram 3 & Python',
+    category: 'bots',
+    categoryLabel: 'Бот-архітектура',
+    icon: 'fa-brands fa-python',
+    badge: 'High-load боти',
+    desc: 'Асинхронні Telegram-боти з обробкою тисяч дій на секунду, чергами та автоматизацією.',
+    presets: ['telegram-bot'],
+  },
+  {
+    id: 'tma',
+    name: 'Telegram Mini Apps',
+    category: 'bots',
+    categoryLabel: 'Web-додатки в чаті',
+    icon: 'fa-brands fa-telegram',
+    badge: 'Трендовий UI',
+    desc: 'Повноцінний інтерфейс магазину чи сервісу прямо у вікні Telegram без встановлення сторонніх додатків.',
+    presets: ['telegram-bot'],
+  },
+
+  // Backend & DB
+  {
+    id: 'nodejs',
+    name: 'Node.js',
+    category: 'backend',
+    categoryLabel: 'Бекенд / API',
+    icon: 'fa-brands fa-node-js',
+    badge: 'Real-time API',
+    desc: 'Швидкісний бекенд для API, вебхуків, мікросервісів та обробки високих навантажень.',
+    presets: ['web-site', 'mobile-app'],
+  },
+  {
+    id: 'fastapi',
+    name: 'FastAPI / Django',
+    category: 'backend',
+    categoryLabel: 'Python-сервіси',
+    icon: 'fa-brands fa-python',
+    badge: 'Мікросервіси',
+    desc: 'REST API з автоматичною інтерактивною Swagger-документацією та складною бізнес-логікою.',
+    presets: ['telegram-bot', 'web-site'],
+  },
+  {
+    id: 'postgres',
+    name: 'PostgreSQL & Redis',
+    category: 'backend',
+    categoryLabel: 'Бази даних',
+    icon: 'fa-solid fa-database',
+    badge: 'ACID & Кешування',
+    desc: 'Надійне збереження фінансових операцій, користувачів і замовлень із миттєвим кешем у Redis.',
+    presets: ['web-site', 'telegram-bot', 'mobile-app'],
+  },
+  {
+    id: 'docker',
+    name: 'Docker & Linux VPS',
+    category: 'backend',
+    categoryLabel: 'DevOps / Інфраструктура',
+    icon: 'fa-brands fa-docker',
+    badge: 'Автономність 24/7',
+    desc: 'Ізольований запуск на захищеному сервері замовника з автоперезапуском у разі збоїв.',
+    presets: ['web-site', 'telegram-bot', 'mobile-app'],
+  },
+
+  // Integrations
+  {
+    id: 'payments',
+    name: 'Monobank, LiqPay, WayForPay',
+    category: 'integrations',
+    categoryLabel: 'Fintech / Платежі',
+    icon: 'fa-solid fa-credit-card',
+    badge: 'Apple Pay & Google Pay',
+    desc: 'Безпечний прийом платежів картками, QR-оплати, автофіскалізація (Checkbox) та регулярні підписки.',
+    presets: ['web-site', 'telegram-bot', 'mobile-app'],
+  },
+  {
+    id: 'git',
+    name: 'Git, GitHub & CI/CD',
+    category: 'integrations',
+    categoryLabel: 'Контроль коду',
+    icon: 'fa-brands fa-git-alt',
+    badge: '100% прозорість',
+    desc: 'Весь код ведеться у вашому приватному репозиторії з першого дня розробки без прив\'язки до розробника.',
+    presets: ['web-site', 'mobile-app', 'telegram-bot', 'landing'],
   },
 ];
 
-const { categories = defaultCategories, class: className = '' } = Astro.props;
+const presets = [
+  {
+    id: 'all',
+    icon: 'fa-solid fa-layer-group',
+    title: 'Усі технології',
+    badge: '16 інструментів',
+    summary: 'Повний перелік мов, фреймворків, бібліотек та баз даних під будь-який формат цифрового продукту.',
+  },
+  {
+    id: 'web-site',
+    icon: 'fa-solid fa-globe',
+    title: 'Веб-сайт або сервіс',
+    badge: 'Next.js + React + Node + Postgres',
+    summary: 'Оптимальний стек для швидких корпоративних сайтів, каталогів та кабінетів з бездоганним SEO.',
+  },
+  {
+    id: 'mobile-app',
+    icon: 'fa-solid fa-mobile-screen-button',
+    title: 'Мобільний застосунок',
+    badge: 'React Native + Expo + API',
+    summary: 'Єдина кодова база для iOS та Android: економія до 50% бюджету та запуск удвічі швидше.',
+  },
+  {
+    id: 'telegram-bot',
+    icon: 'fa-brands fa-telegram',
+    title: 'Telegram-бот з WebApp',
+    badge: 'aiogram 3 + Mini App + Mono/LiqPay',
+    summary: 'Автономний бізнес у месенджері з вітриною товарів, онлайн-оплатою та миттєвими сповіщеннями.',
+  },
+  {
+    id: 'landing',
+    icon: 'fa-solid fa-bolt',
+    title: 'Швидкісний лендінг',
+    badge: 'Astro + Tailwind (100/100)',
+    summary: 'Миттєве завантаження (< 1 с), найвища конверсія у заявку та відсутність зайвого JS на клієнті.',
+  },
+];
+
+const filterCategories = [
+  { id: 'all', label: 'Усі напрямки' },
+  { id: 'web', label: 'Web & Фреймворки' },
+  { id: 'mobile', label: 'Мобільні додатки' },
+  { id: 'bots', label: 'Telegram & Боти' },
+  { id: 'backend', label: 'Backend & БД' },
+  { id: 'integrations', label: 'Оплати & Інструменти' },
+];
+
+const { class: className = '' } = Astro.props;
 ---
 
-<section class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+<section id="tech-stack" class:list={['space-y-8 w-full', className]} data-animate="fade-up">
+  
+  <!-- Section Title -->
   <div class="space-y-2 text-center max-w-xl mx-auto">
     <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-[10px] text-xs font-black uppercase tracking-wider bg-[#FAC3C8] text-[#2A1E1E] shadow-2xs">
       <i class="fa-solid fa-code text-xs"></i>
-      Стек
+      Стек технологій
     </span>
     <h2 class="text-2xl sm:text-4xl font-black text-[#2A1E1E] tracking-tight m-0">
-      Технології, з якими я працюю
+      Фреймворки та інженерний стек
     </h2>
     <p class="text-sm sm:text-base text-[#623A2D]/80 font-medium m-0">
-      Сучасний, перевірений часом та масштабований стек для вирішення завдань будь-якої складності.
+      Підбираю оптимальну технологію під ваше завдання — без надлишкової складності та застарілих рішень.
     </p>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6" data-animate="fade-up" data-stagger>
-    {categories.map((cat) => (
-      <Card hover class="space-y-4 h-full flex flex-col justify-start">
-        <h3 class="text-sm font-black text-[#2A1E1E] uppercase tracking-wider m-0 pb-2 border-b border-[#623A2D]/10">
-          {cat.category}
-        </h3>
-        <ul class="space-y-2 list-none p-0 m-0">
-          {cat.items.map((tech) => (
-            <li class="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#2A1E1E]/90">
-              <i class="fa-solid fa-circle-check text-xs text-[#D09AFC] shrink-0"></i>
-              <span>{tech}</span>
-            </li>
-          ))}
-        </ul>
-      </Card>
+  <!-- Interactive Architecture Combinations (Presets) -->
+  <div class="space-y-3">
+    <div class="flex items-center justify-between gap-2 flex-wrap">
+      <span class="text-xs font-black uppercase tracking-wider text-[#623A2D]/75">
+        Готові архітектурні комбінації під завдання:
+      </span>
+      <span class="text-[11px] font-bold text-[#623A2D]/60 hidden sm:inline-block">
+        Клікніть, щоб виділити стек
+      </span>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
+      {presets.map((preset, idx) => (
+        <button
+          type="button"
+          data-preset={preset.id}
+          data-summary={preset.summary}
+          class:list={[
+            'preset-pill p-3 sm:p-3.5 rounded-[10px] border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 group',
+            idx === 0
+              ? 'bg-[#2A1E1E] text-white border-[#2A1E1E] shadow-xs is-active'
+              : 'bg-white text-[#2A1E1E] border-[#623A2D]/10 hover:border-[#D09AFC]'
+          ]}
+        >
+          <div class="flex items-center justify-between gap-1.5 w-full">
+            <span class="text-xs font-black line-clamp-1">{preset.title}</span>
+            <i class:list={[preset.icon, 'text-xs shrink-0 opacity-80 group-hover:scale-110 transition-transform']}></i>
+          </div>
+          <span class:list={[
+            'text-[10px] font-bold line-clamp-1',
+            idx === 0 ? 'text-[#FAF1EC]/75' : 'text-[#623A2D]/60'
+          ]}>
+            {preset.badge}
+          </span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Active Preset Summary Box -->
+    <div id="preset-summary-box" class="p-3.5 sm:p-4 rounded-[10px] bg-[#FAF1EC] border border-[#623A2D]/10 flex items-center gap-3 text-xs sm:text-sm text-[#2A1E1E] font-medium transition-all">
+      <div class="w-8 h-8 rounded-[8px] bg-white border border-[#623A2D]/10 flex items-center justify-center text-[#D09AFC] shrink-0">
+        <i class="fa-solid fa-circle-info text-xs"></i>
+      </div>
+      <p id="preset-summary-text" class="m-0 leading-relaxed text-[#623A2D]">
+        {presets[0].summary}
+      </p>
+    </div>
+  </div>
+
+  <!-- Category Filter Tabs -->
+  <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+    {filterCategories.map((cat, i) => (
+      <button
+        type="button"
+        data-filter={cat.id}
+        class:list={[
+          'tech-filter-tab px-3.5 py-1.5 rounded-[8px] font-bold text-xs transition-all cursor-pointer border',
+          i === 0
+            ? 'bg-[#2A1E1E] text-white border-[#2A1E1E] shadow-2xs is-active'
+            : 'bg-white text-[#623A2D] border-[#623A2D]/10 hover:border-[#D09AFC]'
+        ]}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Technologies Bento Grid -->
+  <div
+    id="tech-grid"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
+    data-animate="fade-up"
+    data-stagger
+  >
+    {technologies.map((t) => (
+      <div
+        class="tech-card bento-card p-5 space-y-3.5 flex flex-col justify-between transition-all duration-300 relative group hover:border-[#D09AFC]"
+        data-category={t.category}
+        data-presets={t.presets.join(',')}
+      >
+        <div class="space-y-3">
+          <!-- Top Row: Icon + Category & Badge -->
+          <div class="flex items-center justify-between gap-2">
+            <div class="w-10 h-10 rounded-[10px] bg-[#FAF1EC] group-hover:bg-[#D09AFC]/20 border border-[#623A2D]/10 flex items-center justify-center text-lg text-[#2A1E1E] group-hover:scale-105 transition-all shadow-2xs">
+              <i class={t.icon}></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[9px] font-black uppercase tracking-wider text-[#623A2D]/60">
+                {t.categoryLabel}
+              </span>
+              <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-[6px] bg-[#FAF1EC] border border-[#623A2D]/10 text-[#623A2D]">
+                {t.badge}
+              </span>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-base sm:text-lg font-black text-[#2A1E1E] tracking-tight m-0 group-hover:text-[#95553C] transition-colors">
+            {t.name}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-xs sm:text-sm text-[#623A2D]/75 font-medium leading-relaxed m-0 line-clamp-3">
+            {t.desc}
+          </p>
+        </div>
+
+        <!-- Indicator Tag -->
+        <div class="pt-2 border-t border-[#623A2D]/10 flex items-center justify-between text-[11px] font-bold text-[#623A2D]/70">
+          <span class="inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-[10px] text-[#D09AFC]"></i>
+            Використовується в продакшені
+          </span>
+        </div>
+      </div>
     ))}
   </div>
 </section>
+
+<script>
+  function initTechStackInteractions() {
+    const presetPills = document.querySelectorAll<HTMLButtonElement>('.preset-pill');
+    const filterTabs = document.querySelectorAll<HTMLButtonElement>('.tech-filter-tab');
+    const techCards = document.querySelectorAll<HTMLElement>('.tech-card');
+    const summaryText = document.getElementById('preset-summary-text');
+
+    // Preset click handler (Project Architecture Combinations)
+    presetPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const presetId = pill.dataset.preset || 'all';
+        const summary = pill.dataset.summary || '';
+
+        // Update pills styling
+        presetPills.forEach((p) => {
+          p.classList.remove('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-xs', 'is-active');
+          p.classList.add('bg-white', 'text-[#2A1E1E]', 'border-[#623A2D]/10');
+          const sub = p.querySelector('span:last-child');
+          if (sub) {
+            sub.classList.remove('text-[#FAF1EC]/75');
+            sub.classList.add('text-[#623A2D]/60');
+          }
+        });
+
+        pill.classList.remove('bg-white', 'text-[#2A1E1E]', 'border-[#623A2D]/10');
+        pill.classList.add('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-xs', 'is-active');
+        const activeSub = pill.querySelector('span:last-child');
+        if (activeSub) {
+          activeSub.classList.remove('text-[#623A2D]/60');
+          activeSub.classList.add('text-[#FAF1EC]/75');
+        }
+
+        // Update summary text
+        if (summaryText) {
+          summaryText.textContent = summary;
+        }
+
+        // Reset category filter tabs to 'all'
+        filterTabs.forEach((tab) => {
+          tab.classList.remove('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-2xs', 'is-active');
+          tab.classList.add('bg-white', 'text-[#623A2D]', 'border-[#623A2D]/10');
+        });
+        const allTab = document.querySelector<HTMLButtonElement>('.tech-filter-tab[data-filter="all"]');
+        if (allTab) {
+          allTab.classList.remove('bg-white', 'text-[#623A2D]', 'border-[#623A2D]/10');
+          allTab.classList.add('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-2xs', 'is-active');
+        }
+
+        // Filter / Highlight cards
+        techCards.forEach((card) => {
+          const cardPresets = (card.dataset.presets || '').split(',');
+          if (presetId === 'all' || cardPresets.includes(presetId)) {
+            card.style.display = 'flex';
+            card.classList.remove('opacity-40');
+            card.classList.add('opacity-100');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Category filter click handler
+    filterTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const filterCategory = tab.dataset.filter || 'all';
+
+        // Update active tab style
+        filterTabs.forEach((t) => {
+          t.classList.remove('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-2xs', 'is-active');
+          t.classList.add('bg-white', 'text-[#623A2D]', 'border-[#623A2D]/10');
+        });
+
+        tab.classList.remove('bg-white', 'text-[#623A2D]', 'border-[#623A2D]/10');
+        tab.classList.add('bg-[#2A1E1E]', 'text-white', 'border-[#2A1E1E]', 'shadow-2xs', 'is-active');
+
+        // Filter cards by category
+        techCards.forEach((card) => {
+          const cardCat = card.dataset.category;
+          if (filterCategory === 'all' || cardCat === filterCategory) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initTechStackInteractions);
+</script>

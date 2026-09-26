@@ -77,7 +77,7 @@ export const QuickContactModal: React.FC<QuickContactModalProps> = ({
     },
     {
       name: 'Email',
-      href: 'mailto:contact@ihornone.site',
+      href: 'mailto:ihornone.dev@gmail.com',
       icon: 'fa-solid fa-envelope text-[#EA4335]',
       color: 'bg-[#EA4335]/10',
     },

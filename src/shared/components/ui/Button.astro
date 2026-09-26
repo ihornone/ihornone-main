@@ -10,6 +10,8 @@ interface Props {
   icon?: string;
   iconPosition?: 'left' | 'right';
   ariaLabel?: string;
+  target?: string;
+  rel?: string;
 }
 
 const {
@@ -23,6 +25,8 @@ const {
   icon,
   iconPosition = 'right',
   ariaLabel,
+  target,
+  rel,
 } = Astro.props;
 
 const isDisabled = disabled || loading;
@@ -47,6 +51,8 @@ const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-[10px
 {href ? (
   <a
     href={href}
+    target={target}
+    rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
     class={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${isDisabled ? 'opacity-50 pointer-events-none' : ''} ${className}`}
     aria-label={ariaLabel}
     aria-disabled={isDisabled}

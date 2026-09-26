@@ -49,7 +49,17 @@ const {
 
 const { Content } = await render(entry);
 
-const allProjects = await getCollection('projects');
+const allProjectsEntries = await getCollection('projects');
+const allProjects = [...allProjectsEntries].sort((a, b) => {
+  const pinA = Boolean(a.data.pinned);
+  const pinB = Boolean(b.data.pinned);
+  if (pinA && !pinB) return -1;
+  if (!pinA && pinB) return 1;
+
+  const orderA = a.data.order ?? (typeof a.data.pinned === 'number' ? a.data.pinned : 99);
+  const orderB = b.data.order ?? (typeof b.data.pinned === 'number' ? b.data.pinned : 99);
+  return orderA - orderB;
+});
 const currentIndex = allProjects.findIndex((p) => p.id === entry.id);
 const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
 const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;

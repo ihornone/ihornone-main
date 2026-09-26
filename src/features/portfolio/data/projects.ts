@@ -5,7 +5,8 @@ export interface Project {
   icon: string;
   image: string;
   description: string;
-  pinned?: boolean;
+  pinned?: boolean | number;
+  order?: number;
   statusBadge?: string;
   clientName?: string;
   meta?: {

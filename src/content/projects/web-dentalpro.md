@@ -14,6 +14,7 @@ link: "https://dental-clinic.ihornone.site"
 github: "https://github.com/ihornone/demo-dental-clinic"
 statusBadge: "Демо-концепт для портфоліо"
 pinned: false
+order: 4
 galleryFormat: "16:9"
 features:
   - title: "Конверсійний Hero та TrustBar"

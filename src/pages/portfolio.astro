@@ -17,6 +17,7 @@ const allProjects = allEntries
     image: entry.data.image,
     description: entry.data.description,
     pinned: entry.data.pinned,
+    order: entry.data.order,
     statusBadge: entry.data.statusBadge,
     clientName: entry.data.clientName,
     meta: {
@@ -24,9 +25,14 @@ const allProjects = allEntries
     },
   }))
   .sort((a, b) => {
-    if (a.pinned && !b.pinned) return -1;
-    if (!a.pinned && b.pinned) return 1;
-    return 0;
+    const pinA = Boolean(a.pinned);
+    const pinB = Boolean(b.pinned);
+    if (pinA && !pinB) return -1;
+    if (!pinA && pinB) return 1;
+
+    const orderA = a.order ?? (typeof a.pinned === 'number' ? a.pinned : 99);
+    const orderB = b.order ?? (typeof b.pinned === 'number' ? b.pinned : 99);
+    return orderA - orderB;
   });
 
 const categories = ['Усі проєкти', ...new Set(allProjects.map((p) => p.category))];

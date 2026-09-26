@@ -24,21 +24,16 @@ const {
     </span>
   </div>
   
-  <div class="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x sm:snap-none pb-2 sm:pb-0 scrollbar-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-3 text-left">
-    {fields.map((field, index) => {
-      // 7 fields: first 4 take col-span-3 (4 * 3 = 12), last 3 take col-span-4 (3 * 4 = 12)
-      const isFirstFour = index < 4;
-      const spanClass = isFirstFour ? 'lg:col-span-3' : 'lg:col-span-4';
-      return (
-        <div class={`bg-[#FAF1EC] border border-[#623A2D]/10 rounded-[10px] p-4 sm:p-5 flex flex-col justify-between space-y-1.5 min-w-[150px] sm:min-w-0 snap-start shrink-0 sm:shrink shadow-2xs hover:border-[#D09AFC] transition-colors ${spanClass}`}>
-          <span class="text-[10px] sm:text-[11px] font-black text-[#623A2D]/60 uppercase tracking-wider block">
-            {field.label}
-          </span>
-          <strong class="text-xs sm:text-sm font-black text-[#2A1E1E] block leading-snug" title={field.value}>
-            {field.value}
-          </strong>
-        </div>
-      );
-    })}
+  <div class="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x sm:snap-none pb-2 sm:pb-0 scrollbar-none sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
+    {fields.map((field) => (
+      <div class="bg-[#FAF1EC] border border-[#623A2D]/10 rounded-[10px] p-4 sm:p-5 flex flex-col justify-between space-y-1.5 min-w-[150px] sm:min-w-0 snap-start shrink-0 sm:shrink shadow-2xs hover:border-[#D09AFC] transition-colors">
+        <span class="text-[10px] sm:text-[11px] font-black text-[#623A2D]/60 uppercase tracking-wider block">
+          {field.label}
+        </span>
+        <strong class="text-xs sm:text-sm font-black text-[#2A1E1E] block leading-snug" title={field.value}>
+          {field.value}
+        </strong>
+      </div>
+    ))}
   </div>
 </div>

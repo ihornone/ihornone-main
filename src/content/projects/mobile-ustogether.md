@@ -13,6 +13,7 @@ role: "Розробка, UI/UX дизайн, ідея"
 github: "https://github.com/ihornone/UsTogetherRNE"
 statusBadge: "Пет-проєкт (Авторський застосунок)"
 pinned: false
+order: 3
 galleryFormat: "9:16"
 features:
   - title: "Онбординг та перший запуск"

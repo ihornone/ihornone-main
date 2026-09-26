@@ -13,6 +13,7 @@ role: "Мобільна розробка, архітектура, UI/UX"
 github: "https://github.com/ihornone/expo-marketplace"
 statusBadge: "Практичний проєкт (Демо e-commerce)"
 pinned: true
+order: 2
 galleryFormat: "9:16"
 features:
   - title: "Швидка авторизація"
