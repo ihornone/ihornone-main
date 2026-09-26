@@ -33,13 +33,13 @@ const remainingCount = photos.length - initialCount;
         </div>
       </div>
 
-      {/* Standard Grid / Masonry for all screens to prevent cropping/scrolling issues */}
-      <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4" role="list">
+      {/* Clean, robust responsive grid to prevent columns breaking & misalignment */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" role="list">
         {photos.map((photoUrl, index) => {
           const isHidden = index >= initialCount;
           return (
             <div
-              class={`break-inside-avoid rounded-[10px] overflow-hidden border border-[#623A2D]/10 bg-white shadow-2xs hover:border-[#D09AFC] hover:shadow-md transition-all duration-300 group cursor-pointer relative gallery-item ${isHidden ? 'hidden gallery-hidden' : ''}`}
+              class={`rounded-[10px] overflow-hidden border border-[#623A2D]/10 bg-[#FAF1EC]/40 shadow-2xs hover:border-[#D09AFC] hover:shadow-md transition-all duration-300 group cursor-pointer relative gallery-item aspect-[16/10] flex items-center justify-center ${isHidden ? 'hidden gallery-hidden' : ''}`}
               role="listitem"
               data-url={photoUrl}
               data-index={index}
@@ -47,11 +47,11 @@ const remainingCount = photos.length - initialCount;
               <img
                 src={photoUrl}
                 alt={`Фото ${index + 1} з ${photos.length}`}
-                class="w-full h-auto object-contain block"
+                class="w-full h-full object-cover object-top block transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
                 decoding="async"
               />
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-end p-3 pointer-events-none">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 flex items-end p-3 pointer-events-none">
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-white/95 backdrop-blur-xs text-[#2A1E1E] text-[10px] font-black px-2.5 py-1 rounded-[10px] shadow-xs">
                   Збільшити <i class="fa-solid fa-expand ml-1" aria-hidden="true"></i>
                 </span>

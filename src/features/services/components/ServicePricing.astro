@@ -68,17 +68,9 @@ const { pricing } = Astro.props;
                 )}
               </div>
 
-              <!-- For Whom Target Badge -->
-              {plan.forWhom && (
-                <div class="p-3 rounded-[8px] bg-white border border-[#623A2D]/10 text-xs font-medium text-[#623A2D] leading-snug">
-                  <strong class="text-[#2A1E1E] font-bold block mb-0.5">Кому підходить:</strong>
-                  <span>{plan.forWhom}</span>
-                </div>
-              )}
-
               <!-- Features List -->
               <ul class="space-y-2 pt-2 border-t border-[#623A2D]/10 list-none p-0 m-0">
-                {plan.features.map((f) => (
+                {plan.features.slice(0, 4).map((f) => (
                   <li class="flex items-center gap-2 text-xs font-bold text-[#2A1E1E]/90">
                     <i class="fa-solid fa-circle-check text-[#D09AFC] text-xs shrink-0"></i>
                     <span>{f}</span>
